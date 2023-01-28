@@ -420,86 +420,6 @@ const viewUserProfile = lazy(() =>
 );
 const Location = lazy(() => import("./views/apps/freshlist/location/Location"));
 
-const pendingPayment = lazy(() =>
-  import("./views/apps/pendingPayment/PendingPayment")
-);
-
-// const coupon = lazy(() => import("./views/apps/products/coupon/Coupon"));
-
-const offerList = lazy(() =>
-  import("./views/apps/offerAndCoupon/offer/OfferList")
-);
-const addSpecialOffer = lazy(() =>
-  import("./views/apps/offerAndCoupon/specialOffer/AddSpecialOffer")
-);
-
-const addCoupons = lazy(() =>
-  import("./views/apps/offerAndCoupon/coupons/AddCoupons")
-);
-const editCoupon = lazy(() =>
-  import("./views/apps/offerAndCoupon/coupons/EditCoupon")
-);
-const offerByBrand = lazy(() =>
-  import("./views/apps/offerAndCoupon/OfferByBrand")
-);
-const buyGet = lazy(() => import("./views/apps/offerAndCoupon/BuyGet"));
-const rewardPoint = lazy(() => import("./views/apps/rewards/RewardPoint"));
-
-const onlineOrders = lazy(() =>
-  import("./views/apps/onlineOrders/OnlineOrders")
-);
-const Subscription = lazy(() =>
-  import("./views/apps/subscription/Subscription")
-);
-const adSubscription = lazy(() =>
-  import("./views/apps/adSubscription/AdSubscription")
-);
-const pageLayout = lazy(() => import("./views/apps/pageLayout/PageLayout"));
-
-const stockAdjustment = lazy(() =>
-  import("./views/apps/stockControl/StockAdjustment")
-);
-const stockTransferRequest = lazy(() =>
-  import("./views/apps/stockControl/StockTransferRequest")
-);
-
-const menuManagementList = lazy(() =>
-  import("./views/apps/menuManagement/MenuManagementList")
-);
-const addMenuManagement = lazy(() =>
-  import("./views/apps/menuManagement/AddMenuManagement")
-);
-const editMenuManagement = lazy(() =>
-  import("./views/apps/menuManagement/EditMenuManagement")
-);
-
-const storesList = lazy(() => import("./views/apps/store/stores/StoresList"));
-const addstores = lazy(() => import("./views/apps/store/stores/AddStores"));
-const editstore = lazy(() => import("./views/apps/store/stores/EditStore"));
-const viewstore = lazy(() => import("./views/apps/store/stores/ViewStore"));
-const storesRequestList = lazy(() =>
-  import("./views/apps/store/storesRequest/StoresRequestList")
-);
-const addStoresRequest = lazy(() =>
-  import("./views/apps/store/storesRequest/AddStoresRequest")
-);
-const blogList = lazy(() => import("./views/apps/website/blog/BlogList"));
-const addBlog = lazy(() => import("./views/apps/website/blog/AddBlog"));
-const newsList = lazy(() => import("./views/apps/website/news/NewsList"));
-const addNews = lazy(() => import("./views/apps/website/news/AddNews"));
-const videosList = lazy(() => import("./views/apps/website/videos/VideosList"));
-const addVideo = lazy(() => import("./views/apps/website/videos/AddVideo"));
-const websitePdf = lazy(() => import("./views/apps/website/WebsitePdf"));
-const websiteProImg = lazy(() =>
-  import("./views/apps/website/websiteProduct/WebsiteProImg")
-);
-const addProImg = lazy(() =>
-  import("./views/apps/website/websiteProduct/AddProImg")
-);
-const appBanner = lazy(() =>
-  import("./views/apps/mobileApp/appBanner/AppBanner")
-);
-
 const Subs = lazy(() =>
   import("./views/pages/authentication/subscription/Subs")
 );
@@ -512,15 +432,6 @@ const resetPassword = lazy(() =>
 const newPassword = lazy(() =>
   import("./views/pages/authentication/NewPassword")
 );
-
-const sellerSubscription = lazy(() =>
-  import("./views/apps/sellerSubs/SellerSubscription")
-);
-const addSub = lazy(() => import("./views/apps/sellerSubs/AddSub"));
-
-const mySubscription = lazy(() => import("./views/apps/mySubs/MySubscription"));
-
-const sponsoredAd = lazy(() => import("./views/apps/sponsoredAds/SponsoredAd"));
 
 //Theme Component starts from here
 const userList = lazy(() => import("./views/apps/user/list/List"));
@@ -1263,10 +1174,6 @@ class AppRouter extends React.Component {
             path="/app/freshlist/location/location"
             component={Location}
           />
-          <AppRoute
-            path="/app/pendingPayment/pendingPayment"
-            component={pendingPayment}
-          />
           {/* Sales */}
           <AppRoute
             path="/app/freshlist/sales/totalSales"
@@ -1281,110 +1188,6 @@ class AppRouter extends React.Component {
             component={ViewHub}
           />
           <AppRoute path="/app/freshlist/hubs/editHub" component={EditHub} />
-          {/* <AppRoute path="/app/products/coupon" component={coupon} /> */}
-          <AppRoute
-            path="/app/offerAndCoupon/offer/offerList"
-            component={offerList}
-          />
-          <AppRoute
-            path="/app/offerAndCoupon/specialOffer/addSpecialOffer"
-            component={addSpecialOffer}
-          />
-          <AppRoute
-            path="/app/offerAndCoupon/coupons/addCoupons"
-            component={addCoupons}
-          />
-          <AppRoute
-            path="/app/offerAndCoupon/coupons/editCoupon/:id"
-            component={editCoupon}
-          />
-          <AppRoute
-            path="/app/offerAndCoupon/offerByBrand"
-            component={offerByBrand}
-          />
-          <AppRoute path="/app/offerAndCoupon/buyGet" component={buyGet} />
-          <AppRoute path="/app/reward/rewardPoint" component={rewardPoint} />
-          <AppRoute
-            path="/app/subscription/subscription"
-            component={Subscription}
-          />
-          <AppRoute
-            path="/app/adSubscription/adSubscription"
-            component={adSubscription}
-          />
-          <AppRoute
-            path="/app/stockControl/stockTransferRequest"
-            component={stockTransferRequest}
-          />
-          <AppRoute
-            path="/app/stockControl/stockAdjustment"
-            component={stockAdjustment}
-          />
-          <AppRoute
-            path="/app/sellerSubs/sellerSubscription"
-            component={sellerSubscription}
-          />
-          <AppRoute path="/app/sellerSubs/addSub" component={addSub} />
-          <AppRoute
-            path="/app/menuManagement/menuManagementList"
-            component={menuManagementList}
-          />
-          <AppRoute
-            path="/app/menuManagement/addMenuManagement"
-            component={addMenuManagement}
-          />
-          <AppRoute
-            path="/app/menuManagement/editMenuManagement"
-            component={editMenuManagement}
-          />
-          <AppRoute
-            path="/app/store/stores/storesList"
-            component={storesList}
-          />
-          <AppRoute path="/app/store/stores/addstores" component={addstores} />
-          <AppRoute
-            path="/app/store/stores/editstore/:id"
-            component={editstore}
-          />
-          <AppRoute
-            path="/app/store/stores/viewstore/:id"
-            component={viewstore}
-          />
-          <AppRoute
-            path="/app/store/storesRequest/storesRequestList"
-            component={storesRequestList}
-          />
-          <AppRoute
-            path="/app/store/storesRequest/addStoresRequest"
-            component={addStoresRequest}
-          />
-          <AppRoute path="/app/pageLayout/pageLayout" component={pageLayout} />
-          <AppRoute
-            path="/app/onlineOrders/onlineOrders"
-            component={onlineOrders}
-          />
-          <AppRoute path="/app/website/blog/blogList" component={blogList} />
-          <AppRoute path="/app/website/blog/addBlog" component={addBlog} />
-          <AppRoute path="/app/website/news/newsList" component={newsList} />
-          <AppRoute path="/app/website/news/addNews" component={addNews} />
-          <AppRoute path="/app/website/websitePdf" component={websitePdf} />
-          <AppRoute
-            path="/app/website/websiteProduct/websiteProImg"
-            component={websiteProImg}
-          />
-          <AppRoute
-            path="/app/website/websiteProduct/addProImg"
-            component={addProImg}
-          />
-          <AppRoute
-            path="/app/website/videos/videosList"
-            component={videosList}
-          />
-          <AppRoute path="/app/website/videos/addVideo" component={addVideo} />
-          <AppRoute
-            path="/app/mobileApp/appBanner/AppBanner"
-            component={appBanner}
-          />
           <AppRoute path="/app/user/list" component={userList} />
           <AppRoute path="/app/user/edit" component={userEdit} />
           <AppRoute path="/app/user/view" component={userView} />
@@ -1405,14 +1208,6 @@ class AppRouter extends React.Component {
             path="/pages/newPassword"
             component={newPassword}
             fullLayout
-          />
-          <AppRoute
-            path="/app/mysubs/mySubscription"
-            component={mySubscription}
-          />
-          <AppRoute
-            path="/app/sponsoredAds/sponsoredAd"
-            component={sponsoredAd}
           />
           {/* Theme Components Starts from here all the demo components*/}
           <AppRoute
