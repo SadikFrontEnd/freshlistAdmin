@@ -24,13 +24,12 @@ class ViewHub extends React.Component {
   componentDidMount() {
     let { id } = this.props.match.params;
     axiosConfig
-      .get(`/user/getviewone/${id}`)
-
-      .then((response) => {
+      .get(`/admin/viewone_hub/${id}`)
+      .then(response => {
         console.log(response.data.data);
         this.setState({ data: response.data.data });
       })
-      .catch((error) => {
+      .catch(error => {
         console.log(error.response);
       });
   }
@@ -39,7 +38,7 @@ class ViewHub extends React.Component {
     return (
       <React.Fragment>
         <div>
-          <Row>
+          {/* <Row>
             <Col sm="12">
               <div>
                 <Breadcrumb listTag="div">
@@ -56,12 +55,12 @@ class ViewHub extends React.Component {
                 </Breadcrumb>
               </div>
             </Col>
-          </Row>
-          <Card className="overflow-hidden app-ecommerce-details">
+          </Row> */}
+          <Card className="overflow-hidden app-ecommerce-details py-3">
             <Row className="m-2">
               <Col>
                 <h1 col-sm-6 className="float-left">
-                  View HubList
+                  View Hub
                 </h1>
               </Col>
               <Col>
@@ -85,10 +84,18 @@ class ViewHub extends React.Component {
                   <div className="users-page-view-table">
                     <div className="d-flex user-info">
                       <div className="user-info-title font-weight-bold">
-                        Customer Name :
+                        HUB Name :
                       </div>
                       <div className="text-truncate">
-                        <span>{this.state.data.username}</span>
+                        <span>{this.state.data?.name}</span>
+                      </div>
+                    </div>
+                    <div className="d-flex user-info">
+                      <div className="user-info-title font-weight-bold">
+                        Description :
+                      </div>
+                      <div className="text-truncate">
+                        <span>{this.state.data?.desc}</span>
                       </div>
                     </div>
                     <div className="d-flex user-info">
@@ -96,23 +103,31 @@ class ViewHub extends React.Component {
                         Email :
                       </div>
                       <div className="text-truncate">
-                        <span>{this.state.data.email}</span>
+                        <span>{this.state.data?.email}</span>
                       </div>
                     </div>
-                    {/* <div className="d-flex user-info">
-                                            <div className="user-info-title font-weight-bold">
-                                                Total Order :
-                                            </div>
-                                            <div className="text-truncate">
-                                                <span>{this.state.data.category?.title}</span>
-                                            </div>
-                                        </div> */}
                     <div className="d-flex user-info">
                       <div className="user-info-title font-weight-bold">
                         Mobile No. :
                       </div>
                       <div className="text-truncate">
-                        <span>{this.state.data.mobile}</span>
+                        <span>{this.state.data?.mobile}</span>
+                      </div>
+                    </div>
+                    <div className="d-flex user-info">
+                      <div className="user-info-title font-weight-bold">
+                        Address :
+                      </div>
+                      <div className="text-truncate">
+                        <span>{this.state.data?.address}</span>
+                      </div>
+                    </div>
+                    <div className="d-flex user-info">
+                      <div className="user-info-title font-weight-bold">
+                        Delivery Zone :
+                      </div>
+                      <div className="text-truncate">
+                        <span>{this.state.data?.delivery_zone}</span>
                       </div>
                     </div>
                     <div className="d-flex user-info">

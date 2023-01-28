@@ -468,6 +468,14 @@ const navigationConfig = [
     ],
   },
   {
+    id: "language",
+    title: "Language",
+    type: "item",
+    icon: <FaCircle size={8} />,
+    permissions: ["admin", "editor"],
+    navLink: "/app/freshlist/language/languageList",
+  },
+  {
     type: "groupHeader",
     groupTitle: "Web Banner Management",
   },

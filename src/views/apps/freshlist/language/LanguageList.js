@@ -11,16 +11,17 @@ import {
   DropdownItem,
   DropdownToggle,
 } from "reactstrap";
-import axiosConfig from "../../../axiosConfig";
-import { ContextLayout } from "../../../utility/context/Layout";
+// import axiosConfig from "../../../axiosConfig";
+import axios from "axios";
+import { ContextLayout } from "../../../../utility/context/Layout";
 import { AgGridReact } from "ag-grid-react";
-import { Eye, Edit, Trash2, ChevronDown } from "react-feather";
-//import classnames from "classnames";
-import { history } from "../../../history";
-import "../../../assets/scss/plugins/tables/_agGridStyleOverride.scss";
-import "../../../assets/scss/pages/users.scss";
+import { Edit, Trash2, ChevronDown } from "react-feather";
+import { history } from "../../../../history";
+import "../../../../assets/scss/plugins/tables/_agGridStyleOverride.scss";
+import "../../../../assets/scss/pages/users.scss";
+import { Route, Link } from "react-router-dom";
 
-class SystemMails extends React.Component {
+class LanguageList extends React.Component {
   state = {
     rowData: [],
     paginationPageSize: 20,
@@ -37,24 +38,20 @@ class SystemMails extends React.Component {
         headerName: "S.No",
         valueGetter: "node.rowIndex + 1",
         field: "node.rowIndex + 1",
-        width: 150,
+        width: 100,
         filter: true,
-        // checkboxSelection: true,
-        // headerCheckboxSelectionFilteredOnly: true,
-        // headerCheckboxSelection: true,
       },
       {
-        headerName: "Product Image",
-        field: "product_img",
-        filter: false,
-        width: 150,
-        setColumnVisible: false,
-        cellRendererFramework: (params) => {
+        headerName: "Image",
+        field: "image",
+        filter: true,
+        width: 100,
+        cellRendererFramework: params => {
           return (
             <div className="d-flex align-items-center cursor-pointer">
               <img
-                className=" rounded-circle  mr-3"
-                src={params.data.product_img}
+                className="rounded-circle mr-50"
+                src={params.data?.image}
                 alt="user avatar"
                 height="40"
                 width="40"
@@ -64,217 +61,72 @@ class SystemMails extends React.Component {
         },
       },
       {
-        headerName: "Seller Name",
-        field: "item_name",
+        headerName: "Language",
+        field: "lang_name",
         filter: true,
         width: 200,
-        cellRendererFramework: (params) => {
+        cellRendererFramework: params => {
           return (
             <div>
-              <span>{params.data.item_name}</span>
+              <span>{params.data?.lang_name}</span>
             </div>
           );
         },
       },
-      {
-        headerName: "Seller Code",
-        field: "code",
-        filter: true,
-        width: 200,
-        cellRendererFramework: (params) => {
-          return (
-            <div className="d-flex align-items-center cursor-pointer">
-              <span>{params.data.code}</span>
-            </div>
-          );
-        },
-      },
-      {
-        headerName: "Short Description",
-        field: "short_desc",
-        filter: true,
-        width: 200,
-        cellRendererFramework: (params) => {
-          return (
-            <div>
-              <span>{params.data.short_desc}</span>
-            </div>
-          );
-        },
-      },
-      {
-        headerName: "Description",
-        field: "desc",
-        filter: true,
-        width: 200,
-        cellRendererFramework: (params) => {
-          return (
-            <div>
-              <span>{params.data.desc}</span>
-            </div>
-          );
-        },
-      },
-      {
-        headerName: "HSN Code",
-        field: "hsn_code",
-        filter: true,
-        width: 180,
-        cellRendererFramework: (params) => {
-          return (
-            <div>
-              <span>{params.data.hsn_code}</span>
-            </div>
-          );
-        },
-      },
-      {
-        headerName: "Brand",
-        field: "brand",
-        filter: true,
-        width: 200,
-        cellRendererFramework: (params) => {
-          return (
-            <div>
-              <span>{params.data.brand?.name}</span>
-            </div>
-          );
-        },
-      },
-      {
-        headerName: "Product Category",
-        field: "productcategory?.name",
-        filter: true,
-        width: 200,
-        cellRendererFramework: (params) => {
-          return (
-            <div>
-              <span>{params.data.productcategory?.name}</span>
-            </div>
-          );
-        },
-      },
-      {
-        headerName: "Product Sub-Category",
-        field: "productsubcategory",
-        filter: true,
-        width: 200,
-        cellRendererFramework: (params) => {
-          return (
-            <div>
-              <span>{params.data.productsubcategory?.name}</span>
-            </div>
-          );
-        },
-      },
-      {
-        headerName: "Stock Quantity",
-        field: "stock_qty",
-        filter: true,
-        width: 200,
-        cellRendererFramework: (params) => {
-          return (
-            <div>
-              <span>{params.data.stock_qty}</span>
-            </div>
-          );
-        },
-      },
-      {
-        headerName: "Size",
-        field: "size",
-        filter: true,
-        width: 150,
-        cellRendererFramework: (params) => {
-          return (
-            <div>
-              <span>{params.data.size}</span>
-            </div>
-          );
-        },
-      },
-      {
-        headerName: "Colour",
-        field: "colour",
-        filter: true,
-        width: 180,
-        cellRendererFramework: (params) => {
-          return (
-            <div>
-              <span>{params.data.colour}</span>
-            </div>
-          );
-        },
-      },
-      {
-        headerName: "Material",
-        field: "material",
-        filter: true,
-        width: 180,
-        cellRendererFramework: (params) => {
-          return (
-            <div>
-              <span>{params.data.material}</span>
-            </div>
-          );
-        },
-      },
-      {
-        headerName: "Barcode",
-        field: "barcode",
-        filter: true,
-        width: 180,
-        cellRendererFramework: (params) => {
-          return (
-            <div>
-              <span>{params.data.barcode}</span>
-            </div>
-          );
-        },
-      },
-      {
-        headerName: "Status",
-        field: "status",
-        filter: true,
-        width: 150,
-        cellRendererFramework: (params) => {
-          return params.value === "Active" ? (
-            <div className="badge badge-pill badge-success">
-              {params.data.status}
-            </div>
-          ) : params.value === "Inactive" ? (
-            <div className="badge badge-pill badge-warning">
-              {params.data.status}
-            </div>
-          ) : null;
-        },
-      },
+
+      //   {
+      //     headerName: "Status",
+      //     field: "status",
+      //     filter: true,
+      //     width: 150,
+      //     cellRendererFramework: params => {
+      //       return params.value === "Active" ? (
+      //         <div className="badge badge-pill badge-success">
+      //           {params.data.status}
+      //         </div>
+      //       ) : params.value === "Deactive" ? (
+      //         <div className="badge badge-pill badge-warning">
+      //           {params.data.status}
+      //         </div>
+      //       ) : null;
+      //     },
+      //   },
       {
         headerName: "Actions",
+        field: "sortorder",
         field: "transactions",
         width: 150,
-        cellRendererFramework: (params) => {
+        cellRendererFramework: params => {
           return (
             <div className="actions cursor-pointer">
-              <Eye
-                className="mr-50"
-                size={20}
-                onClick={() =>
-                  history.push(`/app/activity/viewActivity/${params.data._id}`)
-                }
-              />
-              <Edit
-                className="mr-50"
-                size={20}
-                onClick={() => history.push("/app/user/edit")}
-              />
-              <Trash2
-                size={20}
-                onClick={() => {
-                  let selectedData = this.gridApi.getSelectedRows();
-                  this.runthisfunction(params.data._id);
-                  this.gridApi.updateRowData({ remove: selectedData });
-                }}
+              <Route
+                render={({ history }) => (
+                  <>
+                    {/* <Eye
+                                className="mr-50"
+                                size="25px"
+                                color="green"
+                                onClick={() =>
+                                    history.push(`/app/customer/viewCustomer/${params.data._id}`)}
+                            /> */}
+                    {/* <Edit
+                      className="mr-50"
+                      size="25px"
+                      color="blue"
+                      onClick={() => history.push("/app/customer/editCustomer")}
+                    /> */}
+                    <Trash2
+                      className="mr-50"
+                      size="25px"
+                      color="red"
+                      onClick={() => {
+                        let selectedData = this.gridApi.getSelectedRows();
+                        this.runthisfunction(params.data._id);
+                        this.gridApi.updateRowData({ remove: selectedData });
+                      }}
+                    />
+                  </>
+                )}
               />
             </div>
           );
@@ -284,24 +136,27 @@ class SystemMails extends React.Component {
   };
 
   async componentDidMount() {
-    await axiosConfig.get("/allproduct").then((response) => {
-      const rowData = response.data.data;
-      console.log(rowData);
-      this.setState({ rowData });
-    });
+    await axios
+      .get("http://3.6.37.16:8000/admin/language_list")
+      .then(response => {
+        let rowData = response.data.data;
+        console.log(rowData);
+        this.setState({ rowData });
+      });
   }
+
   async runthisfunction(id) {
     console.log(id);
-    await axiosConfig.get(`/delproduct/${id}`).then(
-      (response) => {
+    await axios.get(`http://3.6.37.16:8000/admin/del_language/${id}`).then(
+      response => {
         console.log(response);
       },
-      (error) => {
+      error => {
         console.log(error);
       }
     );
   }
-  onGridReady = (params) => {
+  onGridReady = params => {
     this.gridApi = params.api;
     this.gridColumnApi = params.columnApi;
     this.setState({
@@ -310,12 +165,10 @@ class SystemMails extends React.Component {
       totalPages: this.gridApi.paginationGetTotalPages(),
     });
   };
-
-  updateSearchQuery = (val) => {
+  updateSearchQuery = val => {
     this.gridApi.setQuickFilter(val);
   };
-
-  filterSize = (val) => {
+  filterSize = val => {
     if (this.gridApi) {
       this.gridApi.paginationSetPageSize(Number(val));
       this.setState({
@@ -324,30 +177,35 @@ class SystemMails extends React.Component {
       });
     }
   };
-
   render() {
     const { rowData, columnDefs, defaultColDef } = this.state;
     return (
       console.log(rowData),
       (
         <Row className="app-user-list">
-          <Col sm="12">
-          </Col>
+          <Col sm="12"></Col>
           <Col sm="12">
             <Card>
               <Row className="m-2">
                 <Col>
                   <h1 sm="6" className="float-left">
-                    System Mails List
+                    Language List
                   </h1>
                 </Col>
                 <Col>
-                  <Button
-                    className=" btn btn-danger float-right"
-                    onClick={() => history.push("/app/activity/addSystemMails")}
-                  >
-                    Add System Mails
-                  </Button>
+                  <Route
+                    render={({ history }) => (
+                      <Button
+                        className="btn float-right"
+                        color="primary"
+                        onClick={() =>
+                          history.push("/app/freshlist/language/addLanguage")
+                        }
+                      >
+                        Add Language
+                      </Button>
+                    )}
+                  />
                 </Col>
               </Row>
               <CardBody>
@@ -404,7 +262,7 @@ class SystemMails extends React.Component {
                         <div className="table-input mr-1">
                           <Input
                             placeholder="search..."
-                            onChange={(e) =>
+                            onChange={e =>
                               this.updateSearchQuery(e.target.value)
                             }
                             value={this.state.value}
@@ -421,7 +279,7 @@ class SystemMails extends React.Component {
                       </div>
                     </div>
                     <ContextLayout.Consumer>
-                      {(context) => (
+                      {context => (
                         <AgGridReact
                           gridOptions={{}}
                           rowSelection="multiple"
@@ -449,4 +307,4 @@ class SystemMails extends React.Component {
     );
   }
 }
-export default SystemMails;
+export default LanguageList;

@@ -1,5 +1,5 @@
 import React from "react";
-import { Card, CardBody, Media, Row, Col, Button } from "reactstrap";
+import { Card, CardBody, Row, Col, Button } from "reactstrap";
 import {
   MDBCol,
   MDBContainer,
@@ -11,11 +11,11 @@ import {
   MDBBtn,
   MDBTypography,
 } from "mdb-react-ui-kit";
-
 import axiosConfig from "../../../../axiosConfig";
 import { history } from "../../../../history";
 import { Route } from "react-router-dom";
 import Axios from "axios";
+
 class ViewVendor extends React.Component {
   constructor(props) {
     super(props);
@@ -29,7 +29,6 @@ class ViewVendor extends React.Component {
     Axios.get(`http://3.6.37.16:8000/app/vender_getviewone/${id}`)
       .then(response => {
         console.log(response.data.data);
-        //console.log(response.data.data.shop_name);
         this.setState({ data: response.data.data });
       })
       .catch(error => {

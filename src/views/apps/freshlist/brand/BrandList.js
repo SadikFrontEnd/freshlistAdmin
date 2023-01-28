@@ -38,74 +38,65 @@ class BrandList extends React.Component {
         headerName: "S.No",
         valueGetter: "node.rowIndex + 1",
         field: "node.rowIndex + 1",
-        width: 150,
+        width: 100,
         filter: true,
       },
       {
-        headerName: "Brand Image",
-        field: "customerId",
+        headerName: "Image",
+        field: "image",
         filter: true,
-        width: 200,
-        cellRendererFramework: (params) => {
-          return (
-            <div>
-              <span>{params.data.customerId}</span>
-            </div>
-          );
-        },
-      },
-      {
-        headerName: "Name",
-        field: "email	",
-        filter: true,
-        width: 190,
-        cellRendererFramework: (params) => {
+        width: 100,
+        cellRendererFramework: params => {
           return (
             <div className="d-flex align-items-center cursor-pointer">
-              <span>{params.data.email}</span>
-            </div>
-          );
-        },
-      },
-
-      {
-        headerName: "Total Product",
-        field: "lastname",
-        filter: true,
-        width: 200,
-        cellRendererFramework: (params) => {
-          return (
-            <div>
-              <span>{params.data.lastname}</span>
+              <img
+                className="rounded-circle mr-50"
+                src={params.data?.image}
+                alt="user avatar"
+                height="40"
+                width="40"
+              />
             </div>
           );
         },
       },
       {
-        headerName: "Total Order",
-        field: "lastname",
+        headerName: "Brand Name",
+        field: "brand_name",
         filter: true,
-        width: 200,
-        cellRendererFramework: (params) => {
+        width: 100,
+        cellRendererFramework: params => {
           return (
             <div>
-              <span>{params.data.lastname}</span>
+              <span>{params.data?.brand_name}</span>
             </div>
           );
         },
       },
-
+      {
+        headerName: "Description",
+        field: "desc",
+        filter: true,
+        width: 100,
+        cellRendererFramework: params => {
+          return (
+            <div className="d-flex align-items-center cursor-pointer">
+              <span>{params.data?.desc}</span>
+            </div>
+          );
+        },
+      },
       {
         headerName: "Status",
         field: "status",
         filter: true,
         width: 150,
-        cellRendererFramework: (params) => {
-          return params.value === "Block" ? (
+        cellRendererFramework: params => {
+          return params.value === "Active" ? (
             <div className="badge badge-pill badge-success">
               {params.data.status}
             </div>
-          ) : params.value === "Unblock" ? (
+          ) : params.value === "Deactive" ? (
             <div className="badge badge-pill badge-warning">
               {params.data.status}
             </div>
@@ -117,31 +108,37 @@ class BrandList extends React.Component {
         field: "sortorder",
         field: "transactions",
         width: 150,
-        cellRendererFramework: (params) => {
+        cellRendererFramework: params => {
           return (
             <div className="actions cursor-pointer">
-              {/* <Eye
+              <Route
+                render={({ history }) => (
+                  <>
+                    {/* <Eye
                                 className="mr-50"
                                 size="25px"
                                 color="green"
                                 onClick={() =>
                                     history.push(`/app/customer/viewCustomer/${params.data._id}`)}
                             /> */}
-              <Edit
-                className="mr-50"
-                size="25px"
-                color="blue"
-                onClick={() => history.push("/app/customer/editCustomer")}
-              />
-              <Trash2
-                className="mr-50"
-                size="25px"
-                color="red"
-                onClick={() => {
-                  let selectedData = this.gridApi.getSelectedRows();
-                  this.runthisfunction(params.data._id);
-                  this.gridApi.updateRowData({ remove: selectedData });
-                }}
+                    <Edit
+                      className="mr-50"
+                      size="25px"
+                      color="blue"
+                      onClick={() => history.push("/app/customer/editCustomer")}
+                    />
+                    <Trash2
+                      className="mr-50"
+                      size="25px"
+                      color="red"
+                      onClick={() => {
+                        let selectedData = this.gridApi.getSelectedRows();
+                        this.runthisfunction(params.data._id);
+                        this.gridApi.updateRowData({ remove: selectedData });
+                      }}
+                    />
+                  </>
+                )}
               />
             </div>
           );
@@ -149,43 +146,27 @@ class BrandList extends React.Component {
       },
     ],
   };
-  // async componentDidMount() {
-  //     await axios.get(`http://35.154.86.59/api/user/view_onecust/${id}`)
-  //         .then((response) => {
-  //             let rowData = response.data.data;
-  //             console.log(rowData);
-  //             this.setState({ rowData });
-  //         });
-  // }
-  // async componentDidMount() {
-  //     await axios
-  //         .get("http://35.154.86.59/api/user/allcustomer")
-  //         .then((response) => {
-  //             let rowData = response.data.data;
-  //             console.log(rowData);
-  //             this.setState({ rowData });
-  //         });
-  // }
-  // // async componentDidMount() {
-  // //   let { id } = this.props.match.params;
-  // //   await axios
-  // //     .get(`/http://35.154.86.59/api/user/allcustomer/${id}`, {
-  // //       headers: {
-  // //         "auth-adtoken": localStorage.getItem("auth-adtoken"),
-  // //       },
-  // //     })}
-  // async runthisfunction(id) {
-  //     console.log(id);
-  //     await axios.get(`http://35.154.86.59/api/user/delcustomer/${id}`).then(
-  //         (response) => {
-  //             console.log(response);
-  //         },
-  //         (error) => {
-  //             console.log(error);
-  //         }
-  //     );
-  // }
-  onGridReady = (params) => {
+
+  async componentDidMount() {
+    await axios.get("http://3.6.37.16:8000/admin/brandlist").then(response => {
+      let rowData = response.data.data;
+      console.log(rowData);
+      this.setState({ rowData });
+    });
+  }
+
+  async runthisfunction(id) {
+    console.log(id);
+    await axios.get(`http://3.6.37.16:8000/admin/del_brand/${id}`).then(
+      response => {
+        console.log(response);
+      },
+      error => {
+        console.log(error);
+      }
+    );
+  }
+  onGridReady = params => {
     this.gridApi = params.api;
     this.gridColumnApi = params.columnApi;
     this.setState({
@@ -194,10 +175,10 @@ class BrandList extends React.Component {
       totalPages: this.gridApi.paginationGetTotalPages(),
     });
   };
-  updateSearchQuery = (val) => {
+  updateSearchQuery = val => {
     this.gridApi.setQuickFilter(val);
   };
-  filterSize = (val) => {
+  filterSize = val => {
     if (this.gridApi) {
       this.gridApi.paginationSetPageSize(Number(val));
       this.setState({
@@ -291,7 +272,7 @@ class BrandList extends React.Component {
                         <div className="table-input mr-1">
                           <Input
                             placeholder="search..."
-                            onChange={(e) =>
+                            onChange={e =>
                               this.updateSearchQuery(e.target.value)
                             }
                             value={this.state.value}
@@ -308,7 +289,7 @@ class BrandList extends React.Component {
                       </div>
                     </div>
                     <ContextLayout.Consumer>
-                      {(context) => (
+                      {context => (
                         <AgGridReact
                           gridOptions={{}}
                           rowSelection="multiple"
