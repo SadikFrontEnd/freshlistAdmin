@@ -424,19 +424,6 @@ const pendingPayment = lazy(() =>
   import("./views/apps/pendingPayment/PendingPayment")
 );
 
-const simpleProductList = lazy(() =>
-  import("./views/apps/productManagement/simpleProduct/SimpleProductList")
-);
-const addSimpleProduct = lazy(() =>
-  import("./views/apps/productManagement/simpleProduct/AddSimpleProduct")
-);
-const editSimpleProduct = lazy(() =>
-  import("./views/apps/productManagement/simpleProduct/EditSimpleProduct")
-);
-const viewSimpleProduct = lazy(() =>
-  import("./views/apps/productManagement/simpleProduct/ViewSimpleProduct")
-);
-
 // const coupon = lazy(() => import("./views/apps/products/coupon/Coupon"));
 
 const offerList = lazy(() =>
@@ -485,28 +472,7 @@ const addMenuManagement = lazy(() =>
 const editMenuManagement = lazy(() =>
   import("./views/apps/menuManagement/EditMenuManagement")
 );
-const billableExpenseDetails = lazy(() =>
-  import(
-    "./views/apps/purchasesAndExpenses/billableExpenseDetails/BillableExpenseDetails"
-  )
-);
-const addBillableExpenseDetails = lazy(() =>
-  import(
-    "./views/apps/purchasesAndExpenses/billableExpenseDetails/AddBillableExpenseDetails"
-  )
-);
-const purchasesByItem = lazy(() =>
-  import("./views/apps/purchasesAndExpenses/purchasesByItem/PurchasesByItem")
-);
-const addPurchasesByItem = lazy(() =>
-  import("./views/apps/purchasesAndExpenses/purchasesByItem/AddPurchasesByItem")
-);
-const receiveHistory = lazy(() =>
-  import("./views/apps/purchasesAndExpenses/receiveHistory/ReceiveHistory")
-);
-const adRreceiveHistory = lazy(() =>
-  import("./views/apps/purchasesAndExpenses/receiveHistory/AddReceiveHistory")
-);
+
 const storesList = lazy(() => import("./views/apps/store/stores/StoresList"));
 const addstores = lazy(() => import("./views/apps/store/stores/AddStores"));
 const editstore = lazy(() => import("./views/apps/store/stores/EditStore"));
@@ -735,10 +701,10 @@ const accessControl = lazy(() =>
 const RouteConfig = ({ component: Component, fullLayout, ...rest }) => (
   <Route
     {...rest}
-    render={(props) => {
+    render={props => {
       return (
         <ContextLayout.Consumer>
-          {(context) => {
+          {context => {
             let LayoutTag =
               fullLayout === true
                 ? context.fullLayout
@@ -758,7 +724,7 @@ const RouteConfig = ({ component: Component, fullLayout, ...rest }) => (
     }}
   />
 );
-const mapStateToProps = (state) => {
+const mapStateToProps = state => {
   return {
     user: state.auth.login.userRole,
   };
@@ -1301,22 +1267,6 @@ class AppRouter extends React.Component {
             path="/app/pendingPayment/pendingPayment"
             component={pendingPayment}
           />
-          <AppRoute
-            path="/app/productManagement/simpleProduct/simpleProductList"
-            component={simpleProductList}
-          />
-          <AppRoute
-            path="/app/productManagement/simpleProduct/addSimpleProduct"
-            component={addSimpleProduct}
-          />
-          <AppRoute
-            path="/app/productManagement/simpleProduct/editSimpleProduct"
-            component={editSimpleProduct}
-          />
-          <AppRoute
-            path="/app/productManagement/simpleProduct/viewSimpleProduct/:id"
-            component={viewSimpleProduct}
-          />
           {/* Sales */}
           <AppRoute
             path="/app/freshlist/sales/totalSales"
@@ -1407,30 +1357,6 @@ class AppRouter extends React.Component {
           <AppRoute
             path="/app/store/storesRequest/addStoresRequest"
             component={addStoresRequest}
-          />
-          <AppRoute
-            path="/app/purchasesAndExpenses/billableExpenseDetails/addBillableExpenseDetails"
-            component={addBillableExpenseDetails}
-          />
-          <AppRoute
-            path="/app/purchasesAndExpenses/billableExpenseDetails/billableExpenseDetails"
-            component={billableExpenseDetails}
-          />
-          <AppRoute
-            path="/app/purchasesAndExpenses/purchasesByItem/addPurchasesByItem"
-            component={addPurchasesByItem}
-          />
-          <AppRoute
-            path="/app/purchasesAndExpenses/purchasesByItem/purchasesByItem"
-            component={purchasesByItem}
-          />
-          <AppRoute
-            path="/app/purchasesAndExpenses/receiveHistory/addReceiveHistory"
-            component={adRreceiveHistory}
-          />
-          <AppRoute
-            path="/app/purchasesAndExpenses/receiveHistory/receiveHistory"
-            component={receiveHistory}
           />
           <AppRoute path="/app/pageLayout/pageLayout" component={pageLayout} />
           <AppRoute
