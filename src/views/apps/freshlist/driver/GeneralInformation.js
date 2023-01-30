@@ -62,7 +62,7 @@ export class GeneralInformation extends Component {
     // console.log("identity_no", this.state.identity_no);
     // console.log("phone_no", this.state.phone_no);
     // console.log("address", this.state.address);
-    // console.log("deliveryman_img", this.state.deliveryman_img);
+    // console.log("driver_img", this.state.driver_img);
     // console.log("identity_img", this.state.identity_img);
     const data = new FormData();
     data.append("firstname", this.state.firstname);
@@ -71,10 +71,10 @@ export class GeneralInformation extends Component {
     data.append("identity_no", this.state.identity_no);
     data.append("phone_no", this.state.phone_no);
     data.append("address", this.state.address);
-    data.append("deliveryman_img", this.state.deliveryman_img);
+    data.append("driver_img", this.state.driver_img);
     data.append("identity_img", this.state.identity_img);
 
-    // data.append("deliveryman_img", this.state.deliveryman_img);
+    // data.append("driver_img", this.state.driver_img);
     // data.append(
     //   "driverImage",
     //   this.state.selectedFile,
@@ -141,7 +141,7 @@ export class GeneralInformation extends Component {
       //   identity_img: URL.createObjectURL(img),
       // });
       this.setState({
-        deliveryman_img: imgone,
+        driver_img: imgone,
       });
     }
   };
@@ -189,6 +189,7 @@ export class GeneralInformation extends Component {
                       required
                       type="text"
                       name="firstname"
+                      placeholder="First Name"
                       value={this.state.firstname}
                       onChange={this.changeHandler}
                     ></Input>
@@ -199,6 +200,7 @@ export class GeneralInformation extends Component {
                       required
                       type="text"
                       name="lastname"
+                      placeholder="Last Name"
                       value={this.state.lastname}
                       onChange={this.changeHandler}
                     ></Input>
@@ -214,7 +216,7 @@ export class GeneralInformation extends Component {
                       value={this.state.identity_type}
                       onChange={this.changeHandler}
                     >
-                      <option value="Select">--Select--</option>
+                      {/* <option value="Select">--Select--</option> */}
                       {/* <option value="Aadhar">Aadhar Card</option> */}
                       <option value="Driving License">Driving License</option>
                       <option value="PanCard">Pan Card</option>
@@ -226,8 +228,7 @@ export class GeneralInformation extends Component {
                       Identity No.-
                       {this.state.identity_type == "" ? null : (
                         <span style={{ color: "red" }}>
-                          {" "}
-                          of-{this.state.identity_type}{" "}
+                          of-{this.state.identity_type}
                         </span>
                       )}
                     </Label>
@@ -235,6 +236,7 @@ export class GeneralInformation extends Component {
                       required
                       type="text"
                       name="identity_no"
+                      placeholder="Identity No"
                       value={this.state.identity_no}
                       onChange={this.changeHandler}
                     ></Input>
@@ -245,7 +247,7 @@ export class GeneralInformation extends Component {
                     <CustomInput
                       required
                       type="file"
-                      // name="deliveryman_img"
+                      // name="driver_img"
                       // value={this.state.identity}
                       // onChange={this.changeHandler}
 
@@ -259,6 +261,7 @@ export class GeneralInformation extends Component {
                       type="tel"
                       maxLength="10"
                       name="phone_no"
+                      placeholder="Phone No"
                       value={this.state.phone_no}
                       onChange={this.changeHandler}
                     ></Input>
@@ -269,6 +272,7 @@ export class GeneralInformation extends Component {
                       required
                       type="text"
                       name="address"
+                      placeholder="Address"
                       value={this.state.address}
                       onChange={this.changeHandler}
                     ></Input>
@@ -299,7 +303,7 @@ export class GeneralInformation extends Component {
                     />
                   </Col>
                   <Col lg="6" md="6" className="mb-1">
-                    <Label>DeliveryMan Image</Label>
+                    <Label>Driver Image</Label>
                     <CustomInput
                       required
                       type="file"

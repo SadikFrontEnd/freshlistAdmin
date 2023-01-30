@@ -19,12 +19,14 @@ export class AccountInformation extends Component {
     super(props);
 
     this.state = {
-      name: "",
+      email: "",
+      password: "",
+      confirmpassword: "",
       selectedFile: null,
       selectedName: "",
       sortorder: "",
-      desc: "",
-      product_img: "",
+      // desc: "",
+      // product_img: "",
       status: "",
     };
   }
@@ -45,14 +47,12 @@ export class AccountInformation extends Component {
     e.preventDefault();
     const data = new FormData();
     data.append("name", this.state.name);
+    data.append("email", this.state.email);
+    data.append("password", this.state.password);
+    data.append("confirmpassword", this.state.confirmpassword);
     data.append("sortorder", this.state.sortorder);
-    data.append("desc", this.state.desc);
-    data.append("status", this.state.status);
-    data.append(
-      "product_img",
-      this.state.selectedFile,
-      this.state.selectedName
-    );
+    console.log("abbb", data);
+
     //   for (var value of data.values()) {
     //     console.log(value);
     //  }
@@ -94,18 +94,21 @@ export class AccountInformation extends Component {
                   <Col lg="4" md="4" className="mb-2">
                     <Label>Email</Label>
                     <Input
-                      type="text"
-                      name="type"
-                      value={this.state.type}
+                      type="email"
+                      name="email"
+                      placeholder=" Email"
+                      value={this.state.email}
                       onChange={this.changeHandler}
                     ></Input>
                   </Col>
                   <Col lg="4" md="4" className="mb-1">
                     <Label>Password</Label>
                     <Input
-                      type="text"
-                      name="Password"
-                      value={this.state.desc}
+                      required
+                      type="password"
+                      name="password"
+                      placeholder=" Password"
+                      value={this.state.password}
                       onChange={this.changeHandler}
                     ></Input>
                   </Col>
@@ -114,10 +117,10 @@ export class AccountInformation extends Component {
                     <Label> Confirm Password</Label>
                     <Input
                       required
-                      type="text"
-                      name="Enter Password"
-                      placeholder="Enter Password."
-                      value={this.state.date}
+                      type="Password"
+                      name="confirmpassword"
+                      placeholder="Confirm Password"
+                      value={this.state.confirmpassword}
                       onChange={this.changeHandler}
                     ></Input>
                   </Col>

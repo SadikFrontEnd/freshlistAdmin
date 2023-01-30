@@ -81,7 +81,7 @@ class All extends React.Component {
                     color="blue"
                     onClick={() =>
                       history.push(
-                        `/app/freshlist/order/viewAll/${params.data._id}`
+                        `/app/freshlist/order/EditOrder/${params.data._id}`
                       )
                     }
                   />
