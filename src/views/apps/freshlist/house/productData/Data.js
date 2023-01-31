@@ -198,7 +198,6 @@ export class Data extends Component {
                     value={this.state.name}
                     onChange={this.changeHandler}
                   >
-                    <option>---None---</option>
                     <option value="1">1</option>
                     <option value="2">2</option>
                     <option value="3">3</option>

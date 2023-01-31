@@ -11,8 +11,6 @@ import {
   FormGroup,
   CustomInput,
 } from "reactstrap";
-import { EditorState, convertToRaw } from "draft-js";
-import { Editor } from "react-draft-wysiwyg";
 import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
 import "../../../../../assets/scss/plugins/extensions/editor.scss";
 import draftToHtml from "draftjs-to-html";
@@ -25,10 +23,20 @@ export class PaymentDetails extends Component {
     super(props);
     this.state = {
       name: "",
+      firstname: "",
+      lastname: "",
+      email: "",
+      company: "",
+      adreess: "",
+      address1: "",
+      address2: "",
+      city: "",
+      postCode: "",
+      country: "",
+      region: "",
       selectedFile: null,
       selectedName: "",
       sortorder: "",
-      desc: "",
       brand_img: "",
       status: "",
     };
@@ -50,8 +58,11 @@ export class PaymentDetails extends Component {
     e.preventDefault();
     const data = new FormData();
     data.append("name", this.state.name);
+    data.append("firstname", this.state.firstname);
+    data.append("lastname", this.state.lastname);
+    data.append("company", this.state.company);
     data.append("sortorder", this.state.sortorder);
-    data.append("desc", this.state.desc);
+    // data.append("desc", this.state.desc);
     data.append("status", this.state.status);
     if (this.state.selectedFile !== null) {
       data.append(
@@ -60,6 +71,9 @@ export class PaymentDetails extends Component {
         this.state.selectedName
       );
     }
+    //   for (var value of data.values()) {
+    //     console.log(value);
+    //  }
     axiosConfig
       .post("/addbrand", data)
       .then((response) => {
@@ -78,83 +92,130 @@ export class PaymentDetails extends Component {
             <Form className="m-1" onSubmit={this.submitHandler}>
               <Row className="mb-2">
                 <Col lg="12" md="12" className="mb-2">
-                  <Label> Product Name</Label>
-                  <Input
-                    type="text"
-                    placeholder="Product Name"
-                    name="name"
-                    value={this.state.name}
+                  <Label>Choose Address</Label>
+                  <CustomInput
+                    type="select"
+                    placeholder="Select Type"
+                    name="address"
+                    value={this.state.address}
                     onChange={this.changeHandler}
-                  />
+                  >
+                    <option value="default">...None...</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                  </CustomInput>
                 </Col>
-                <Col lg="12" md="12">
-                  <FormGroup>
-                    <Label>Description</Label>
-                    <Editor
-                      toolbarClassName="demo-toolbar-absolute"
-                      wrapperClassName="demo-wrapper"
-                      editorClassName="demo-editor"
-                      editorState={this.state.editorState}
-                      onEditorStateChange={this.onEditorStateChange}
-                      toolbar={{
-                        image: {
-                          uploadCallback: this.uploadImageCallBack,
-                          previewImage: true,
-                          alt: { present: false, mandatory: false },
-                          uploadEnabled: true,
-                          inputAccept:
-                            "image/gif,image/jpeg,image/jpg,image/png,image/svg",
-                        },
-                      }}
-                    />
-                  </FormGroup>
-                </Col>
-                <hr />
                 <Col lg="12" md="12" className="mb-2">
-                  <Label> Meta Tag Title</Label>
+                  <Label>FirstName</Label>
                   <Input
                     type="text"
-                    placeholder="Meta Tag"
-                    name="name"
-                    value={this.state.name}
+                    placeholder="FirstName"
+                    name="firstname"
+                    value={this.state.firstname}
                     onChange={this.changeHandler}
                   />
                 </Col>
                 <hr />
-                <Col lg="12" md="12" className="mb-1">
-                  <Label>MetaData</Label>
-                  <textarea
+                <Col lg="12" md="12" className="mb-2">
+                  <Label>LastName</Label>
+                  <Input
                     type="text"
-                    rows={4}
-                    className="form-control"
-                    placeholder="MetaData"
-                    name="type"
-                    value={this.state.sortorder}
+                    placeholder="LastName"
+                    name="lastname"
+                    value={this.state.lastname}
                     onChange={this.changeHandler}
                   />
                 </Col>
-                <Col lg="12" md="12" className="mb-1">
-                  <Label>Meta Tag Keywords</Label>
-                  <textarea
+                <hr />
+                <Col lg="12" md="12" className="mb-2">
+                  <Label>Company</Label>
+                  <Input
                     type="text"
-                    rows={4}
-                    className="form-control"
-                    placeholder="Meta Tag Keywords"
-                    name="type"
-                    value={this.state.sortorder}
+                    placeholder="Company"
+                    name="company"
+                    value={this.state.company}
+                    onChange={this.changeHandler}
+                  />
+                </Col>
+                <hr />
+                <Col lg="12" md="12" className="mb-2">
+                  <Label>Address1</Label>
+                  <Input
+                    type="text"
+                    placeholder="Address"
+                    name="address1"
+                    value={this.state.address1}
                     onChange={this.changeHandler}
                   />
                 </Col>
                 <Col lg="12" md="12" className="mb-2">
-                  <Label> Product Tag</Label>
+                  <Label>Address2</Label>
                   <Input
                     type="text"
-                    placeholder="Product Tag"
-                    name="name"
-                    value={this.state.name}
+                    placeholder="Address"
+                    name="address2"
+                    value={this.state.address2}
                     onChange={this.changeHandler}
                   />
                 </Col>
+                <Col lg="12" md="12" className="mb-2">
+                  <Label>City</Label>
+                  <Input
+                    type="text"
+                    placeholder="City"
+                    name="city"
+                    value={this.state.city}
+                    onChange={this.changeHandler}
+                  />
+                </Col>
+                <Col lg="12" md="12" className="mb-2">
+                  <Label>PostCode</Label>
+                  <Input
+                    type="text"
+                    placeholder="PostCode"
+                    name="postCode"
+                    value={this.state.postCode}
+                    onChange={this.changeHandler}
+                  />
+                </Col>
+                <Col lg="12" md="12" className="mb-2">
+                  <Label>Country</Label>
+                  <CustomInput
+                    type="select"
+                    placeholder="Select Type"
+                    name="country"
+                    value={this.state.country}
+                    onChange={this.changeHandler}
+                  >
+                    <option value="India">India</option>
+                    <option value="Japan">Japan</option>
+                    <option value="BanglaDesh">BanglaDesh</option>
+                  </CustomInput>
+                </Col>
+
+                <Col lg="12" md="12" className="mb-2">
+                  <Label>Region/State</Label>
+                  <CustomInput
+                    type="select"
+                    name="region"
+                    value={this.state.region}
+                    onChange={this.changeHandler}
+                  >
+                    <option value="Kerala">Kerala</option>
+                    <option value="MadhyaPradesh">MadhyaPradesh</option>
+                    <option value="Bihar">Bihar</option>
+                    <option value="Gujrat">Gujrat</option>
+                  </CustomInput>
+                </Col>
+              </Row>
+              <Row>
+                <Button.Ripple
+                  color="primary"
+                  type="submit"
+                  className="mr-1 mb-1 right"
+                >
+                  Continue
+                </Button.Ripple>
               </Row>
             </Form>
           </CardBody>

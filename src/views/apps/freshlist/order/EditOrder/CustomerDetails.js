@@ -11,8 +11,6 @@ import {
   FormGroup,
   CustomInput,
 } from "reactstrap";
-import { EditorState, convertToRaw } from "draft-js";
-import { Editor } from "react-draft-wysiwyg";
 import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
 import "../../../../../assets/scss/plugins/extensions/editor.scss";
 import draftToHtml from "draftjs-to-html";
@@ -25,6 +23,10 @@ export class CustomerDetails extends Component {
     super(props);
     this.state = {
       name: "",
+      firstname: "",
+      lastname: "",
+      email: "",
+      telephone: "",
       selectedFile: null,
       selectedName: "",
       sortorder: "",
@@ -77,134 +79,116 @@ export class CustomerDetails extends Component {
     return (
       <div>
         <Card>
-          {/* <Row className="m-2">
-            <Col>
-              <h1 col-sm-6 className="float-left">
-                General
-              </h1>
-            </Col>
-            <Col>
-              <Button
-                className=" btn btn-danger float-right"
-                onClick={() =>
-                  history.push("/app/freshlist/house/houseProductList")
-                }
-              >
-                Back
-              </Button>
-            </Col>
-          </Row> */}
           <CardBody>
             <Form className="m-1" onSubmit={this.submitHandler}>
               <Row className="mb-2">
                 <Col lg="12" md="12" className="mb-2">
-                  <Label> Product Name</Label>
-                  <Input
-                    type="text"
-                    placeholder="Product Name"
-                    name="name"
+                  <Label>Store</Label>
+                  <CustomInput
+                    type="select"
+                    placeholder="Select Type"
+                    name="type"
                     value={this.state.name}
                     onChange={this.changeHandler}
-                  />
+                  >
+                    <option value="default">Default</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                  </CustomInput>
                 </Col>
-                <Col lg="12" md="12">
-                  <FormGroup>
-                    <Label>Description</Label>
-                    <Editor
-                      toolbarClassName="demo-toolbar-absolute"
-                      wrapperClassName="demo-wrapper"
-                      editorClassName="demo-editor"
-                      editorState={this.state.editorState}
-                      onEditorStateChange={this.onEditorStateChange}
-                      toolbar={{
-                        image: {
-                          uploadCallback: this.uploadImageCallBack,
-                          previewImage: true,
-                          alt: { present: false, mandatory: false },
-                          uploadEnabled: true,
-                          inputAccept:
-                            "image/gif,image/jpeg,image/jpg,image/png,image/svg",
-                        },
-                      }}
-                    />
-                  </FormGroup>
-                </Col>
-                <hr />
                 <Col lg="12" md="12" className="mb-2">
-                  <Label> Meta Tag Title</Label>
+                  <Label>Currency</Label>
+                  <CustomInput
+                    type="select"
+                    placeholder="Select Type"
+                    name="type"
+                    value={this.state.name}
+                    onChange={this.changeHandler}
+                  >
+                    <option value="default">Rupee</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                  </CustomInput>
+                </Col>
+                <Col lg="12" md="12" className="mb-2">
+                  <Label>Customer</Label>
                   <Input
                     type="text"
-                    placeholder="Meta Tag"
+                    placeholder="Customer"
                     name="name"
                     value={this.state.name}
                     onChange={this.changeHandler}
                   />
                 </Col>
                 <hr />
-                {/* <Col lg="12" md="12" className="mb-2">
-                  <Label> Meta Tag Description</Label>
-                  <Input
-                    type="text"
-                    placeholder="Meta Tag Description"
-                    name="name"
-                    value={this.state.name}
-                    onChange={this.changeHandler}
-                  />
-                </Col> */}
-                <Col lg="12" md="12" className="mb-1">
-                  <Label>MetaData</Label>
-                  <textarea
-                    type="text"
-                    rows={4}
-                    className="form-control"
-                    placeholder="MetaData"
+                <Col lg="12" md="12" className="mb-2">
+                  <Label>Customer Group</Label>
+                  <CustomInput
+                    type="select"
+                    placeholder="Select Type"
                     name="type"
-                    value={this.state.sortorder}
+                    value={this.state.customergroup}
                     onChange={this.changeHandler}
-                  />
-                </Col>
-                {/* <Col lg="12" md="12" className="mb-2">
-                  <Label> Meta Tag Keywords</Label>
-                  <Input
-                    type="text"
-                    placeholder="Meta Tag Keywords"
-                    name="name"
-                    value={this.state.name}
-                    onChange={this.changeHandler}
-                  />
-                </Col> */}
-                <Col lg="12" md="12" className="mb-1">
-                  <Label>Meta Tag Keywords</Label>
-                  <textarea
-                    type="text"
-                    rows={4}
-                    className="form-control"
-                    placeholder="Meta Tag Keywords"
-                    name="type"
-                    value={this.state.sortorder}
-                    onChange={this.changeHandler}
-                  />
+                  >
+                    <option value="default">Default</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                  </CustomInput>
                 </Col>
                 <Col lg="12" md="12" className="mb-2">
-                  <Label> Product Tag</Label>
+                  <Label>FirstName</Label>
                   <Input
                     type="text"
-                    placeholder="Product Tag"
-                    name="name"
-                    value={this.state.name}
+                    placeholder="FirstName"
+                    name="firstname"
+                    value={this.state.firstname}
                     onChange={this.changeHandler}
                   />
                 </Col>
+                <hr />
+                <Col lg="12" md="12" className="mb-2">
+                  <Label>LastName</Label>
+                  <Input
+                    type="text"
+                    placeholder="LastName"
+                    name="lastname"
+                    value={this.state.lastname}
+                    onChange={this.changeHandler}
+                  />
+                </Col>
+                <hr />
+                <Col lg="12" md="12" className="mb-2">
+                  <Label>Email</Label>
+                  <Input
+                    type="email"
+                    placeholder="Email"
+                    name="email"
+                    value={this.state.email}
+                    onChange={this.changeHandler}
+                  />
+                </Col>
+                <hr />
+                <Col lg="12" md="12" className="mb-2">
+                  <Label>Telephone</Label>
+                  <Input
+                    type="number"
+                    placeholder="Telephone"
+                    name="telephone"
+                    value={this.state.telephone}
+                    onChange={this.changeHandler}
+                  />
+                </Col>
+                <hr />
               </Row>
-              {/* <Row>
+              <Row>
                 <Button.Ripple
                   color="primary"
                   type="submit"
-                  className="mr-1 mb-1"
+                  className="mr-1 mb-1 right"
                 >
-                  Update
+                  Continue
                 </Button.Ripple>
-              </Row> */}
+              </Row>
             </Form>
           </CardBody>
         </Card>

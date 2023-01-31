@@ -5,6 +5,7 @@ import CustomerDetails from "./EditOrder/CustomerDetails";
 import Products from "./EditOrder/Products";
 import PaymentDetails from "./EditOrder/PaymentDetails";
 import ShippingDetails from "./EditOrder/ShippingDetails";
+import Totals from "./EditOrder/Totals";
 function EditOrder() {
   return (
     <div>
@@ -21,6 +22,9 @@ function EditOrder() {
           </Tab>
           <Tab label="Shipping Details">
             <ShippingDetails />
+          </Tab>
+          <Tab label="Totals">
+            <Totals />
           </Tab>
         </Tabs>
         <hr />

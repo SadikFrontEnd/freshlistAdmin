@@ -49,9 +49,6 @@ export class Attribute extends Component {
     console.log(event.target.files[0]);
   };
 
-  changeHandler1 = (e) => {
-    this.setState({ status: e.target.value });
-  };
   changeHandler = (e) => {
     this.setState({ [e.target.name]: e.target.value });
   };
@@ -61,14 +58,15 @@ export class Attribute extends Component {
     this.setState({ inputlist: list });
   };
 
-  handleinputchange = (e, index) => {
-    const { name, value } = e.target;
-    const list = [...this.state.inputlist];
-    list[index][name] = value;
-    this.setState({ inputlist: list });
+  // handleinputchange = (e, index) => {
+  //   const { name, value } = e.target;
+  //   const list = [...this.state.inputlist];
+  //   list[index][name] = value;
+  //   this.setState({ inputlist: list });
 
-    console.log(this.state.inputlist);
-  };
+  //   console.log(this.state.inputlist);
+  // };
+
   handleClick = () => {
     this.setState({
       inputlist: [
@@ -161,7 +159,7 @@ export class Attribute extends Component {
                       </tr>
                     </thead>
                     <tbody>
-                      <tr>
+                      {/* <tr>
                         <td className="p-0">
                           <CustomInput
                             type="select"
@@ -280,7 +278,7 @@ export class Attribute extends Component {
                             -
                           </Button>
                         </td>
-                      </tr>
+                      </tr> */}
                       {this.state.inputlist.map((e, i) => {
                         return (
                           <>
@@ -332,8 +330,8 @@ export class Attribute extends Component {
                                 <Input
                                   type="text"
                                   placeholder="Quantity"
-                                  name="name"
-                                  value={this.state.name}
+                                  name="quantity"
+                                  value={this.state.quantity}
                                   onChange={this.changeHandler}
                                 />
                               </td>
@@ -395,7 +393,7 @@ export class Attribute extends Component {
                                 />
                               </td>
                               <td>
-                                {this.state.inputlist.length !== 1 && (
+                                {this.state.inputlist.length !== 0 && (
                                   <Button
                                     color="primary"
                                     className="mr-1 mt-2"
