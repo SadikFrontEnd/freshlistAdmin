@@ -8,6 +8,12 @@ import Attribute from "./productData/Attribute";
 import Discount from "./productData/Discount";
 import Special from "./productData/Special";
 import ImageGallery from "./productData/ImageGallery";
+import Option from "./productData/Option";
+import Banner from "./productData/Banner";
+import Recurring from "./productData/Recurring";
+import Videos from "./productData/Videos";
+import Seo from "./productData/Seo";
+import RewardPoints from "./productData/RewardPoints";
 function EditHouseProduct() {
   return (
     <div>
@@ -25,8 +31,12 @@ function EditHouseProduct() {
           <Tab label="Attribute">
             <Attribute />
           </Tab>
-          <Tab label="Option">Tab 5 Option</Tab>
-          <Tab label="Recurring">Tab 6 Recurring</Tab>
+          <Tab label="Option">
+            <Option />
+          </Tab>
+          <Tab label="Recurring">
+            <Recurring />
+          </Tab>
           <Tab label="Discount">
             <Discount />
           </Tab>
@@ -36,11 +46,21 @@ function EditHouseProduct() {
           <Tab label="Image">
             <ImageGallery />
           </Tab>
-          <Tab label="Banners">Tab 10 Banners</Tab>
-          <Tab label="Videos">Tab 11 Data</Tab>
-          <Tab label="Reward Points">Tab 12 Links</Tab>
-          <Tab label="SEO">Tab 13 SEO</Tab>
-          <Tab label="Design">Tab 14 Design</Tab>
+          <Tab label="Banners">
+            <Banner />
+          </Tab>
+          <Tab label="Videos">
+            <Videos />
+          </Tab>
+          <Tab label="Reward Points">
+            <RewardPoints />
+          </Tab>
+          <Tab label="SEO">
+            <Seo />
+          </Tab>
+          <Tab label="Design">
+            <Discount />
+          </Tab>
         </Tabs>
         <hr />
       </Container>

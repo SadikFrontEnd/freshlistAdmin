@@ -380,10 +380,6 @@ export class AddOrder extends Component {
                       <Col lg="3" md="3" className="mb-1">
                         <Label>Product Name</Label>
                         <Multiselect
-                          // name="product_name"
-                          // value={this.state.inputlist.selected}
-                          // value={this.state.productName}
-                          // isObject={false}
                           placeholder="Select Product"
                           displayValue="product_name"
                           onRemove={(e) => {
@@ -404,7 +400,6 @@ export class AddOrder extends Component {
                       <Col lg="3" md="3" className="mb-1">
                         <Label>Attribute Value</Label>
                         <Multiselect
-                          // name="selected"
                           displayValue="product_name"
                           value={this.state.inputlist.selected}
                           isObject={false}
@@ -435,15 +430,6 @@ export class AddOrder extends Component {
                           onChange={(e) => this.handleinputchange(e, i)}
                         />
                       </Col>
-                      {/* <Col>
-                      <Button.Ripple
-                        onClick={this.handleClick}
-                        color="primary"
-                        className="mr-1 mt-2"
-                      >
-                        Add new Field
-                      </Button.Ripple>
-                    </Col> */}
                       <Col lg="3" md="3" className="d-flex">
                         {this.state.inputlist.length !== 1 && (
                           <Button.Ripple

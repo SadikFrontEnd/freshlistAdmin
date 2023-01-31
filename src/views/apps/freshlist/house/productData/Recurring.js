@@ -12,33 +12,22 @@ import {
   CustomInput,
   Table,
 } from "reactstrap";
-import { EditorState, convertToRaw } from "draft-js";
-import { Editor } from "react-draft-wysiwyg";
-import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
-import "../../../../../assets/scss/plugins/extensions/editor.scss";
-import draftToHtml from "draftjs-to-html";
-import { Route } from "react-router-dom";
-
 import { history } from "../../../../../history";
 import axiosConfig from "../../../../../axiosConfig";
 
-export class Attribute extends Component {
+export class Recurring extends Component {
   constructor(props) {
     super(props);
     this.state = {
       name: "",
+      title: "",
+      product: "",
+      main: "",
+      link: "",
       selectedFile: null,
       selectedName: "",
       sortorder: "",
-      desc: "",
       brand_img: "",
-      quantity: "",
-      size: "",
-      required: "",
-      quant: "",
-      optValue: "",
-      opValue: "",
-      status: "",
       inputlist: [{ selected: "", attribute: "", quantity: "" }],
     };
   }
@@ -70,15 +59,11 @@ export class Attribute extends Component {
     e.preventDefault();
     const data = new FormData();
     data.append("name", this.state.name);
+    data.append("title", this.state.title);
+    data.append("product", this.state.product);
+    data.append("main", this.state.main);
+    data.append("link", this.state.link);
     data.append("sortorder", this.state.sortorder);
-    data.append("quantity", this.state.quantity);
-    data.append("size", this.state.size);
-    data.append("required", this.state.required);
-    data.append("desc", this.state.desc);
-    data.append("quant", this.state.quant);
-    data.append("optValue", this.state.optValue);
-    data.append("opValue", this.state.opValue);
-    data.append("status", this.state.status);
     if (this.state.selectedFile !== null) {
       data.append(
         "brand_img",
@@ -93,48 +78,17 @@ export class Attribute extends Component {
         <Card>
           <CardBody>
             <Form className="m-1" onSubmit={this.submitHandler}>
-              <Row className="mb-2">
-                <Col lg="2" md="2" className="mb-2">
-                  <Label>Size</Label>
-                  <CustomInput
-                    type="select"
-                    placeholder="Size"
-                    name="type"
-                    value={this.state.size}
-                    onChange={this.changeHandler}
-                  >
-                    <option value="Yes">Yes</option>
-                    <option value="No">No</option>
-                  </CustomInput>
-                </Col>
-                <Col lg="10" md="10" className="mb-2">
-                  <Label>Required</Label>
-                  <CustomInput
-                    type="select"
-                    placeholder="Required"
-                    name="type"
-                    value={this.state.required}
-                    onChange={this.changeHandler}
-                  >
-                    <option value="Yes">Yes</option>
-                    <option value="No">No</option>
-                  </CustomInput>
-                </Col>
-                <hr />
-              </Row>
+              <hr />
               <Row>
-                <Col lg="2" md="2"></Col>
-                <Col lg="10" md="10">
+                <Col lg="12" md="12">
                   <Table responsive bordered>
                     <thead>
                       <tr>
-                        <th>Option Value</th>
-                        <th>Quantity</th>
-                        <th>Subtract Stock</th>
-                        <th>Price</th>
-                        <th> Special Price</th>
-                        <th>Points</th>
-                        <th>Weight</th>
+                        <th>Title</th>
+                        <th>Type:Product/Quantity</th>
+                        <th>Type:Main/Inner</th>
+                        <th>Link(Auto Complete)</th>
+                        <th>Image</th>
                         <th></th>
                       </tr>
                     </thead>
@@ -144,18 +98,6 @@ export class Attribute extends Component {
                           <>
                             <tr key={i}>
                               <td className="p-0">
-                                <CustomInput
-                                  type="select"
-                                  placeholder="option value"
-                                  name="type"
-                                  value={this.state.name}
-                                  onChange={this.changeHandler}
-                                >
-                                  <option value="Yes">Large</option>
-                                  <option value="No">Small</option>
-                                </CustomInput>
-                              </td>
-                              <td>
                                 <Input
                                   type="text"
                                   placeholder="Quantity"
@@ -172,8 +114,9 @@ export class Attribute extends Component {
                                   value={this.state.name}
                                   onChange={this.changeHandler}
                                 >
-                                  <option value="Yes">+</option>
-                                  <option value="No">-</option>
+                                  <option value="Product">Product</option>
+                                  <option value="Product2">Product2</option>
+                                  <option value="Product3">Product3</option>
                                 </CustomInput>
                               </td>
                               <td>
@@ -184,79 +127,44 @@ export class Attribute extends Component {
                                   value={this.state.name}
                                   onChange={this.changeHandler}
                                 >
-                                  <option value="Yes">+</option>
-                                  <option value="No">-</option>
+                                  <option value="Banner">Banner</option>
+                                  <option value="Banner1">Banner1</option>
+                                  <option value="Banner2">Banner2</option>
                                 </CustomInput>
-                                <Input
-                                  type="text"
-                                  placeholder="Quantity"
-                                  name="quantity"
-                                  value={this.state.quantity}
-                                  onChange={this.changeHandler}
-                                />
                               </td>
                               <td>
-                                <CustomInput
-                                  type="select"
-                                  placeholder="option value"
-                                  name="type"
-                                  value={this.state.name}
-                                  onChange={this.changeHandler}
-                                >
-                                  <option value="Yes">+</option>
-                                  <option value="No">-</option>
-                                </CustomInput>
                                 <Input
                                   type="text"
-                                  placeholder="Quantity"
+                                  placeholder="Price"
                                   name="name"
                                   value={this.state.name}
                                   onChange={this.changeHandler}
                                 />
                               </td>
                               <td>
-                                <CustomInput
-                                  type="select"
-                                  placeholder="option value"
-                                  name="type"
-                                  value={this.state.name}
-                                  onChange={this.changeHandler}
-                                >
-                                  <option value="Yes">+</option>
-                                  <option value="No">-</option>
-                                </CustomInput>
                                 <Input
-                                  type="text"
-                                  placeholder="Quantity"
+                                  type="date"
+                                  placeholder="Date Start"
                                   name="name"
                                   value={this.state.name}
                                   onChange={this.changeHandler}
                                 />
                               </td>
                               <td>
-                                <CustomInput
-                                  type="select"
-                                  placeholder="option value"
-                                  name="type"
-                                  value={this.state.name}
-                                  onChange={this.changeHandler}
-                                >
-                                  <option value="Yes">+</option>
-                                  <option value="No">-</option>
-                                </CustomInput>
                                 <Input
-                                  type="text"
-                                  placeholder="Quantity"
+                                  type="date"
+                                  placeholder="Date End"
                                   name="name"
                                   value={this.state.name}
                                   onChange={this.changeHandler}
                                 />
                               </td>
+
                               <td>
                                 {this.state.inputlist.length !== 1 && (
                                   <Button
                                     color="primary"
-                                    className="mr-1 mt-2"
+                                    className="mr-1"
                                     style={{ height: "40px" }}
                                     onClick={() => this.handleremove(i)}
                                   >
@@ -265,6 +173,12 @@ export class Attribute extends Component {
                                 )}
                               </td>
                             </tr>
+                          </>
+                        );
+                      })}
+                      {this.state.inputlist.map((e, i) => {
+                        return (
+                          <>
                             <tr>
                               <td></td>
                               <td></td>
@@ -299,4 +213,4 @@ export class Attribute extends Component {
     );
   }
 }
-export default Attribute;
+export default Recurring;

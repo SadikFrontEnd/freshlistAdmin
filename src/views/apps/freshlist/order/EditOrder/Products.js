@@ -12,19 +12,16 @@ import {
   CustomInput,
   Table,
 } from "reactstrap";
-import { EditorState, convertToRaw } from "draft-js";
-import { Editor } from "react-draft-wysiwyg";
 import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
 import "../../../../../assets/scss/plugins/extensions/editor.scss";
-import draftToHtml from "draftjs-to-html";
 import { Route } from "react-router-dom";
 import { history } from "../../../../../history";
 import axiosConfig from "../../../../../axiosConfig";
 
 import { Tabs, Tab } from "react-bootstrap-tabs";
 import { Container } from "reactstrap";
-import CustomerDetails from "./CustomerDetails";
-import Product from "./Products/Product";
+// import CustomerDetails from "./CustomerDetails";
+// import Product from "./Products/Product";
 import Vouchers from "./Products/Vouchers";
 export class Products extends Component {
   constructor(props) {
@@ -95,7 +92,6 @@ export class Products extends Component {
     data.append("optValue", this.state.optValue);
     data.append("opValue", this.state.opValue);
     data.append("status", this.state.status);
-    // data.append("name", this.state.name);
     data.append("productName", this.state.productName);
     data.append("quant", this.state.quant);
     if (this.state.selectedFile !== null) {
@@ -106,15 +102,15 @@ export class Products extends Component {
       );
     }
 
-    axiosConfig
-      .post("/addbrand", data)
-      .then((response) => {
-        console.log(response);
-        this.props.history.push("/app/freshlist/house/HouseProductList");
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    // axiosConfig
+    //   .post("/addbrand", data)
+    //   .then((response) => {
+    //     console.log(response);
+    //     this.props.history.push("/app/freshlist/house/HouseProductList");
+    //   })
+    //   .catch((error) => {
+    //     console.log(error);
+    //   });
   };
   render() {
     return (
@@ -246,7 +242,6 @@ export class Products extends Component {
                               >
                                 <Button
                                   color="primary"
-                                  // type="submit"
                                   className="mr-1 mb-1"
                                   onClick={this.handleClick}
                                 >

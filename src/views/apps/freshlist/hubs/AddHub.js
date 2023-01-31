@@ -15,10 +15,11 @@ import { history } from "../../../../history";
 import axiosConfig from "../../../../axiosConfig";
 import { Route } from "react-router-dom";
 
-const AddHub = () => {
+const AddHub = (props) => {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
+    password: "",
     mobile: "",
     address: "",
     delivery_zone: "",
@@ -35,7 +36,7 @@ const AddHub = () => {
       .post("/admin/addhub", formData)
       .then((response) => {
         console.log("response", response.data.data);
-        // this.props.history.push("/app/freshlist/order/orderList");
+        props.history.push("/app/freshlist/hubs/hubList");
       })
       .catch((error) => {
         console.log(error);
@@ -83,8 +84,9 @@ const AddHub = () => {
                 <FormGroup>
                   <Label>Mobile No.</Label>
                   <Input
-                    type="Number"
-                    placeholder="Enter No."
+                    type="tel"
+                    maxlength="10"
+                    placeholder="Mobile"
                     name="mobile"
                     value={formData.mobile}
                     onChange={changeHandler}
@@ -99,6 +101,18 @@ const AddHub = () => {
                     placeholder="Enter Email"
                     name="email"
                     value={formData.email}
+                    onChange={changeHandler}
+                  />
+                </FormGroup>
+              </Col>
+              <Col lg="6" md="6">
+                <FormGroup>
+                  <Label>Password</Label>
+                  <Input
+                    type="password"
+                    placeholder="Enter Password"
+                    name="password"
+                    value={formData.password}
                     onChange={changeHandler}
                   />
                 </FormGroup>
@@ -201,9 +215,13 @@ const AddHub = () => {
             </Row>
 
             <Row className="m-2">
-              <Button color="primary" type="submit" className="mr-1 mb-1">
-                Add Hub
-              </Button>
+              <Route
+                render={({ history }) => (
+                  <Button color="primary" type="submit" className="mr-1 mb-1">
+                    Add Hub
+                  </Button>
+                )}
+              />
             </Row>
           </Form>
         </CardBody>

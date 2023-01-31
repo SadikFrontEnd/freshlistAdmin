@@ -21,9 +21,10 @@ export default class EditHub extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      username: "",
+      name: "",
       email: "",
       mobile: "",
+      delivery_zone: "",
       status: "",
     };
   }
@@ -34,9 +35,10 @@ export default class EditHub extends Component {
       .then((response) => {
         console.log("getviewone", response.data.data);
         this.setState({
-          username: response.data.data.username,
-          mobile: response.data.data.mobile,
+          name: response.data.data.name,
           email: response.data.data.email,
+          mobile: response.data.data.mobile,
+          delivery_zone: response.data.data.delivery_zone,
           status: response.data.data.status,
         });
       })
@@ -77,10 +79,7 @@ export default class EditHub extends Component {
                 <BreadcrumbItem href="/analyticsDashboard" tag="a">
                   Home
                 </BreadcrumbItem>
-                <BreadcrumbItem
-                  href="/app/freshlist/customer/customerList"
-                  tag="a"
-                >
+                <BreadcrumbItem href="/app/freshlist/hubs/hubList" tag="a">
                   Customer List
                 </BreadcrumbItem>
                 <BreadcrumbItem active>Edit Customer List</BreadcrumbItem>
@@ -98,9 +97,7 @@ export default class EditHub extends Component {
                 render={({ history }) => (
                   <Button
                     className=" btn btn-danger float-right"
-                    onClick={() =>
-                      history.push("/app/freshlist/customer/customerList")
-                    }
+                    onClick={() => history.push("/app/freshlist/hubs/hubList")}
                   >
                     Back
                   </Button>
@@ -114,17 +111,17 @@ export default class EditHub extends Component {
               <Row>
                 <Col lg="5" md="5" className="ml-2">
                   <FormGroup>
-                    <Label>Customer Name</Label>
+                    <Label>Hub Name</Label>
                     <Input
                       type="text"
-                      placeholder="Customer Name"
+                      placeholder="Hub Name"
                       name="username"
                       value={this.state.username}
                       onChange={this.changeHandler}
                     />
                   </FormGroup>
                 </Col>
-                <Col lg="5" md="5">
+                <Col lg="5" md="5" className="ml-2">
                   <FormGroup>
                     <Label>Email</Label>
                     <Input
@@ -145,6 +142,18 @@ export default class EditHub extends Component {
                       placeholder="Enter Mobile"
                       name="mobile"
                       value={this.state.mobile}
+                      onChange={this.changeHandler}
+                    />
+                  </FormGroup>
+                </Col>
+                <Col lg="5" md="5" className="ml-2">
+                  <FormGroup>
+                    <Label>Delivery Zone</Label>
+                    <Input
+                      type="text"
+                      placeholder="Delivery Zone"
+                      name="delivery_zone"
+                      value={this.state.delivery_zone}
                       onChange={this.changeHandler}
                     />
                   </FormGroup>

@@ -52,7 +52,7 @@ class HubList extends React.Component {
         field: "name",
         filter: true,
         width: 140,
-        cellRendererFramework: params => {
+        cellRendererFramework: (params) => {
           return (
             <div className="d-flex align-items-center cursor-pointer">
               <span>{params.data.name}</span>
@@ -65,7 +65,7 @@ class HubList extends React.Component {
         field: "mobile",
         filter: true,
         width: 150,
-        cellRendererFramework: params => {
+        cellRendererFramework: (params) => {
           return (
             <div className="d-flex align-items-center cursor-pointer">
               <span>{params.data.mobile}</span>
@@ -79,7 +79,7 @@ class HubList extends React.Component {
         field: "email",
         filter: true,
         width: 100,
-        cellRendererFramework: params => {
+        cellRendererFramework: (params) => {
           return (
             <div>
               <span>{params.data.email}</span>
@@ -92,7 +92,7 @@ class HubList extends React.Component {
         field: "address",
         filter: true,
         width: 120,
-        cellRendererFramework: params => {
+        cellRendererFramework: (params) => {
           return (
             <div>
               <span>{params.data.address}</span>
@@ -105,7 +105,7 @@ class HubList extends React.Component {
         field: "delivery_zone",
         filter: true,
         width: 150,
-        cellRendererFramework: params => {
+        cellRendererFramework: (params) => {
           return (
             <div>
               <span>{params.data.delivery_zone}</span>
@@ -119,7 +119,7 @@ class HubList extends React.Component {
         field: "status",
         filter: true,
         width: 150,
-        cellRendererFramework: params => {
+        cellRendererFramework: (params) => {
           return params.value === "Active" ? (
             <div className="badge badge-pill badge-success">
               {params.data.status}
@@ -136,7 +136,7 @@ class HubList extends React.Component {
         field: "sortorder",
         field: "transactions",
         width: 150,
-        cellRendererFramework: params => {
+        cellRendererFramework: (params) => {
           return (
             <div className="actions cursor-pointer">
               <Route
@@ -189,7 +189,7 @@ class HubList extends React.Component {
   };
 
   async componentDidMount() {
-    await axiosConfig.get("admin/hublist").then(response => {
+    await axiosConfig.get("admin/hublist").then((response) => {
       let rowData = response.data.data;
       console.log(rowData);
       this.setState({ rowData });
@@ -198,16 +198,16 @@ class HubList extends React.Component {
   async runthisfunction(id) {
     console.log(id);
     await axiosConfig.delete(`/admin/del_hub/${id}`).then(
-      response => {
+      (response) => {
         console.log(response);
       },
-      error => {
+      (error) => {
         console.log(error);
       }
     );
   }
 
-  onGridReady = params => {
+  onGridReady = (params) => {
     this.gridApi = params.api;
     this.gridColumnApi = params.columnApi;
     this.setState({
@@ -216,10 +216,10 @@ class HubList extends React.Component {
       totalPages: this.gridApi.paginationGetTotalPages(),
     });
   };
-  updateSearchQuery = val => {
+  updateSearchQuery = (val) => {
     this.gridApi.setQuickFilter(val);
   };
-  filterSize = val => {
+  filterSize = (val) => {
     if (this.gridApi) {
       this.gridApi.paginationSetPageSize(Number(val));
       this.setState({
@@ -324,7 +324,7 @@ class HubList extends React.Component {
                         <div className="table-input mr-1">
                           <Input
                             placeholder="search..."
-                            onChange={e =>
+                            onChange={(e) =>
                               this.updateSearchQuery(e.target.value)
                             }
                             value={this.state.value}
@@ -341,7 +341,7 @@ class HubList extends React.Component {
                       </div>
                     </div>
                     <ContextLayout.Consumer>
-                      {context => (
+                      {(context) => (
                         <AgGridReact
                           gridOptions={{}}
                           rowSelection="multiple"

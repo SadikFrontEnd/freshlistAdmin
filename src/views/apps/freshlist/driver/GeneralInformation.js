@@ -96,18 +96,6 @@ export class GeneralInformation extends Component {
         console.log(error.response.data);
       });
   };
-  componentDidMount() {
-    // debugger;
-    // const { id } = this.props.match.params;
-    // console.log(this.props, this.prop.id);
-    // axiosConfig.get(`/admin/viewone_drive/${id}`).then((response) => {
-    //   console.log("viewOneDriver", response.data.data);
-    //   this.setState({
-    //     banner_title: response.data.data.banner_title,
-    // status: response.data.data.status,
-    //   });
-    // });
-  }
 
   onImageChange = (event) => {
     if (event.target.files && event.target.files[0]) {

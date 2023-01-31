@@ -22,7 +22,7 @@ import { Route } from "react-router-dom";
 import { history } from "../../../../../history";
 import axiosConfig from "../../../../../axiosConfig";
 
-export class Attribute extends Component {
+export class Option extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -57,6 +57,16 @@ export class Attribute extends Component {
     list.splice(index, 1);
     this.setState({ inputlist: list });
   };
+
+  // handleinputchange = (e, index) => {
+  //   const { name, value } = e.target;
+  //   const list = [...this.state.inputlist];
+  //   list[index][name] = value;
+  //   this.setState({ inputlist: list });
+
+  //   console.log(this.state.inputlist);
+  // };
+
   handleClick = () => {
     this.setState({
       inputlist: [
@@ -86,6 +96,16 @@ export class Attribute extends Component {
         this.state.selectedName
       );
     }
+
+    // axiosConfig
+    //   .post("/addbrand", data)
+    //   .then((response) => {
+    //     console.log(response);
+    //     this.props.history.push("/app/freshlist/house/HouseProductList");
+    //   })
+    //   .catch((error) => {
+    //     console.log(error);
+    //   });
   };
   render() {
     return (
@@ -265,27 +285,31 @@ export class Attribute extends Component {
                                 )}
                               </td>
                             </tr>
-                            <tr>
-                              <td></td>
-                              <td></td>
-                              <td></td>
-                              <td></td>
-                              <td></td>
-                              <td></td>
-                              <td>
-                                {this.state.inputlist.length - 1 === i && (
-                                  <Button
-                                    color="primary"
-                                    style={{ padding: "5px 8px" }}
-                                    onClick={this.handleClick}
-                                  >
-                                    +
-                                  </Button>
-                                )}
-                              </td>
-                              <td></td>
-                            </tr>
                           </>
+                        );
+                      })}
+                      {this.state.inputlist.map((e, i) => {
+                        return (
+                          <tr key={i}>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td>
+                              {this.state.inputlist.length - 1 === i && (
+                                <Button
+                                  color="primary"
+                                  style={{ padding: "5px 8px" }}
+                                  onClick={this.handleClick}
+                                >
+                                  +
+                                </Button>
+                              )}
+                            </td>
+                            <td></td>
+                          </tr>
                         );
                       })}
                     </tbody>
@@ -299,4 +323,4 @@ export class Attribute extends Component {
     );
   }
 }
-export default Attribute;
+export default Option;

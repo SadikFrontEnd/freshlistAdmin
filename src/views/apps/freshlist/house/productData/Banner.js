@@ -12,27 +12,25 @@ import {
   CustomInput,
   Table,
 } from "reactstrap";
-import { EditorState, convertToRaw } from "draft-js";
-import { Editor } from "react-draft-wysiwyg";
 import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
 import "../../../../../assets/scss/plugins/extensions/editor.scss";
-import draftToHtml from "draftjs-to-html";
 import { Route } from "react-router-dom";
-
 import { history } from "../../../../../history";
 import axiosConfig from "../../../../../axiosConfig";
 
-export class Discount extends Component {
+export class Banner extends Component {
   constructor(props) {
     super(props);
     this.state = {
       name: "",
+      title: "",
+      product: "",
+      main: "",
+      link: "",
       selectedFile: null,
       selectedName: "",
       sortorder: "",
-      desc: "",
       brand_img: "",
-      status: "",
       inputlist: [{ selected: "", attribute: "", quantity: "" }],
     };
   }
@@ -43,9 +41,6 @@ export class Discount extends Component {
     console.log(event.target.files[0]);
   };
 
-  changeHandler1 = (e) => {
-    this.setState({ status: e.target.value });
-  };
   changeHandler = (e) => {
     this.setState({ [e.target.name]: e.target.value });
   };
@@ -54,15 +49,6 @@ export class Discount extends Component {
     list.splice(index, 1);
     this.setState({ inputlist: list });
   };
-
-  //   handleinputchange = (e, index) => {
-  //     const { name, value } = e.target;
-  //     const list = [...this.state.inputlist];
-  //     list[index][name] = value;
-  //     this.setState({ inputlist: list });
-
-  //     console.log(this.state.inputlist);
-  //   };
   handleClick = () => {
     this.setState({
       inputlist: [
@@ -76,9 +62,11 @@ export class Discount extends Component {
     e.preventDefault();
     const data = new FormData();
     data.append("name", this.state.name);
+    data.append("title", this.state.title);
+    data.append("product", this.state.product);
+    data.append("main", this.state.main);
+    data.append("link", this.state.link);
     data.append("sortorder", this.state.sortorder);
-    data.append("desc", this.state.desc);
-    data.append("status", this.state.status);
     if (this.state.selectedFile !== null) {
       data.append(
         "brand_img",
@@ -99,12 +87,11 @@ export class Discount extends Component {
                   <Table responsive bordered>
                     <thead>
                       <tr>
-                        <th>Customer Group</th>
-                        <th>Quantity</th>
-                        <th>Priority</th>
-                        <th>Price</th>
-                        <th>Date Start</th>
-                        <th>Date End</th>
+                        <th>Title</th>
+                        <th>Type:Product/Quantity</th>
+                        <th>Type:Main/Inner</th>
+                        <th>Link(Auto Complete)</th>
+                        <th>Image</th>
                         <th></th>
                       </tr>
                     </thead>
@@ -114,19 +101,6 @@ export class Discount extends Component {
                           <>
                             <tr key={i}>
                               <td className="p-0">
-                                <CustomInput
-                                  type="select"
-                                  placeholder="option value"
-                                  name="type"
-                                  value={this.state.name}
-                                  onChange={this.changeHandler}
-                                >
-                                  <option value="Default">Default</option>
-                                  <option value="Large">Large</option>
-                                  <option value="Small">Small</option>
-                                </CustomInput>
-                              </td>
-                              <td>
                                 <Input
                                   type="text"
                                   placeholder="Quantity"
@@ -136,13 +110,30 @@ export class Discount extends Component {
                                 />
                               </td>
                               <td>
-                                <Input
-                                  type="text"
-                                  placeholder="Priority"
-                                  name="name"
+                                <CustomInput
+                                  type="select"
+                                  placeholder="option value"
+                                  name="type"
                                   value={this.state.name}
                                   onChange={this.changeHandler}
-                                />
+                                >
+                                  <option value="Product">Product</option>
+                                  <option value="Product2">Product2</option>
+                                  <option value="Product3">Product3</option>
+                                </CustomInput>
+                              </td>
+                              <td>
+                                <CustomInput
+                                  type="select"
+                                  placeholder="option value"
+                                  name="type"
+                                  value={this.state.name}
+                                  onChange={this.changeHandler}
+                                >
+                                  <option value="Banner">Banner</option>
+                                  <option value="Banner1">Banner1</option>
+                                  <option value="Banner2">Banner2</option>
+                                </CustomInput>
                               </td>
                               <td>
                                 <Input
@@ -154,23 +145,13 @@ export class Discount extends Component {
                                 />
                               </td>
                               <td>
-                                <Input
-                                  type="date"
-                                  placeholder="Date Start"
-                                  name="name"
-                                  value={this.state.name}
-                                  onChange={this.changeHandler}
+                                <img
+                                  width="150px"
+                                  alt="Card cap"
+                                  src="https://picsum.photos/318/180"
                                 />
                               </td>
-                              <td>
-                                <Input
-                                  type="date"
-                                  placeholder="Date End"
-                                  name="name"
-                                  value={this.state.name}
-                                  onChange={this.changeHandler}
-                                />
-                              </td>
+
                               <td>
                                 {this.state.inputlist.length !== 1 && (
                                   <Button
@@ -190,7 +171,7 @@ export class Discount extends Component {
                       {this.state.inputlist.map((e, i) => {
                         return (
                           <>
-                            <tr key={i}>
+                            <tr>
                               <td></td>
                               <td></td>
                               <td></td>
@@ -224,4 +205,4 @@ export class Discount extends Component {
     );
   }
 }
-export default Discount;
+export default Banner;

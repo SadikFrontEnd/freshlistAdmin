@@ -25,9 +25,7 @@ export class AccountInformation extends Component {
       selectedFile: null,
       selectedName: "",
       sortorder: "",
-      // desc: "",
-      // product_img: "",
-      status: "",
+      // status: "",
     };
   }
 
@@ -37,27 +35,32 @@ export class AccountInformation extends Component {
     console.log(event.target.files[0]);
   };
 
-  changeHandler1 = (e) => {
-    this.setState({ status: e.target.value });
-  };
+  // changeHandler1 = (e) => {
+  //   this.setState({ status: e.target.value });
+  // };
   changeHandler = (e) => {
     this.setState({ [e.target.name]: e.target.value });
   };
   submitHandler = (e) => {
     e.preventDefault();
-    const data = new FormData();
-    data.append("name", this.state.name);
-    data.append("email", this.state.email);
-    data.append("password", this.state.password);
-    data.append("confirmpassword", this.state.confirmpassword);
-    data.append("sortorder", this.state.sortorder);
-    console.log("abbb", data);
+    // console.log("abbb", data);
+    // this.setState()
+    // const data = new FormData();
+    // data.append("name", this.state.name);
+    // data.append("email", this.state.email);
+    // data.append("password", this.state.password);
+    // data.append("confirmpassword", this.state.confirmpassword);
+    // data.append("sortorder", this.state.sortorder);
 
     //   for (var value of data.values()) {
     //     console.log(value);
     //  }
     axiosConfig
-      .post(" /addproductcategory", data)
+      .post(" /addproductcategory", {
+        email: this.state.email,
+        password: this.state.password,
+        confirmpassword: this.state.confirmpassword,
+      })
       .then((response) => {
         console.log(response);
         this.props.history.push("/app/category/category");
