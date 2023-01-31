@@ -115,7 +115,7 @@ export class Attribute extends Component {
             <Form className="m-1" onSubmit={this.submitHandler}>
               <Row className="mb-2">
                 <Col lg="2" md="2" className="mb-2">
-                  <Label>Size</Label>
+                  <Label>Size1</Label>
                   <CustomInput
                     type="select"
                     placeholder="Size"
