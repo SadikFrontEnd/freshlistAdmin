@@ -268,7 +268,6 @@ export class AddDriver extends Component {
                               of-{this.state.identity_type}
                             </span>
                           )}
-                          \
                         </Label>
                         <Input
                           // required
