@@ -320,6 +320,7 @@ const EditSubCategory = lazy(() =>
 const BrandList = lazy(() => import("./views/apps/freshlist/brand/BrandList"));
 const AddBrand = lazy(() => import("./views/apps/freshlist/brand/AddBrand"));
 const EditBrand = lazy(() => import("./views/apps/freshlist/brand/EditBrand"));
+const ViewBrand = lazy(() => import("./views/apps/freshlist/brand/ViewBrand"));
 // Product Attributes
 
 // Batch
@@ -614,10 +615,10 @@ const accessControl = lazy(() =>
 const RouteConfig = ({ component: Component, fullLayout, ...rest }) => (
   <Route
     {...rest}
-    render={(props) => {
+    render={props => {
       return (
         <ContextLayout.Consumer>
-          {(context) => {
+          {context => {
             let LayoutTag =
               fullLayout === true
                 ? context.fullLayout
@@ -637,7 +638,7 @@ const RouteConfig = ({ component: Component, fullLayout, ...rest }) => (
     }}
   />
 );
-const mapStateToProps = (state) => {
+const mapStateToProps = state => {
   return {
     user: state.auth.login.userRole,
   };
@@ -1048,8 +1049,12 @@ class AppRouter extends React.Component {
           />
           <AppRoute path="/app/freshlist/brand/addBrand" component={AddBrand} />
           <AppRoute
-            path="/app/freshlist/brand/editBrand"
+            path="/app/freshlist/brand/editBrand/:id"
             component={EditBrand}
+          />
+          <AppRoute
+            path="/app/freshlist/brand/viewBrand/:id"
+            component={ViewBrand}
           />
           {/* Batch */}
           <AppRoute path="/app/freshlist/batch/addbatch" component={AddBatch} />

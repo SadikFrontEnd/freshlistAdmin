@@ -15,7 +15,7 @@ import {
 import axios from "axios";
 import { ContextLayout } from "../../../../utility/context/Layout";
 import { AgGridReact } from "ag-grid-react";
-import { Edit, Trash2, ChevronDown } from "react-feather";
+import { Edit, Trash2, ChevronDown, Eye } from "react-feather";
 import { history } from "../../../../history";
 import "../../../../assets/scss/plugins/tables/_agGridStyleOverride.scss";
 import "../../../../assets/scss/pages/users.scss";
@@ -114,18 +114,25 @@ class BrandList extends React.Component {
               <Route
                 render={({ history }) => (
                   <>
-                    {/* <Eye
-                                className="mr-50"
-                                size="25px"
-                                color="green"
-                                onClick={() =>
-                                    history.push(`/app/customer/viewCustomer/${params.data._id}`)}
-                            /> */}
+                    <Eye
+                      className="mr-50"
+                      size="25px"
+                      color="green"
+                      onClick={() =>
+                        history.push(
+                          `/app/freshlist/brand/viewBrand/${params.data._id}`
+                        )
+                      }
+                    />
                     <Edit
                       className="mr-50"
                       size="25px"
                       color="blue"
-                      onClick={() => history.push("/app/customer/editCustomer")}
+                      onClick={() =>
+                        history.push(
+                          `/app/freshlist/brand/editBrand/${params.data._id}`
+                        )
+                      }
                     />
                     <Trash2
                       className="mr-50"
