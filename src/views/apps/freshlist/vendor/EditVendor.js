@@ -195,7 +195,7 @@ export class EditVendor extends Component {
         console.log(response.data);
         if (response.data.msg === "success") {
           swal("Success!", "Submitted SuccessFull!", "success");
-          //  this.props.history.push("/app/freshlist/vendor/vendorList");
+          this.props.history.push("/app/freshlist/vendor/vendorList");
         }
       })
       .catch(error => {
