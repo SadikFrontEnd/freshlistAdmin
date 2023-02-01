@@ -20,10 +20,10 @@ export class EditCategory extends Component {
     super(props);
     this.state = {
       category_name: "",
+      desc: "",
       selectedFile: null,
       selectedName: "",
-      desc: "",
-      image: "",
+      // image: "",
       status: "",
     };
   }
@@ -40,8 +40,24 @@ export class EditCategory extends Component {
   changeHandler = (e) => {
     this.setState({ [e.target.name]: e.target.value });
   };
+  async componentDidMount() {
+    let { id } = this.props.match.params;
+    await axiosConfig.get(`/admin/viewonecategory/${id}`).then((response) => {
+      let rowData = response.data.data;
+      console.log(rowData, rowData.category_name);
+      this.setState({
+        category_name: response.data.data.category_name,
+        desc: response.data.data.desc,
+        status: response.data.data.status,
+        // image: response.data.data.image,
+        selectedName: response.data.data.image,
+      });
+    });
+  }
+
   submitHandler = (e) => {
     e.preventDefault();
+    let { id } = this.props.match.params;
     const data = new FormData();
     data.append("category_name", this.state.category_name);
     data.append("desc", this.state.desc);
@@ -49,9 +65,8 @@ export class EditCategory extends Component {
     if (this.state.selectedFile !== null) {
       data.append("image", this.state.selectedFile, this.state.selectedName);
     }
-
     axiosConfig
-      .post("/addbrand", data)
+      .post(`/admin/edit_category/${id}`, data)
       .then((response) => {
         console.log(response);
         this.props.history.push("/app/freshlist/category/categoryList");
@@ -136,9 +151,10 @@ export class EditCategory extends Component {
                         style={{ marginRight: "3px" }}
                         type="radio"
                         name="status"
-                        value="true"
+                        value="Enable"
+                        checked
                       />
-                      <span style={{ marginRight: "20px" }}>Active</span>
+                      <span style={{ marginRight: "20px" }}>True</span>
 
                       <input
                         style={{ marginRight: "3px" }}
@@ -146,7 +162,7 @@ export class EditCategory extends Component {
                         name="status"
                         value="false"
                       />
-                      <span style={{ marginRight: "3px" }}>Inactive</span>
+                      <span style={{ marginRight: "3px" }}>False</span>
                     </div>
                   </FormGroup>
                 </Col>

@@ -125,7 +125,6 @@ class Gallery extends Component {
                     <Col md={2}>
                       <Card className="filefolder">
                         <Link>
-                          {" "}
                           <FcFolder size={100} />
                         </Link>
                       </Card>
@@ -135,7 +134,6 @@ class Gallery extends Component {
                     <Col md={2}>
                       <Card className="filefolder">
                         <Link>
-                          {" "}
                           <FcFolder size={100} />
                         </Link>
                       </Card>
@@ -144,7 +142,6 @@ class Gallery extends Component {
                     <Col md={2}>
                       <Card className="filefolder">
                         <Link>
-                          {" "}
                           <FcFolder size={100} />
                         </Link>
                       </Card>
@@ -153,7 +150,6 @@ class Gallery extends Component {
                     <Col md={2}>
                       <Card className="filefolder">
                         <Link>
-                          {" "}
                           <FcFolder size={100} />
                         </Link>
                       </Card>
@@ -162,7 +158,6 @@ class Gallery extends Component {
                     <Col md={2}>
                       <Card className="filefolder">
                         <Link>
-                          {" "}
                           <FcFolder size={100} />
                         </Link>
                       </Card>
@@ -171,7 +166,6 @@ class Gallery extends Component {
                     <Col md={2}>
                       <Card className="filefolder">
                         <Link>
-                          {" "}
                           <FcFolder size={100} />
                         </Link>
                       </Card>
@@ -180,7 +174,6 @@ class Gallery extends Component {
                     <Col md={2}>
                       <Card className="filefolder">
                         <Link>
-                          {" "}
                           <FcFolder size={100} />
                         </Link>
                       </Card>
@@ -189,7 +182,6 @@ class Gallery extends Component {
                     <Col md={2}>
                       <Card className="filefolder">
                         <Link>
-                          {" "}
                           <FcFolder size={100} />
                         </Link>
                       </Card>
@@ -198,7 +190,6 @@ class Gallery extends Component {
                     <Col md={2}>
                       <Card className="filefolder">
                         <Link>
-                          {" "}
                           <FcFolder size={100} />
                         </Link>
                       </Card>
@@ -207,7 +198,6 @@ class Gallery extends Component {
                     <Col md={2}>
                       <Card className="filefolder">
                         <Link>
-                          {" "}
                           <FcFolder size={100} />
                         </Link>
                       </Card>

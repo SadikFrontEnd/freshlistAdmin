@@ -80,16 +80,6 @@ export class AccountInformation extends Component {
                   <BsFillPersonFill /> Account Information
                 </h3>
               </Col>
-
-              {/* <div className="table-input mr-1">
-                                <Input
-                                    placeholder="search by Product..."
-                                    onChange={(e) =>
-                                        this.updateSearchQuery(e.target.value)
-                                    }
-                                    value={this.state.value}
-                                />
-                            </div> */}
             </Row>
             <CardBody>
               <Form className="m-1" onSubmit={this.submitHandler}>
@@ -141,6 +131,7 @@ export class AccountInformation extends Component {
             </CardBody>
           </Card>
         </div>
+        s
       </div>
     );
   }
