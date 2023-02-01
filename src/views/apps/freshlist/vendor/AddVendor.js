@@ -142,9 +142,7 @@ export class AddVendor extends Component {
     for (var value of data.values()) {
       console.log(value);
     }
-    // for (var key of data.keys()) {
-    //   console.log(key);
-    // }
+
     let { id } = this.props.match.params;
     axiosConfig
       .post(`/admin/admin_add_vender`, data)
