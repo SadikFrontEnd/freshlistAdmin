@@ -90,7 +90,7 @@ class CategoryList extends React.Component {
         filter: true,
         width: 150,
         cellRendererFramework: (params) => {
-          return params.value === "true" ? (
+          return params.value === "Enable" ? (
             <div className="badge badge-pill badge-success">
               {params.data.status}
             </div>
@@ -124,7 +124,9 @@ class CategoryList extends React.Component {
                     size="25px"
                     color="blue"
                     onClick={() =>
-                      history.push("/app/freshlist/category/editCategory")
+                      history.push(
+                        `/app/freshlist/category/editCategory/${params.data._id}`
+                      )
                     }
                   />
                 )}
@@ -149,14 +151,7 @@ class CategoryList extends React.Component {
       },
     ],
   };
-  // async componentDidMount() {
-  //   let { id } = this.props.match.params;
-  //   await axiosConfig.get(`/admin/viewonecategory/${id}`).then((response) => {
-  //     let rowData = response.data.data;
-  //     console.log(rowData);
-  //     this.setState({ rowData });
-  //   });
-  // }
+
   async componentDidMount() {
     await axiosConfig.get("/admin/getallcategory").then((response) => {
       let rowData = response.data.data;

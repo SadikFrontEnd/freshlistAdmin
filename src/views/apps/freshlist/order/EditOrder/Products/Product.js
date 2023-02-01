@@ -39,15 +39,15 @@ export class Product extends Component {
     data.append("productName", this.state.productName);
     data.append("quantity", this.state.quantity);
     data.append("sortorder", this.state.sortorder);
-    axiosConfig
-      .post("/addbrand", data)
-      .then((response) => {
-        console.log(response);
-        this.props.history.push("/app/freshlist/house/HouseProductList");
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    // axiosConfig
+    //   .post("/addbrand", data)
+    //   .then((response) => {
+    //     console.log(response);
+    //     this.props.history.push("/app/freshlist/house/HouseProductList");
+    //   })
+    //   .catch((error) => {
+    //     console.log(error);
+    //   });
   };
   render() {
     return (

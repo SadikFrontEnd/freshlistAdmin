@@ -12,27 +12,25 @@ import {
   CustomInput,
   Table,
 } from "reactstrap";
-import { EditorState, convertToRaw } from "draft-js";
-import { Editor } from "react-draft-wysiwyg";
 import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
 import "../../../../../assets/scss/plugins/extensions/editor.scss";
-import draftToHtml from "draftjs-to-html";
 import { Route } from "react-router-dom";
-
 import { history } from "../../../../../history";
 import axiosConfig from "../../../../../axiosConfig";
 
-export class Discount extends Component {
+export class Seo extends Component {
   constructor(props) {
     super(props);
     this.state = {
       name: "",
+      title: "",
+      product: "",
+      main: "",
+      link: "",
       selectedFile: null,
       selectedName: "",
       sortorder: "",
-      desc: "",
       brand_img: "",
-      status: "",
       inputlist: [{ selected: "", attribute: "", quantity: "" }],
     };
   }
@@ -43,9 +41,6 @@ export class Discount extends Component {
     console.log(event.target.files[0]);
   };
 
-  changeHandler1 = (e) => {
-    this.setState({ status: e.target.value });
-  };
   changeHandler = (e) => {
     this.setState({ [e.target.name]: e.target.value });
   };
@@ -54,15 +49,6 @@ export class Discount extends Component {
     list.splice(index, 1);
     this.setState({ inputlist: list });
   };
-
-  //   handleinputchange = (e, index) => {
-  //     const { name, value } = e.target;
-  //     const list = [...this.state.inputlist];
-  //     list[index][name] = value;
-  //     this.setState({ inputlist: list });
-
-  //     console.log(this.state.inputlist);
-  //   };
   handleClick = () => {
     this.setState({
       inputlist: [
@@ -76,9 +62,11 @@ export class Discount extends Component {
     e.preventDefault();
     const data = new FormData();
     data.append("name", this.state.name);
+    data.append("title", this.state.title);
+    data.append("product", this.state.product);
+    data.append("main", this.state.main);
+    data.append("link", this.state.link);
     data.append("sortorder", this.state.sortorder);
-    data.append("desc", this.state.desc);
-    data.append("status", this.state.status);
     if (this.state.selectedFile !== null) {
       data.append(
         "brand_img",
@@ -99,13 +87,8 @@ export class Discount extends Component {
                   <Table responsive bordered>
                     <thead>
                       <tr>
-                        <th>Customer Group</th>
-                        <th>Quantity</th>
-                        <th>Priority</th>
-                        <th>Price</th>
-                        <th>Date Start</th>
-                        <th>Date End</th>
-                        <th></th>
+                        <th>Stores</th>
+                        <th>Keyword</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -113,61 +96,12 @@ export class Discount extends Component {
                         return (
                           <>
                             <tr key={i}>
-                              <td className="p-0">
-                                <CustomInput
-                                  type="select"
-                                  placeholder="option value"
-                                  name="type"
-                                  value={this.state.name}
-                                  onChange={this.changeHandler}
-                                >
-                                  <option value="Default">Default</option>
-                                  <option value="Large">Large</option>
-                                  <option value="Small">Small</option>
-                                </CustomInput>
-                              </td>
+                              <td className="p-0">Default</td>
                               <td>
                                 <Input
                                   type="text"
-                                  placeholder="Quantity"
                                   name="name"
-                                  value={this.state.name}
-                                  onChange={this.changeHandler}
-                                />
-                              </td>
-                              <td>
-                                <Input
-                                  type="text"
-                                  placeholder="Priority"
-                                  name="name"
-                                  value={this.state.name}
-                                  onChange={this.changeHandler}
-                                />
-                              </td>
-                              <td>
-                                <Input
-                                  type="text"
-                                  placeholder="Price"
-                                  name="name"
-                                  value={this.state.name}
-                                  onChange={this.changeHandler}
-                                />
-                              </td>
-                              <td>
-                                <Input
-                                  type="date"
-                                  placeholder="Date Start"
-                                  name="name"
-                                  value={this.state.name}
-                                  onChange={this.changeHandler}
-                                />
-                              </td>
-                              <td>
-                                <Input
-                                  type="date"
-                                  placeholder="Date End"
-                                  name="name"
-                                  value={this.state.name}
+                                  value="Britannia-toastea-premium-bake-rusk"
                                   onChange={this.changeHandler}
                                 />
                               </td>
@@ -190,11 +124,7 @@ export class Discount extends Component {
                       {this.state.inputlist.map((e, i) => {
                         return (
                           <>
-                            <tr key={i}>
-                              <td></td>
-                              <td></td>
-                              <td></td>
-                              <td></td>
+                            <tr>
                               <td></td>
                               <td></td>
                               <td>
@@ -224,4 +154,4 @@ export class Discount extends Component {
     );
   }
 }
-export default Discount;
+export default Seo;

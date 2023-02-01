@@ -50,7 +50,7 @@ class CustomerList extends React.Component {
         field: "username",
         filter: true,
         width: 200,
-        cellRendererFramework: params => {
+        cellRendererFramework: (params) => {
           return (
             <div>
               <span>{params.data.username}</span>
@@ -63,7 +63,7 @@ class CustomerList extends React.Component {
         field: "email",
         filter: true,
         width: 190,
-        cellRendererFramework: params => {
+        cellRendererFramework: (params) => {
           return (
             <div className="d-flex align-items-center cursor-pointer">
               <span>{params.data.email}</span>
@@ -90,7 +90,7 @@ class CustomerList extends React.Component {
         field: "mobile",
         filter: true,
         width: 200,
-        cellRendererFramework: params => {
+        cellRendererFramework: (params) => {
           return (
             <div>
               <span>{params.data.mobile}</span>
@@ -103,7 +103,7 @@ class CustomerList extends React.Component {
         field: "status",
         filter: true,
         width: 150,
-        cellRendererFramework: params => {
+        cellRendererFramework: (params) => {
           return params.value === "true" ? (
             <div className="badge badge-pill badge-success">
               {params.data.status}
@@ -120,7 +120,7 @@ class CustomerList extends React.Component {
         field: "sortorder",
         field: "transactions",
         width: 150,
-        cellRendererFramework: params => {
+        cellRendererFramework: (params) => {
           return (
             <div className="actions cursor-pointer">
               <Route
@@ -151,16 +151,16 @@ class CustomerList extends React.Component {
                   />
                 )}
               />
-              {/* <Trash2
-                                className="mr-50"
-                                size="25px"
-                                color="red"
-                                onClick={() => {
-                                    let selectedData = this.gridApi.getSelectedRows();
-                                    this.runthisfunction(params.data._id);
-                                    this.gridApi.updateRowData({ remove: selectedData });
-                                }}
-                            /> */}
+              <Trash2
+                className="mr-50"
+                size="25px"
+                color="red"
+                onClick={() => {
+                  let selectedData = this.gridApi.getSelectedRows();
+                  this.runthisfunction(params.data._id);
+                  this.gridApi.updateRowData({ remove: selectedData });
+                }}
+              />
             </div>
           );
         },
@@ -169,7 +169,7 @@ class CustomerList extends React.Component {
   };
 
   async componentDidMount() {
-    await axiosConfig.get("/user/userlist").then(response => {
+    await axiosConfig.get("/user/userlist").then((response) => {
       let rowData = response.data.data;
       // console.log("CustomerList", response);
       this.setState({ rowData });
@@ -177,16 +177,16 @@ class CustomerList extends React.Component {
   }
   async runthisfunction(id) {
     console.log(id);
-    await axios.get(`/user/dlt_user/${id}`).then(
-      response => {
+    await axios.delete(`/user/dlt_user/${id}`).then(
+      (response) => {
         console.log(response);
       },
-      error => {
+      (error) => {
         console.log(error);
       }
     );
   }
-  onGridReady = params => {
+  onGridReady = (params) => {
     this.gridApi = params.api;
     this.gridColumnApi = params.columnApi;
     this.setState({
@@ -195,10 +195,10 @@ class CustomerList extends React.Component {
       totalPages: this.gridApi.paginationGetTotalPages(),
     });
   };
-  updateSearchQuery = val => {
+  updateSearchQuery = (val) => {
     this.gridApi.setQuickFilter(val);
   };
-  filterSize = val => {
+  filterSize = (val) => {
     if (this.gridApi) {
       this.gridApi.paginationSetPageSize(Number(val));
       this.setState({
@@ -293,7 +293,7 @@ class CustomerList extends React.Component {
                         <div className="table-input mr-1">
                           <Input
                             placeholder="search..."
-                            onChange={e =>
+                            onChange={(e) =>
                               this.updateSearchQuery(e.target.value)
                             }
                             value={this.state.value}
@@ -310,7 +310,7 @@ class CustomerList extends React.Component {
                       </div>
                     </div>
                     <ContextLayout.Consumer>
-                      {context => (
+                      {(context) => (
                         <AgGridReact
                           gridOptions={{}}
                           rowSelection="multiple"

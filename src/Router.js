@@ -558,7 +558,9 @@ const ReactTables = lazy(() =>
   import("./views/tables/react-tables/ReactTables")
 );
 const Aggrid = lazy(() => import("./views/tables/aggrid/Aggrid"));
-const DataTable = lazy(() => import("./views/tables/data-tables/DataTables"));
+const DataTable = lazy(() =>
+  impoaccordianrt("./views/tables/data-tables/DataTables")
+);
 
 const faq = lazy(() => import("./views/pages/faq/FAQ"));
 const knowledgeBase = lazy(() =>
@@ -612,10 +614,10 @@ const accessControl = lazy(() =>
 const RouteConfig = ({ component: Component, fullLayout, ...rest }) => (
   <Route
     {...rest}
-    render={props => {
+    render={(props) => {
       return (
         <ContextLayout.Consumer>
-          {context => {
+          {(context) => {
             let LayoutTag =
               fullLayout === true
                 ? context.fullLayout
@@ -635,7 +637,7 @@ const RouteConfig = ({ component: Component, fullLayout, ...rest }) => (
     }}
   />
 );
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
     user: state.auth.login.userRole,
   };
@@ -1023,7 +1025,7 @@ class AppRouter extends React.Component {
             component={AddCategory}
           />
           <AppRoute
-            path="/app/freshlist/category/editCategory"
+            path="/app/freshlist/category/editCategory/:id"
             component={EditCategory}
           />
           {/* Subcategory */}

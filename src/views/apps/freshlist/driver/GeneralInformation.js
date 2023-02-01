@@ -96,18 +96,6 @@ export class GeneralInformation extends Component {
         console.log(error.response.data);
       });
   };
-  componentDidMount() {
-    // debugger;
-    // const { id } = this.props.match.params;
-    // console.log(this.props, this.prop.id);
-    // axiosConfig.get(`/admin/viewone_drive/${id}`).then((response) => {
-    //   console.log("viewOneDriver", response.data.data);
-    //   this.setState({
-    //     banner_title: response.data.data.banner_title,
-    // status: response.data.data.status,
-    //   });
-    // });
-  }
 
   onImageChange = (event) => {
     if (event.target.files && event.target.files[0]) {
@@ -332,3 +320,103 @@ export class GeneralInformation extends Component {
   }
 }
 export default GeneralInformation;
+
+// import React, { Component } from "react";
+// import GeneralInformation from "./GeneralInformation";
+// import AccountInformation from "./AccountInformation";
+// import VehicleInfo from "./VehicleInfo";
+// import {
+//   Card,
+//   CardBody,
+//   Col,
+//   Form,
+//   Row,
+//   Input,
+//   CustomInput,
+//   Label,
+//   Button,
+// } from "reactstrap";
+// import { history } from "../../../../history";
+// import axiosConfig from "../../../../axiosConfig";
+
+// export class AddDriver extends Component {
+//   constructor(props) {
+//     super(props);
+
+//     this.state = {
+//       name: "",
+//       selectedFile: null,
+//       selectedName: "",
+//       sortorder: "",
+//       desc: "",
+//       product_img: "",
+//       status: "",
+//     };
+//   }
+
+//   onChangeHandler = (event) => {
+//     this.setState({ selectedFile: event.target.files[0] });
+//     this.setState({ selectedName: event.target.files[0].name });
+//     console.log(event.target.files[0]);
+//   };
+
+//   changeHandler1 = (e) => {
+//     this.setState({ status: e.target.value });
+//   };
+//   changeHandler = (e) => {
+//     this.setState({ [e.target.name]: e.target.value });
+//   };
+//   submitHandler = (e) => {
+//     e.preventDefault();
+//     const data = new FormData();
+//     data.append("name", this.state.name);
+//     data.append("sortorder", this.state.sortorder);
+//     data.append("desc", this.state.desc);
+//     data.append("status", this.state.status);
+//     data.append(
+//       "product_img",
+//       this.state.selectedFile,
+//       this.state.selectedName
+//     );
+//     //   for (var value of data.values()) {
+//     //     console.log(value);
+//     //  }
+//     axiosConfig
+//       .post(" /addproductcategory", data)
+//       .then((response) => {
+//         console.log(response);
+//         this.props.history.push("/app/category/category");
+//       })
+//       .catch((error) => {
+//         console.log(error);
+//       });
+//   };
+//   render() {
+//     return (
+//       <div>
+//         <Col sm="12">
+//           <Col>
+//             <h1 sm="12">
+//               <GeneralInformation />
+//             </h1>
+//           </Col>
+//         </Col>
+//         <Col sm="12">
+//           <Col>
+//             <h1 sm="12">
+//               <AccountInformation />
+//             </h1>
+//           </Col>
+//         </Col>
+//         <Col sm="12">
+//           <Col>
+//             <h1 sm="12">
+//               <VehicleInfo />
+//             </h1>
+//           </Col>
+//         </Col>
+//       </div>
+//     );
+//   }
+// }
+// export default AddDriver;

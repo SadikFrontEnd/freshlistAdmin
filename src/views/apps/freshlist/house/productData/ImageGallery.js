@@ -68,15 +68,15 @@ export class ImageGallery extends Component {
       );
     }
 
-    axiosConfig
-      .post("/addbrand", data)
-      .then((response) => {
-        console.log(response);
-        this.props.history.push("/app/freshlist/house/HouseProductList");
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    // axiosConfig
+    //   .post("/addbrand", data)
+    //   .then((response) => {
+    //     console.log(response);
+    //     this.props.history.push("/app/freshlist/house/HouseProductList");
+    //   })
+    //   .catch((error) => {
+    //     console.log(error);
+    //   });
   };
   render() {
     return (
@@ -106,7 +106,6 @@ export class ImageGallery extends Component {
                 width="200px"
                 alt="Card cap"
                 src="https://picsum.photos/318/180"
-                // width="100%"
               />
             </Row>
             <Row style={{ border: "1px solid gray" }}>Image</Row>

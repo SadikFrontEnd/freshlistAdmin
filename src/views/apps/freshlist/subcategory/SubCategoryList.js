@@ -11,7 +11,7 @@ import {
   DropdownItem,
   DropdownToggle,
 } from "reactstrap";
-// import axiosConfig from "../../../axiosConfig";
+import axiosConfig from "../../../../axiosConfig";
 import axios from "axios";
 import { ContextLayout } from "../../../../utility/context/Layout";
 import { AgGridReact } from "ag-grid-react";
@@ -89,11 +89,15 @@ class SubCategoryList extends React.Component {
         filter: true,
         width: 150,
         cellRendererFramework: (params) => {
-          return (
-            <div>
-              <span>{params.data.status}</span>
+          return params.value === "Active" ? (
+            <div className="badge badge-pill badge-success">
+              {params.data.status}
             </div>
-          );
+          ) : params.value === "Inactive" ? (
+            <div className="badge badge-pill badge-warning">
+              {params.data.status}
+            </div>
+          ) : null;
         },
       },
       {
@@ -152,13 +156,11 @@ class SubCategoryList extends React.Component {
   //         });
   // }
   async componentDidMount() {
-    await axios
-      .get("http://3.6.37.16:8000/admin/getalldata")
-      .then((response) => {
-        let rowData = response.data.data;
-        console.log(rowData);
-        this.setState({ rowData });
-      });
+    await axiosConfig.get("/admin/getalldata").then((response) => {
+      let rowData = response.data.data;
+      console.log(rowData);
+      this.setState({ rowData });
+    });
   }
   // // async componentDidMount() {
   // //   let { id } = this.props.match.params;
