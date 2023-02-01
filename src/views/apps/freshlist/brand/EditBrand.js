@@ -19,12 +19,11 @@ export class EditBrand extends Component {
     super(props);
     this.state = {
       name: "",
-      selectedFile: null,
-      selectedName: "",
-      sortorder: "",
       desc: "",
       brand_img: "",
       status: "",
+      selectedFile: null,
+      selectedName: "",
     };
   }
 
@@ -34,31 +33,47 @@ export class EditBrand extends Component {
     console.log(event.target.files[0]);
   };
 
-  changeHandler1 = e => {
+  handleChange = e => {
     this.setState({ status: e.target.value });
   };
   changeHandler = e => {
     this.setState({ [e.target.name]: e.target.value });
   };
+
+  componentDidMount() {
+    // console.log(this.props.match.params);
+    let { id } = this.props.match.params;
+    axiosConfig
+      .get(`/admin/viewone_brand/${id}`)
+      .then(response => {
+        console.log(response.data.data);
+        this.setState({
+          data: response.data.data,
+          name: response.data.data.brand_name,
+          desc: response.data.data.desc,
+          status: response.data.data.status,
+        });
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  }
+
   submitHandler = e => {
     e.preventDefault();
     const data = new FormData();
-    data.append("name", this.state.name);
-    data.append("sortorder", this.state.sortorder);
+    data.append("brand_name", this.state.name);
     data.append("desc", this.state.desc);
     data.append("status", this.state.status);
     if (this.state.selectedFile !== null) {
-      data.append(
-        "brand_img",
-        this.state.selectedFile,
-        this.state.selectedName
-      );
+      data.append("image", this.state.selectedFile, this.state.selectedName);
     }
-    //   for (var value of data.values()) {
-    //     console.log(value);
-    //  }
+    for (var value of data.values()) {
+      console.log(value);
+    }
+    let { id } = this.props.match.params;
     axiosConfig
-      .post("/addbrand", data)
+      .post(`/admin/edit_brand/${id}`, data)
       .then(response => {
         console.log(response);
         this.props.history.push("/app/freshlist/brand/brandList");
@@ -74,7 +89,7 @@ export class EditBrand extends Component {
           <Row className="m-2">
             <Col>
               <h1 col-sm-6 className="float-left">
-                Update Brand
+                Edit Brand
               </h1>
             </Col>
             <Col>
@@ -90,12 +105,22 @@ export class EditBrand extends Component {
             <Form className="m-1" onSubmit={this.submitHandler}>
               <Row className="mb-2">
                 <Col lg="6" md="6" className="mb-1">
-                  <Label>Name</Label>
+                  <Label>Brand Name</Label>
                   <Input
                     type="text"
-                    placeholder="Customer Name"
+                    placeholder="Branch Name"
                     name="name"
                     value={this.state.name}
+                    onChange={this.changeHandler}
+                  />
+                </Col>
+                <Col lg="6" md="6" className="mb-1">
+                  <Label>Description</Label>
+                  <Input
+                    type="text"
+                    placeholder="Description"
+                    name="desc"
+                    value={this.state.desc}
                     onChange={this.changeHandler}
                   />
                 </Col>
@@ -104,10 +129,31 @@ export class EditBrand extends Component {
                   <Label>Brand Image</Label>
                   <CustomInput
                     type="file"
-                    name="type"
-                    value={this.state.type}
-                    onChange={this.changeHandler}
+                    onChange={this.onChangeHandler}
                   ></CustomInput>
+                </Col>
+                <Col lg="6" md="6" sm="6" className="mb-2 mt-1">
+                  <Label className="mb-1">Status</Label>
+                  <div
+                    className="form-label-group"
+                    onChange={this.handleChange}
+                  >
+                    <input
+                      style={{ marginRight: "3px" }}
+                      type="radio"
+                      name="status"
+                      value="Active"
+                    />
+                    <span style={{ marginRight: "20px" }}>Active</span>
+
+                    <input
+                      style={{ marginRight: "3px" }}
+                      type="radio"
+                      name="status"
+                      value="Deactive"
+                    />
+                    <span style={{ marginRight: "3px" }}>Deactive</span>
+                  </div>
                 </Col>
               </Row>
               <Row>
