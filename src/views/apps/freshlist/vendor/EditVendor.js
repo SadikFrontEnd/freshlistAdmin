@@ -190,10 +190,13 @@ export class EditVendor extends Component {
     }
     let { id } = this.props.match.params;
     axiosConfig
-      .post("/admin/addorder", this.state)
+      .post(`/admin/edit_admin_vender/${id}`, data)
       .then(response => {
-        console.log(response.data.data);
-        swal("Success!", "Submitted SuccessFull!", "success");
+        console.log(response.data);
+        if (response.data.msg === "success") {
+          swal("Success!", "Submitted SuccessFull!", "success");
+          //  this.props.history.push("/app/freshlist/vendor/vendorList");
+        }
       })
       .catch(error => {
         console.log(error);
