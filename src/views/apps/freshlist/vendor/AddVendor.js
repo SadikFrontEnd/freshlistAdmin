@@ -88,20 +88,6 @@ export class AddVendor extends Component {
     this.setState({ [e.target.name]: e.target.value });
   };
 
-  async componentDidMount() {
-    axiosConfig
-      .get("/admin/product_list")
-      .then(response => {
-        // console.log(response);
-        this.setState({
-          productName: response.data.data,
-        });
-      })
-      .catch(error => {
-        console.log(error);
-      });
-  }
-
   submitHandler = e => {
     e.preventDefault();
     const data = new FormData();
@@ -156,15 +142,18 @@ export class AddVendor extends Component {
     for (var value of data.values()) {
       console.log(value);
     }
-    for (var key of data.keys()) {
-      console.log(key);
-    }
+    // for (var key of data.keys()) {
+    //   console.log(key);
+    // }
     let { id } = this.props.match.params;
     axiosConfig
-      .post("")
+      .post(`/admin/admin_add_vender`, data)
       .then(response => {
-        console.log(response.data.data);
-        swal("Success!", "Submitted SuccessFull!", "success");
+        console.log(response.data);
+        if (response.data.msg === "success") {
+          swal("Success!", "Submitted SuccessFull!", "success");
+          this.props.history.push("/app/freshlist/vendor/vendorList");
+        }
       })
       .catch(error => {
         console.log(error);
