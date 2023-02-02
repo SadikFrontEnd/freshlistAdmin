@@ -41,6 +41,24 @@ export class EditSubCategory extends Component {
   changeHandler = (e) => {
     this.setState({ [e.target.name]: e.target.value });
   };
+
+  componentDidMount() {
+    const { id } = this.props.match.params.id;
+
+    axiosConfig
+      .get(`/admin/sub_viewonedata/${id}`)
+      .then((response) => {
+        console.log(response.data.data);
+        // this.setState({
+        //   rowData: response.data.data,
+        // });
+        this.props.history.push("/app/freshlist/subcategory/subcategoryList");
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }
+
   submitHandler = (e) => {
     e.preventDefault();
     const data = new FormData();
