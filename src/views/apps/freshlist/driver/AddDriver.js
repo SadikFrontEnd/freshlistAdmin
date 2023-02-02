@@ -29,16 +29,6 @@ export class AddDriver extends Component {
       email: "",
       password: "",
       confirmpassword: "",
-      // identity_type: "",
-      // identity_img: [],
-      // aadharcardimage: [],
-      // selectedFile: null,
-      // selectedName: "",
-      // driver_img: "",
-      // registrationCard: [],
-      // insurance: [],
-      // license: [],
-      // driver_img: [],
       selectedFile1: null,
       selectedName1: "",
       selectedFile2: null,
@@ -55,13 +45,6 @@ export class AddDriver extends Component {
       selectedName7: "",
     };
   }
-
-  // onChangeHandler = (event) => {
-  //   this.setState({ selectedFile: event.target.files[0] });
-  //   this.setState({ selectedName: event.target.files[0].name });
-  //   console.log(event.target.files[0]);
-  // };
-
   onChangeHandler1 = (event) => {
     this.setState({ selectedFile1: event.target.files[0] });
     this.setState({ selectedName1: event.target.files[0].name });
@@ -114,21 +97,17 @@ export class AddDriver extends Component {
     console.log("email", this.state.email);
     console.log("password", this.state.password);
     console.log("confirmpassword", this.state.confirmpassword);
-    // console.log("identity_img", this.state.identity_img);
-    // console.log("registrationCard", this.state.registrationCard);
-    // console.log("insurance", this.state.insurance);
-    // console.log("license", this.state.license);
-    // console.log("driver_img", this.state.driver_img);
-    // data.append("firstname", this.state.firstname);
-    // data.append("lastname", this.state.lastname);
-    // data.append("identity_type", this.state.identity_type);
-    // data.append("identity_no", this.state.identity_no);
-    // data.append("phone_no", this.state.phone_no);
-    // data.append("address", this.state.address);
+
+    data.append("firstname", this.state.firstname);
+    data.append("lastname", this.state.lastname);
+    data.append("identity_type", this.state.identity_type);
+    data.append("identity_no", this.state.identity_no);
+    data.append("phone_no", this.state.phone_no);
+    data.append("address", this.state.address);
+    data.append("email", this.state.email);
+    data.append("password", this.state.password);
+    data.append("confirmpassword", this.state.confirmpassword);
     // data.append("identity_img", this.state.identity_img);
-    // data.append("email", this.state.email);
-    // data.append("password", this.state.password);
-    // data.append("confirmpassword", this.state.confirmpassword);
     // data.append("registrationCard", this.state.registrationCard);
     // data.append("insurance", this.state.insurance);
     // data.append("license", this.state.license);
@@ -146,48 +125,6 @@ export class AddDriver extends Component {
       .catch((error) => {
         console.log(error.response.data);
       });
-  };
-  onImageChange = (event) => {
-    if (event.target.files && event.target.files[0]) {
-      let img = event.target.files[0];
-      // console.log(img);
-      // this.setState({
-      //   identity_img: URL.createObjectURL(img),
-      // });
-      this.setState({
-        identity_img: img,
-      });
-    }
-  };
-  onImageChangeone = (event) => {
-    if (event.target.files && event.target.files[0]) {
-      let imgone = event.target.files[0];
-      // console.log(imgone);
-      // this.setState({
-      //   identity_img: URL.createObjectURL(img),
-      // });
-      this.setState({
-        aadharcardimage: imgone,
-      });
-    }
-  };
-  driver_img = (event) => {
-    if (event.target.files && event.target.files[0]) {
-      let imgtwo = event.target.files[0];
-      // console.log(imgone);
-      // this.setState({
-      //   identity_img: URL.createObjectURL(img),
-      // });
-      this.setState({
-        driver_img: imgtwo,
-      });
-    }
-  };
-  fileSelectedHandler = (e) => {
-    this.setState({
-      aadharcardimage: [...this.state.aadharcardimage, ...e.target.files],
-    });
-    console.log(this.state.aadharcardimage);
   };
   render() {
     return (
@@ -225,7 +162,7 @@ export class AddDriver extends Component {
                       <Col lg="6" md="6" className="mb-2">
                         <Label>First Name</Label>
                         <Input
-                          // required
+                          required
                           type="text"
                           name="firstname"
                           placeholder="First Name"
@@ -236,7 +173,7 @@ export class AddDriver extends Component {
                       <Col lg="6" md="6" className="mb-1">
                         <Label>Last Name</Label>
                         <Input
-                          // required
+                          required
                           type="text"
                           name="lastname"
                           placeholder="Last Name"
@@ -270,7 +207,7 @@ export class AddDriver extends Component {
                           )}
                         </Label>
                         <Input
-                          // required
+                          required
                           type="text"
                           name="identity_no"
                           placeholder="Identity No"
@@ -281,7 +218,7 @@ export class AddDriver extends Component {
                       <Col lg="6" md="6" className="mb-1">
                         <Label>Identity Type Image</Label>
                         <CustomInput
-                          // required
+                          required
                           // type="file"
                           // name="driver_img"
                           // value={this.state.identity}
@@ -294,7 +231,7 @@ export class AddDriver extends Component {
                       <Col lg="6" md="6" className="mb-1">
                         <Label>Phone No.</Label>
                         <Input
-                          // required
+                          required
                           type="tel"
                           maxLength="10"
                           name="phone_no"
@@ -306,7 +243,7 @@ export class AddDriver extends Component {
                       <Col lg="6" md="6" className="mb-1">
                         <Label>Address</Label>
                         <Input
-                          // required
+                          required
                           type="text"
                           name="address"
                           placeholder="Address"
@@ -320,7 +257,7 @@ export class AddDriver extends Component {
                           <span style={{ color: "red" }}>* Pdf/jpeg</span>
                         </Label>
                         <CustomInput
-                          // required
+                          required
                           type="file"
                           onChange={this.onChangeHandler2}
                           // name="identity_img"
@@ -333,7 +270,7 @@ export class AddDriver extends Component {
                       <Col lg="6" md="6" className="mb-1">
                         <Label>Driver Image</Label>
                         <CustomInput
-                          // required
+                          required
                           type="file"
                           onChange={this.onChangeHandler3}
                           // type="file"
@@ -367,7 +304,7 @@ export class AddDriver extends Component {
                       <Col lg="6" md="6" className="mb-1">
                         <Label>Password</Label>
                         <Input
-                          // required
+                          required
                           type="password"
                           name="password"
                           placeholder=" Password"
@@ -398,7 +335,7 @@ export class AddDriver extends Component {
                       <Col lg="6" md="6" className="mb-1">
                         <Label>Registration Card</Label>
                         <CustomInput
-                          // required
+                          required
                           type="file"
                           onChange={this.onChangeHandler4}
                           // type="file"
@@ -410,7 +347,7 @@ export class AddDriver extends Component {
                       <Col lg="6" md="6" className="mb-1">
                         <Label>Insurance</Label>
                         <CustomInput
-                          // required
+                          required
                           type="file"
                           onChange={this.onChangeHandler5}
                           // type="file"
@@ -423,7 +360,7 @@ export class AddDriver extends Component {
                       <Col lg="6" md="6" className="mb-1">
                         <Label>License</Label>
                         <CustomInput
-                          // required
+                          required
                           // type="file"
                           // name="identity"
                           // value={this.state.identity}
@@ -435,7 +372,7 @@ export class AddDriver extends Component {
                       <Col lg="6" md="6" className="mb-1">
                         <Label>Driver Photo</Label>
                         <CustomInput
-                          // required
+                          required
                           type="file"
                           onChange={this.onChangeHandler7}
                           // type="file"

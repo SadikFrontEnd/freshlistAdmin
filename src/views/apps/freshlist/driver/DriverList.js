@@ -12,8 +12,8 @@ import {
   DropdownToggle,
   Badge,
 } from "reactstrap";
-// import axiosConfig from "../../../axiosConfig";
-import axios from "axios";
+import axiosConfig from "../../../../axiosConfig";
+// import axios from "axios";
 import { ContextLayout } from "../../../../utility/context/Layout";
 import { AgGridReact } from "ag-grid-react";
 import { Eye, Edit, Trash2, ChevronDown } from "react-feather";
@@ -62,7 +62,7 @@ class DriverList extends React.Component {
         },
       },
       {
-        headerName: "F-Name",
+        headerName: "FirstName",
         field: "firstname",
         filter: true,
         width: 120,
@@ -75,7 +75,7 @@ class DriverList extends React.Component {
         },
       },
       {
-        headerName: "L-Name",
+        headerName: "LastName",
         field: "lastname",
         filter: true,
         width: 120,
@@ -114,7 +114,7 @@ class DriverList extends React.Component {
         },
       },
       {
-        headerName: "phone_No",
+        headerName: "Phone",
         field: "phone_no	",
         filter: true,
         width: 120,
@@ -127,19 +127,19 @@ class DriverList extends React.Component {
         },
       },
 
-      {
-        headerName: "Rating.",
-        field: "mobile",
-        filter: true,
-        width: 100,
-        cellRendererFramework: (params) => {
-          return (
-            <div>
-              <span>{params.data.mobile}</span>
-            </div>
-          );
-        },
-      },
+      // {
+      //   headerName: "Rating.",
+      //   field: "mobile",
+      //   filter: true,
+      //   width: 100,
+      //   cellRendererFramework: (params) => {
+      //     return (
+      //       <div>
+      //         <span>{params.data.mobile}</span>
+      //       </div>
+      //     );
+      //   },
+      // },
       {
         headerName: "Status",
         field: "status",
@@ -206,44 +206,18 @@ class DriverList extends React.Component {
       },
     ],
   };
-  // async componentDidMount() {
-  //     await axios.get(`http://35.154.86.59/api/user/view_onecust/${id}`)
-  //         .then((response) => {
-  //             let rowData = response.data.data;
-  //             console.log(rowData);
-  //             this.setState({ rowData });
-  //         });
-  // }
+
   async componentDidMount() {
-    await axios
-      .get("http://3.6.37.16:8000/admin/getall_drive")
+    await axiosConfig
+      .get("/admin/getall_drive")
       .then((response) => {
+        console.log(response.data.data);
         this.setState({ rowData: response.data.data });
       })
       .catch((err) => {
         console.log("Error", err);
       });
   }
-  // async componentDidMount() {
-  //   let { id } = this.props.match.params;
-  //   await axios
-  //     .get(`/http://35.154.86.59/api/user/allcustomer/${id}`, {
-  //       headers: {
-  //         "auth-adtoken": localStorage.getItem("auth-adtoken"),
-  //       },
-  //     })}
-  // async runthisfunction(id)
-  //  {
-  //     console.log(id)
-  //     await axios.get(`http://35.154.86.59/api/user/delcustomer/${id}`).then(
-  //         (response) => {
-  //             console.log(response);
-  //         },
-  //         (error) => {
-  //             console.log(error);
-  //         }
-  //     );
-  // }
   onGridReady = (params) => {
     this.gridApi = params.api;
     this.gridColumnApi = params.columnApi;

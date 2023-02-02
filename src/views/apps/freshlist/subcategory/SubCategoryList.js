@@ -122,7 +122,9 @@ class SubCategoryList extends React.Component {
                     size="25px"
                     color="blue"
                     onClick={() =>
-                      history.push("/app/freshlist/subcategory/editSubCategory")
+                      history.push(
+                        `/app/freshlist/subcategory/editSubCategory/${params.data._id}`
+                      )
                     }
                   />
                 )}

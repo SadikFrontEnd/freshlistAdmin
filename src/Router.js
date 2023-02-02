@@ -1038,7 +1038,7 @@ class AppRouter extends React.Component {
             component={AddSubCategory}
           />
           <AppRoute
-            path="/app/freshlist/subcategory/editSubCategory"
+            path="/app/freshlist/subcategory/editSubCategory/:id"
             component={EditSubCategory}
           />
           {/* Brand */}
