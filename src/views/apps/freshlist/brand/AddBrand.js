@@ -20,51 +20,47 @@ export class AddBrand extends Component {
     super(props);
     this.state = {
       name: "",
-      selectedFile: null,
-      selectedName: "",
-      sortorder: "",
       desc: "",
       brand_img: "",
       status: "",
+      selectedFile: null,
+      selectedName: "",
     };
   }
 
-  onChangeHandler = (event) => {
+  onChangeHandler = event => {
     this.setState({ selectedFile: event.target.files[0] });
     this.setState({ selectedName: event.target.files[0].name });
     console.log(event.target.files[0]);
   };
-
-  changeHandler1 = (e) => {
+  handleChange = e => {
     this.setState({ status: e.target.value });
   };
-  changeHandler = (e) => {
+  changeHandler = e => {
     this.setState({ [e.target.name]: e.target.value });
   };
-  submitHandler = (e) => {
+  submitHandler = e => {
     e.preventDefault();
     const data = new FormData();
-    data.append("name", this.state.name);
-    data.append("sortorder", this.state.sortorder);
+    data.append("brand_name", this.state.name);
     data.append("desc", this.state.desc);
     data.append("status", this.state.status);
-    if (this.state.selectedFile !== null) {
-      data.append(
-        "brand_img",
-        this.state.selectedFile,
-        this.state.selectedName
-      );
+    data.append("image", this.state.selectedFile, this.state.selectedName);
+
+    for (var value of data.values()) {
+      console.log(value);
     }
-    //   for (var value of data.values()) {
-    //     console.log(value);
-    //  }
+    for (var key of data.keys()) {
+      console.log(key);
+    }
+
     axiosConfig
-      .post("/addbrand", data)
-      .then((response) => {
+      .post(`/admin/addbrand`, data)
+      .then(response => {
         console.log(response);
-        this.props.history.push("/app/freshlist/subcategory/subcategoryList");
+        this.props.history.push("/app/freshlist/brand/brandList");
       })
-      .catch((error) => {
+      .catch(error => {
         console.log(error);
       });
   };
@@ -96,75 +92,65 @@ export class AddBrand extends Component {
           <CardBody>
             <Form className="m-1" onSubmit={this.submitHandler}>
               <Row className="mb-2">
-                {/* <Col lg="6" md="6" className="mb-2">
+                <Col lg="6" md="6" className="mb-1">
                   <Label>Brand Name</Label>
                   <Input
                     type="text"
-                    placeholder="Brand Name"
+                    placeholder="Branch Name"
                     name="name"
                     value={this.state.name}
                     onChange={this.changeHandler}
                   />
-                </Col> */}
-                <Col lg="6" md="6" className="mb-2">
-                  <Label>Brand Name</Label>
-                  <CustomInput
-                    type="select"
-                    placeholder="Select Brand"
-                    name="type"
-                    value={this.state.name}
+                </Col>
+                <Col lg="6" md="6" className="mb-1">
+                  <Label>Description</Label>
+                  <Input
+                    type="text"
+                    placeholder="Description"
+                    name="desc"
+                    value={this.state.desc}
                     onChange={this.changeHandler}
-                  >
-                    <option>---Select---</option>
-                    <option value="1KG">1</option>
-                    <option value="2KG">2</option>
-                    <option value="3KG">3</option>
-                  </CustomInput>
+                  />
                 </Col>
 
                 <Col lg="6" md="6" className="mb-1">
                   <Label>Brand Image</Label>
                   <CustomInput
                     type="file"
-                    placeholder="Sort Order"
-                    name="sortorder"
-                    value={this.state.sortorder}
-                    onChange={this.changeHandler}
-                  />
+                    onChange={this.onChangeHandler}
+                  ></CustomInput>
                 </Col>
                 <Col lg="6" md="6" sm="6" className="mb-2 mt-1">
-                  <FormGroup>
-                    <Label className="mb-1">Status</Label>
-                    <div
-                      className="form-label-group"
-                      onChange={(e) => this.changeHandler1(e)}
-                    >
-                      <input
-                        style={{ marginRight: "3px" }}
-                        type="radio"
-                        name="status"
-                        value="Active"
-                      />
-                      <span style={{ marginRight: "20px" }}>Active</span>
+                  <Label className="mb-1">Status</Label>
+                  <div
+                    className="form-label-group"
+                    onChange={this.handleChange}
+                  >
+                    <input
+                      style={{ marginRight: "3px" }}
+                      type="radio"
+                      name="status"
+                      value="Active"
+                    />
+                    <span style={{ marginRight: "20px" }}>Active</span>
 
-                      <input
-                        style={{ marginRight: "3px" }}
-                        type="radio"
-                        name="status"
-                        value="Inactive"
-                      />
-                      <span style={{ marginRight: "3px" }}>Inactive</span>
-                    </div>
-                  </FormGroup>
+                    <input
+                      style={{ marginRight: "3px" }}
+                      type="radio"
+                      name="status"
+                      value="Deactive"
+                    />
+                    <span style={{ marginRight: "3px" }}>Deactive</span>
+                  </div>
                 </Col>
               </Row>
               <Row>
                 <Button.Ripple
-                  color="danger"
+                  color="primary"
                   type="submit"
                   className="mr-1 mb-1"
                 >
-                  Add Brand
+                  Add
                 </Button.Ripple>
               </Row>
             </Form>

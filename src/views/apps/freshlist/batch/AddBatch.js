@@ -14,6 +14,7 @@ import {
 } from "reactstrap";
 import axiosConfig from "../../../../axiosConfig";
 import swal from "sweetalert";
+
 export default class AddBatch extends Component {
   constructor(props) {
     super(props);
@@ -23,23 +24,23 @@ export default class AddBatch extends Component {
       selectedName: "",
     };
   }
-  onChangeHandler = (event) => {
+  onChangeHandler = event => {
     this.setState({ selectedFile: event.target.files[0] });
     this.setState({ selectedName: event.target.files[0].name });
     console.log(event.target.files[0]);
   };
-  onChangeHandler = (event) => {
+  onChangeHandler = event => {
     this.setState({ selectedFile: event.target.files });
     this.setState({ selectedName: event.target.files.name });
     console.log(event.target.files);
   };
-  changeHandler1 = (e) => {
+  changeHandler1 = e => {
     this.setState({ status: e.target.value });
   };
-  changeHandler = (e) => {
+  changeHandler = e => {
     this.setState({ [e.target.name]: e.target.value });
   };
-  submitHandler = (e) => {
+  submitHandler = e => {
     e.preventDefault();
     const data = new FormData();
     data.append("batch_title", this.state.batch_title);
@@ -53,12 +54,12 @@ export default class AddBatch extends Component {
     }
     axiosConfig
       .post("/addbatch", data)
-      .then((response) => {
+      .then(response => {
         console.log(response);
         swal("Successful!", "You clicked the button!", "success");
         this.props.history.push("/app/freshlist/batch/batchList");
       })
-      .catch((error) => {
+      .catch(error => {
         console.log(error);
       });
   };

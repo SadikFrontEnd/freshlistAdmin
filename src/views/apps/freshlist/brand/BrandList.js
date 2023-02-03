@@ -164,7 +164,7 @@ class BrandList extends React.Component {
 
   async runthisfunction(id) {
     console.log(id);
-    await axios.get(`http://3.6.37.16:8000/admin/del_brand/${id}`).then(
+    await axios.delete(`http://3.6.37.16:8000/admin/del_brand/${id}`).then(
       response => {
         console.log(response);
       },
