@@ -17,7 +17,7 @@ import { history } from "../../../../history";
 import axiosConfig from "../../../../axiosConfig";
 import { Route } from "react-router-dom";
 
-export class AddBatch extends Component {
+export class EditBatch extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -36,11 +36,34 @@ export class AddBatch extends Component {
   changeHandler = e => {
     this.setState({ [e.target.name]: e.target.value });
   };
+
+  componentDidMount() {
+    // console.log(this.props.match.params);
+    let { id } = this.props.match.params;
+    axiosConfig
+      .get(`/admin/viewone_addbatch/${id}`)
+      .then(response => {
+        console.log(response.data.data);
+        this.setState({
+          data: response.data.data,
+          batch: response.data.data.batch,
+          rack_no: response.data.data.rack_no,
+          shelf_life: response.data.data.shelf_life,
+          expiry_date: response.data.data.expiry_date,
+          stock: response.data.data.stock,
+          notify: response.data.data.notify,
+        });
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  }
   submitHandler = e => {
     e.preventDefault();
     console.log(this.state);
+    let { id } = this.props.match.params;
     axiosConfig
-      .post(`/admin/addbatch`, this.state)
+      .post(`/admin/edit_batch/${id}`, this.state)
       .then(response => {
         console.log(response);
         this.props.history.push("/app/freshlist/batch/batchList");
@@ -56,7 +79,7 @@ export class AddBatch extends Component {
           <Row className="m-2">
             <Col>
               <h1 col-sm-6 className="float-left">
-                Add Batch
+                Edit Batch
               </h1>
             </Col>
             <Col>
@@ -181,7 +204,7 @@ export class AddBatch extends Component {
     );
   }
 }
-export default AddBatch;
+export default EditBatch;
 
 // {
 //         batch: this.state.batch,

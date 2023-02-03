@@ -325,9 +325,8 @@ const ViewBrand = lazy(() => import("./views/apps/freshlist/brand/ViewBrand"));
 
 // Batch
 const AddBatch = lazy(() => import("./views/apps/freshlist/batch/AddBatch"));
-const AssigntoBatch = lazy(() =>
-  import("./views/apps/freshlist/batch/AssigntoBatch")
-);
+const BatchList = lazy(() => import("./views/apps/freshlist/batch/BatchList"));
+const EditBatch = lazy(() => import("./views/apps/freshlist/batch/EditBatch"));
 
 const ProductAttributeList = lazy(() =>
   import("./views/apps/freshlist/attribute/ProductAttributeList")
@@ -1059,8 +1058,12 @@ class AppRouter extends React.Component {
           {/* Batch */}
           <AppRoute path="/app/freshlist/batch/addbatch" component={AddBatch} />
           <AppRoute
-            path="/app/freshlist/batch/assigntobatch"
-            component={AssigntoBatch}
+            path="/app/freshlist/batch/batchList"
+            component={BatchList}
+          />
+          <AppRoute
+            path="/app/freshlist/batch/editBatch/:id"
+            component={EditBatch}
           />
           {/* Product Attribute */}
           <AppRoute
