@@ -13,6 +13,7 @@ import {
 } from "reactstrap";
 import { history } from "../../../../history";
 import axiosConfig from "../../../../axiosConfig";
+import { Route } from "react-router-dom";
 
 export class EditBrand extends Component {
   constructor(props) {
@@ -93,12 +94,18 @@ export class EditBrand extends Component {
               </h1>
             </Col>
             <Col>
-              <Button
-                className=" btn btn-danger float-right"
-                onClick={() => history.push("/app/freshlist/brand/brandList")}
-              >
-                Back
-              </Button>
+              <Route
+                render={({ history }) => (
+                  <Button
+                    className=" btn btn-danger float-right"
+                    onClick={() =>
+                      history.push("/app/freshlist/brand/brandList")
+                    }
+                  >
+                    Back
+                  </Button>
+                )}
+              />
             </Col>
           </Row>
           <CardBody>

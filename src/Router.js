@@ -306,6 +306,9 @@ const AddCategory = lazy(() =>
 const EditCategory = lazy(() =>
   import("./views/apps/freshlist/category/EditCategory")
 );
+const ViewCategory = lazy(() =>
+  import("./views/apps/freshlist/category/ViewCategory")
+);
 // Subcategory SubCategoryList
 const SubCategoryList = lazy(() =>
   import("./views/apps/freshlist/subcategory/SubCategoryList")
@@ -327,6 +330,7 @@ const ViewBrand = lazy(() => import("./views/apps/freshlist/brand/ViewBrand"));
 const AddBatch = lazy(() => import("./views/apps/freshlist/batch/AddBatch"));
 const BatchList = lazy(() => import("./views/apps/freshlist/batch/BatchList"));
 const EditBatch = lazy(() => import("./views/apps/freshlist/batch/EditBatch"));
+const ViewBatch = lazy(() => import("./views/apps/freshlist/batch/ViewBatch"));
 
 const ProductAttributeList = lazy(() =>
   import("./views/apps/freshlist/attribute/ProductAttributeList")
@@ -1028,6 +1032,10 @@ class AppRouter extends React.Component {
             path="/app/freshlist/category/editCategory/:id"
             component={EditCategory}
           />
+          <AppRoute
+            path="/app/freshlist/category/viewCategory/:id"
+            component={ViewCategory}
+          />
           {/* Subcategory */}
           <AppRoute
             path="/app/freshlist/subcategory/subCategoryList"
@@ -1064,6 +1072,10 @@ class AppRouter extends React.Component {
           <AppRoute
             path="/app/freshlist/batch/editBatch/:id"
             component={EditBatch}
+          />
+          <AppRoute
+            path="/app/freshlist/batch/viewBatch/:id"
+            component={ViewBatch}
           />
           {/* Product Attribute */}
           <AppRoute

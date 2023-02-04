@@ -39,20 +39,38 @@ class CategoryList extends React.Component {
         headerName: "S.No",
         valueGetter: "node.rowIndex + 1",
         field: "node.rowIndex + 1",
-        width: 150,
+        width: 100,
         filter: true,
       },
       {
-        headerName: "Category Image",
+        headerName: "Image",
         field: "image",
         filter: true,
-        width: 170,
-        cellRendererFramework: (params) => {
+        width: 100,
+        cellRendererFramework: params => {
           return (
-            <img
-              className="w-50 h-50  rounded-circle"
-              src={params.data.image}
-            />
+            <div className="d-flex align-items-center cursor-pointer">
+              <img
+                className="rounded-circle mr-50"
+                src={params.data?.image}
+                alt="user avatar"
+                height="40"
+                width="40"
+              />
+            </div>
+          );
+        },
+      },
+      {
+        headerName: "Title",
+        field: "title",
+        filter: true,
+        width: 150,
+        cellRendererFramework: params => {
+          return (
+            <div className="d-flex align-items-center cursor-pointer">
+              <span>{params.data.title}</span>
+            </div>
           );
         },
       },
@@ -60,11 +78,24 @@ class CategoryList extends React.Component {
         headerName: "Name",
         field: "category_name",
         filter: true,
-        width: 190,
-        cellRendererFramework: (params) => {
+        width: 150,
+        cellRendererFramework: params => {
           return (
             <div className="d-flex align-items-center cursor-pointer">
               <span>{params.data.category_name}</span>
+            </div>
+          );
+        },
+      },
+      {
+        headerName: "Type",
+        field: "type",
+        filter: true,
+        width: 150,
+        cellRendererFramework: params => {
+          return (
+            <div className="d-flex align-items-center cursor-pointer">
+              <span>{params.data.type}</span>
             </div>
           );
         },
@@ -74,8 +105,8 @@ class CategoryList extends React.Component {
         headerName: "Description",
         field: "desc",
         filter: true,
-        width: 200,
-        cellRendererFramework: (params) => {
+        width: 150,
+        cellRendererFramework: params => {
           return (
             <div>
               <span>{params.data.desc}</span>
@@ -88,8 +119,8 @@ class CategoryList extends React.Component {
         headerName: "Status",
         field: "status",
         filter: true,
-        width: 150,
-        cellRendererFramework: (params) => {
+        width: 100,
+        cellRendererFramework: params => {
           return params.value === "Enable" ? (
             <div className="badge badge-pill badge-success">
               {params.data.status}
@@ -106,29 +137,34 @@ class CategoryList extends React.Component {
         field: "sortorder",
         field: "transactions",
         width: 150,
-        cellRendererFramework: (params) => {
+        cellRendererFramework: params => {
           return (
             <div className="actions cursor-pointer">
-              {/* <Eye
-                className="mr-50"
-                size="25px"
-                color="green"
-                onClick={() =>
-                  history.push(`/app/customer/viewCustomer/${params.data._id}`)
-                }
-              /> */}
               <Route
                 render={({ history }) => (
-                  <Edit
-                    className="mr-50"
-                    size="25px"
-                    color="blue"
-                    onClick={() =>
-                      history.push(
-                        `/app/freshlist/category/editCategory/${params.data._id}`
-                      )
-                    }
-                  />
+                  <>
+                    <Eye
+                      className="mr-50"
+                      size="25px"
+                      color="green"
+                      onClick={() =>
+                        history.push(
+                          `/app/freshlist/category/viewCategory/${params.data._id}`
+                        )
+                      }
+                    />
+
+                    <Edit
+                      className="mr-50"
+                      size="25px"
+                      color="blue"
+                      onClick={() =>
+                        history.push(
+                          `/app/freshlist/category/editCategory/${params.data._id}`
+                        )
+                      }
+                    />
+                  </>
                 )}
               />
               <Route
@@ -153,25 +189,25 @@ class CategoryList extends React.Component {
   };
 
   async componentDidMount() {
-    await axiosConfig.get("/admin/getallcategory").then((response) => {
+    await axiosConfig.get("/admin/getallcategory").then(response => {
       let rowData = response.data.data;
       console.log(rowData);
       this.setState({ rowData });
     });
   }
 
-  // async runthisfunction(id) {
-  //   console.log(id);
-  //   await axiosConfig.get(`/admin/del_one_category/${id}`).then(
-  //     (response) => {
-  //       console.log(response);
-  //     },
-  //     (error) => {
-  //       console.log(error);
-  //     }
-  //   );
-  // }
-  onGridReady = (params) => {
+  async runthisfunction(id) {
+    console.log(id);
+    await axiosConfig.delete(`/admin/del_one_category/${id}`).then(
+      response => {
+        console.log(response);
+      },
+      error => {
+        console.log(error);
+      }
+    );
+  }
+  onGridReady = params => {
     this.gridApi = params.api;
     this.gridColumnApi = params.columnApi;
     this.setState({
@@ -180,10 +216,10 @@ class CategoryList extends React.Component {
       totalPages: this.gridApi.paginationGetTotalPages(),
     });
   };
-  updateSearchQuery = (val) => {
+  updateSearchQuery = val => {
     this.gridApi.setQuickFilter(val);
   };
-  filterSize = (val) => {
+  filterSize = val => {
     if (this.gridApi) {
       this.gridApi.paginationSetPageSize(Number(val));
       this.setState({
@@ -288,7 +324,7 @@ class CategoryList extends React.Component {
                         <div className="table-input mr-1">
                           <Input
                             placeholder="search..."
-                            onChange={(e) =>
+                            onChange={e =>
                               this.updateSearchQuery(e.target.value)
                             }
                             value={this.state.value}
@@ -305,7 +341,7 @@ class CategoryList extends React.Component {
                       </div>
                     </div>
                     <ContextLayout.Consumer>
-                      {(context) => (
+                      {context => (
                         <AgGridReact
                           gridOptions={{}}
                           rowSelection="multiple"
