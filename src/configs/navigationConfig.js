@@ -205,18 +205,10 @@ const navigationConfig = [
   },
   {
     id: "brand",
-    title: "Brands",
+    title: "Brand",
     type: "collapse",
     icon: <FaStar size={15} />,
     children: [
-      // {
-      //   id: "addbrand",
-      //   title: "Add Brand",
-      //   type: "item",
-      //   icon: <FaCircle size={8} />,
-      //   permissions: ["admin", "editor"],
-      //   navLink: "/app/freshlist/brand/AddBrand",
-      // },
       {
         id: "brandlist",
         title: "Brand List",
@@ -234,21 +226,13 @@ const navigationConfig = [
     type: "collapse",
     icon: <FaStar size={15} />,
     children: [
-      // {
-      //   id: "addbatch",
-      //   title: "Add Batch",
-      //   type: "item",
-      //   icon: <FaCircle size={8} />,
-      //   permissions: ["admin", "editor"],
-      //   navLink: "/app/freshlist/batch/addbatch",
-      // },
       {
-        id: "assigntobatch",
-        title: "Assign To Batch",
+        id: "batchList",
+        title: "Batch List",
         type: "item",
         icon: <FaCircle size={8} />,
         permissions: ["admin", "editor"],
-        navLink: "/app/freshlist/batch/assigntobatch",
+        navLink: "/app/freshlist/batch/batchList",
       },
     ],
   },

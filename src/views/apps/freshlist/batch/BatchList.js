@@ -13,7 +13,7 @@ import {
   DropdownItem,
   DropdownToggle,
 } from "reactstrap";
-// import axiosConfig from "../../../axiosConfig";
+import axiosConfig from "../../../../axiosConfig";
 import axios from "axios";
 import { ContextLayout } from "../../../../utility/context/Layout";
 import { AgGridReact } from "ag-grid-react";
@@ -23,7 +23,7 @@ import "../../../../assets/scss/plugins/tables/_agGridStyleOverride.scss";
 import "../../../../assets/scss/pages/users.scss";
 import { Route, Link } from "react-router-dom";
 
-class AssignToBatch extends React.Component {
+class BatchList extends React.Component {
   state = {
     rowData: [],
     paginationPageSize: 20,
@@ -40,66 +40,70 @@ class AssignToBatch extends React.Component {
         headerName: "S.No",
         valueGetter: "node.rowIndex + 1",
         field: "node.rowIndex + 1",
-        width: 150,
+        width: 80,
         filter: true,
       },
       {
-        headerName: "Hub Name",
-        field: "hub",
+        headerName: "Batch Name",
+        field: "batch",
         filter: true,
-        width: 200,
-        cellRendererFramework: (params) => {
+        width: 100,
+        cellRendererFramework: params => {
           return (
             <div>
-              <span>{params.data.hub}</span>
+              <span>{params.data?.batch}</span>
             </div>
           );
         },
       },
-      // {
-      //   headerName: "Product Name",
-      //   field: "product_name",
-      //   filter: true,
-      //   width: 200,
-      //   cellRendererFramework: (params) => {
-      //     return (
-      //       <div>
-      //         <span>{params.data.product_name}</span>
-      //       </div>
-      //     );
-      //   },
-      // },
       {
-        headerName: "Product Name",
-        field: "product_name",
+        headerName: "Rack No.",
+        field: "rack_no",
         filter: true,
-        width: 200,
-        cellRendererFramework: (params) => {
+        width: 100,
+        cellRendererFramework: params => {
           return (
-            <CustomInput
-              type="select"
-              placeholder="Select Type"
-              name="type"
-              value={this.state.name}
-              onChange={this.changeHandler}
-            >
-              <option>---Select---</option>
-              <option value="veg">{params.data.product_name}</option>
-              <option value="nonveg">{params.data.product_name}</option>
-              <option value="egg">{params.data.product_name}</option>
-            </CustomInput>
+            <div>
+              <span>{params.data?.rack_no}</span>
+            </div>
           );
         },
       },
       {
-        headerName: "Batch",
-        field: "batch",
+        headerName: "Shelf Life",
+        field: "shelf_life",
         filter: true,
-        width: 200,
-        cellRendererFramework: (params) => {
+        width: 100,
+        cellRendererFramework: params => {
           return (
             <div>
-              <span>{params.data.batch}</span>
+              <span>{params.data?.shelf_life}</span>
+            </div>
+          );
+        },
+      },
+      {
+        headerName: "Expiry Date",
+        field: "expiry_date",
+        filter: true,
+        width: 100,
+        cellRendererFramework: params => {
+          return (
+            <div>
+              <span>{params.data?.expiry_date}</span>
+            </div>
+          );
+        },
+      },
+      {
+        headerName: "Stock",
+        field: "stock",
+        filter: true,
+        width: 100,
+        cellRendererFramework: params => {
+          return (
+            <div>
+              <span>{params.data?.stock}</span>
             </div>
           );
         },
@@ -108,8 +112,8 @@ class AssignToBatch extends React.Component {
         headerName: "Notify",
         field: "notify",
         filter: true,
-        width: 150,
-        cellRendererFramework: (params) => {
+        width: 100,
+        cellRendererFramework: params => {
           return (
             <div>
               <span>{params.data.notify}</span>
@@ -118,41 +122,66 @@ class AssignToBatch extends React.Component {
         },
       },
       {
+        headerName: "Status",
+        field: "status",
+        filter: true,
+        width: 100,
+        cellRendererFramework: params => {
+          return params.value === "Active" ? (
+            <div className="badge badge-pill badge-success">
+              {params.data.status}
+            </div>
+          ) : params.value === "Deactive" ? (
+            <div className="badge badge-pill badge-warning">
+              {params.data.status}
+            </div>
+          ) : null;
+        },
+      },
+      {
         headerName: "Actions",
         field: "sortorder",
         // eslint-disable-next-line no-dupe-keys
         field: "transactions",
         width: 150,
-        cellRendererFramework: (params) => {
+        cellRendererFramework: params => {
           return (
             <div className="actions cursor-pointer">
-              <Eye
-                className="mr-50"
-                size="25px"
-                color="green"
-                onClick={() =>
-                  history.push(
-                    `/app/freshlist/house/viewHouseProduct/${params.data._id}`
-                  )
-                }
-              />
-              <Edit
-                className="mr-50"
-                size="25px"
-                color="blue"
-                onClick={() =>
-                  history.push("/app/freshlist/house/editHouseProduct")
-                }
-              />
-              <Trash2
-                className="mr-50"
-                size="25px"
-                color="red"
-                onClick={() => {
-                  let selectedData = this.gridApi.getSelectedRows();
-                  this.runthisfunction(params.data._id);
-                  this.gridApi.updateRowData({ remove: selectedData });
-                }}
+              <Route
+                render={({ history }) => (
+                  <>
+                    <Eye
+                      className="mr-50"
+                      size="25px"
+                      color="green"
+                      onClick={() =>
+                        history.push(
+                          `/app/freshlist/batch/editBatch/${params.data._id}`
+                        )
+                      }
+                    />
+                    <Edit
+                      className="mr-50"
+                      size="25px"
+                      color="blue"
+                      onClick={() =>
+                        history.push(
+                          `/app/freshlist/batch/editBatch/${params.data._id}`
+                        )
+                      }
+                    />
+                    <Trash2
+                      className="mr-50"
+                      size="25px"
+                      color="red"
+                      onClick={() => {
+                        let selectedData = this.gridApi.getSelectedRows();
+                        this.runthisfunction(params.data._id);
+                        this.gridApi.updateRowData({ remove: selectedData });
+                      }}
+                    />
+                  </>
+                )}
               />
             </div>
           );
@@ -161,7 +190,27 @@ class AssignToBatch extends React.Component {
     ],
   };
 
-  onGridReady = (params) => {
+  async componentDidMount() {
+    await axiosConfig.get(`/admin/getall_batch`).then(response => {
+      let rowData = response.data.data;
+      console.log(rowData);
+      this.setState({ rowData });
+    });
+  }
+
+  async runthisfunction(id) {
+    console.log(id);
+    await axiosConfig.delete(`/admin/viewone_addbatch/${id}`).then(
+      response => {
+        console.log(response);
+      },
+      error => {
+        console.log(error);
+      }
+    );
+  }
+
+  onGridReady = params => {
     this.gridApi = params.api;
     this.gridColumnApi = params.columnApi;
     this.setState({
@@ -170,10 +219,10 @@ class AssignToBatch extends React.Component {
       totalPages: this.gridApi.paginationGetTotalPages(),
     });
   };
-  updateSearchQuery = (val) => {
+  updateSearchQuery = val => {
     this.gridApi.setQuickFilter(val);
   };
-  filterSize = (val) => {
+  filterSize = val => {
     if (this.gridApi) {
       this.gridApi.paginationSetPageSize(Number(val));
       this.setState({
@@ -194,23 +243,24 @@ class AssignToBatch extends React.Component {
               <Row className="m-2">
                 <Col>
                   <h1 sm="6" className="float-left">
-                    Assign To Batch
+                    Batch List
                   </h1>
                 </Col>
-                {/* <Col>
+                <Col>
                   <Route
                     render={({ history }) => (
                       <Button
-                        className="btn btn-primary float-right"
+                        className="btn float-right"
+                        color="primary"
                         onClick={() =>
-                          history.push("/app/freshlist/hub/addbatch")
+                          history.push("/app/freshlist/batch/addbatch")
                         }
                       >
-                        Assign To Batch
+                        Add Batch
                       </Button>
                     )}
                   />
-                </Col> */}
+                </Col>
               </Row>
               <CardBody>
                 {this.state.rowData === null ? null : (
@@ -266,7 +316,7 @@ class AssignToBatch extends React.Component {
                         <div className="table-input mr-1">
                           <Input
                             placeholder="search..."
-                            onChange={(e) =>
+                            onChange={e =>
                               this.updateSearchQuery(e.target.value)
                             }
                             value={this.state.value}
@@ -283,7 +333,7 @@ class AssignToBatch extends React.Component {
                       </div>
                     </div>
                     <ContextLayout.Consumer>
-                      {(context) => (
+                      {context => (
                         <AgGridReact
                           gridOptions={{}}
                           rowSelection="multiple"
@@ -311,4 +361,4 @@ class AssignToBatch extends React.Component {
     );
   }
 }
-export default AssignToBatch;
+export default BatchList;
