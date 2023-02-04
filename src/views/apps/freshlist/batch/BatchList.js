@@ -156,7 +156,7 @@ class BatchList extends React.Component {
                       color="green"
                       onClick={() =>
                         history.push(
-                          `/app/freshlist/batch/editBatch/${params.data._id}`
+                          `/app/freshlist/batch/viewBatch/${params.data._id}`
                         )
                       }
                     />

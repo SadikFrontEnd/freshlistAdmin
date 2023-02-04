@@ -11,7 +11,7 @@ import {
   DropdownItem,
   DropdownToggle,
 } from "reactstrap";
-// import axiosConfig from "../../../axiosConfig";
+import axiosConfig from "../../../../axiosConfig";
 import axios from "axios";
 import { ContextLayout } from "../../../../utility/context/Layout";
 import { AgGridReact } from "ag-grid-react";
@@ -155,7 +155,7 @@ class BrandList extends React.Component {
   };
 
   async componentDidMount() {
-    await axios.get("http://3.6.37.16:8000/admin/brandlist").then(response => {
+    await axiosConfig.get("/admin/brandlist").then(response => {
       let rowData = response.data.data;
       console.log(rowData);
       this.setState({ rowData });
@@ -164,7 +164,7 @@ class BrandList extends React.Component {
 
   async runthisfunction(id) {
     console.log(id);
-    await axios.delete(`http://3.6.37.16:8000/admin/del_brand/${id}`).then(
+    await axiosConfig.delete(`/admin/del_brand/${id}`).then(
       response => {
         console.log(response);
       },
