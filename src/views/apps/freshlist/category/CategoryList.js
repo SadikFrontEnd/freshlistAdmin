@@ -62,19 +62,6 @@ class CategoryList extends React.Component {
         },
       },
       {
-        headerName: "Title",
-        field: "title",
-        filter: true,
-        width: 150,
-        cellRendererFramework: params => {
-          return (
-            <div className="d-flex align-items-center cursor-pointer">
-              <span>{params.data.title}</span>
-            </div>
-          );
-        },
-      },
-      {
         headerName: "Name",
         field: "category_name",
         filter: true,
@@ -82,7 +69,7 @@ class CategoryList extends React.Component {
         cellRendererFramework: params => {
           return (
             <div className="d-flex align-items-center cursor-pointer">
-              <span>{params.data.category_name}</span>
+              <span>{params.data?.category_name}</span>
             </div>
           );
         },
@@ -95,37 +82,37 @@ class CategoryList extends React.Component {
         cellRendererFramework: params => {
           return (
             <div className="d-flex align-items-center cursor-pointer">
-              <span>{params.data.type}</span>
+              <span>{params.data?.type}</span>
             </div>
           );
         },
       },
-
       {
-        headerName: "Description",
-        field: "desc",
+        headerName: "Featured",
+        field: "feature",
         filter: true,
         width: 150,
         cellRendererFramework: params => {
           return (
-            <div>
-              <span>{params.data.desc}</span>
+            <div className="d-flex align-items-center cursor-pointer">
+              <span className="" style={{ textTransform: "uppercase" }}>
+                {params.data?.feature}
+              </span>
             </div>
           );
         },
       },
-
       {
         headerName: "Status",
         field: "status",
         filter: true,
         width: 100,
         cellRendererFramework: params => {
-          return params.value === "Enable" ? (
+          return params.value === "Active" ? (
             <div className="badge badge-pill badge-success">
               {params.data.status}
             </div>
-          ) : params.value === "false" ? (
+          ) : params.value === "Deactive" ? (
             <div className="badge badge-pill badge-warning">
               {params.data.status}
             </div>
