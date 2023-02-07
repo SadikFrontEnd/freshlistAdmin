@@ -44,18 +44,18 @@ class DriverList extends React.Component {
       },
       {
         headerName: "Image",
-        field: "deliveryman_img",
+        field: "driver_img",
         filter: true,
-        width: 120,
-        cellRendererFramework: (params) => {
+        width: 150,
+        cellRendererFramework: params => {
           return (
-            <div>
-              <span></span>
+            <div className="d-flex align-items-center cursor-pointer">
               <img
-                width={45}
-                style={{ borderRadius: "50%" }}
-                src={params.data?.deliveryman_img}
-                alt="img"
+                className="rounded-circle mr-50"
+                src={params.data?.driver_img}
+                alt="user avatar"
+                height="40"
+                width="40"
               />
             </div>
           );
@@ -65,11 +65,11 @@ class DriverList extends React.Component {
         headerName: "FirstName",
         field: "firstname",
         filter: true,
-        width: 120,
-        cellRendererFramework: (params) => {
+        width: 150,
+        cellRendererFramework: params => {
           return (
-            <div>
-              <span>{params.data.firstname}</span>
+            <div className="d-flex align-items-center">
+              <span>{params.data?.firstname}</span>
             </div>
           );
         },
@@ -78,11 +78,11 @@ class DriverList extends React.Component {
         headerName: "LastName",
         field: "lastname",
         filter: true,
-        width: 120,
-        cellRendererFramework: (params) => {
+        width: 150,
+        cellRendererFramework: params => {
           return (
-            <div>
-              <span>{params.data.lastname}</span>
+            <div className="d-flex align-items-center">
+              <span>{params.data?.lastname}</span>
             </div>
           );
         },
@@ -92,9 +92,9 @@ class DriverList extends React.Component {
         field: "address	",
         filter: true,
         width: 150,
-        cellRendererFramework: (params) => {
+        cellRendererFramework: params => {
           return (
-            <div className="d-flex align-items-center cursor-pointer">
+            <div className="d-flex align-items-center">
               <span>{params.data.address}</span>
             </div>
           );
@@ -105,22 +105,22 @@ class DriverList extends React.Component {
         field: "email	",
         filter: true,
         width: 150,
-        cellRendererFramework: (params) => {
+        cellRendererFramework: params => {
           return (
-            <div className="d-flex align-items-center cursor-pointer">
+            <div className="d-flex align-items-center">
               <span>{params.data.email}</span>
             </div>
           );
         },
       },
       {
-        headerName: "Phone",
+        headerName: "Phone No.",
         field: "phone_no	",
         filter: true,
-        width: 120,
-        cellRendererFramework: (params) => {
+        width: 150,
+        cellRendererFramework: params => {
           return (
-            <div className="d-flex align-items-center cursor-pointer">
+            <div className="d-flex align-items-center">
               <span>{params.data?.phone_no}</span>
             </div>
           );
@@ -128,41 +128,28 @@ class DriverList extends React.Component {
       },
 
       // {
-      //   headerName: "Rating.",
-      //   field: "mobile",
+      //   headerName: "Status",
+      //   field: "status",
       //   filter: true,
-      //   width: 100,
-      //   cellRendererFramework: (params) => {
-      //     return (
-      //       <div>
-      //         <span>{params.data.mobile}</span>
+      //   width: 150,
+      //   cellRendererFramework: params => {
+      //     return params.value === "Block" ? (
+      //       <div className="badge badge-pill badge-success">
+      //         {params.data.status}
       //       </div>
-      //     );
+      //     ) : params.value === "Unblock" ? (
+      //       <div className="badge badge-pill badge-warning">
+      //         {params.data.status}
+      //       </div>
+      //     ) : null;
       //   },
       // },
       {
-        headerName: "Status",
-        field: "status",
-        filter: true,
-        width: 150,
-        cellRendererFramework: (params) => {
-          return params.value === "Block" ? (
-            <div className="badge badge-pill badge-success">
-              {params.data.status}
-            </div>
-          ) : params.value === "Unblock" ? (
-            <div className="badge badge-pill badge-warning">
-              {params.data.status}
-            </div>
-          ) : null;
-        },
-      },
-      {
-        headerName: "Actions",
+        headerName: "Action",
         field: "sortorder",
         field: "transactions",
         width: 150,
-        cellRendererFramework: (params) => {
+        cellRendererFramework: params => {
           return (
             <div className="actions cursor-pointer">
               {/* <Eye
@@ -210,15 +197,26 @@ class DriverList extends React.Component {
   async componentDidMount() {
     await axiosConfig
       .get("/admin/getall_drive")
-      .then((response) => {
+      .then(response => {
         console.log(response.data.data);
         this.setState({ rowData: response.data.data });
       })
-      .catch((err) => {
+      .catch(err => {
         console.log("Error", err);
       });
   }
-  onGridReady = (params) => {
+  async runthisfunction(id) {
+    console.log(id);
+    await axiosConfig.delete(`/admin/del_drive/${id}`).then(
+      response => {
+        console.log(response);
+      },
+      error => {
+        console.log(error);
+      }
+    );
+  }
+  onGridReady = params => {
     this.gridApi = params.api;
     this.gridColumnApi = params.columnApi;
     this.setState({
@@ -227,10 +225,10 @@ class DriverList extends React.Component {
       totalPages: this.gridApi.paginationGetTotalPages(),
     });
   };
-  updateSearchQuery = (val) => {
+  updateSearchQuery = val => {
     this.gridApi.setQuickFilter(val);
   };
-  filterSize = (val) => {
+  filterSize = val => {
     if (this.gridApi) {
       this.gridApi.paginationSetPageSize(Number(val));
       this.setState({
@@ -324,7 +322,7 @@ class DriverList extends React.Component {
                         <div className="table-input mr-1">
                           <Input
                             placeholder="search..."
-                            onChange={(e) =>
+                            onChange={e =>
                               this.updateSearchQuery(e.target.value)
                             }
                             value={this.state.value}
@@ -341,7 +339,7 @@ class DriverList extends React.Component {
                       </div>
                     </div>
                     <ContextLayout.Consumer>
-                      {(context) => (
+                      {context => (
                         <AgGridReact
                           gridOptions={{}}
                           rowSelection="multiple"

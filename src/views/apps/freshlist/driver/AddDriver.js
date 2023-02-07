@@ -23,7 +23,7 @@ export class AddDriver extends Component {
       firstname: "",
       lastname: "",
       identity_type: "",
-      identity_no: "",
+      //identity_no: "",
       phone_no: "",
       address: "",
       email: "",
@@ -80,39 +80,57 @@ export class AddDriver extends Component {
   submitHandler = e => {
     e.preventDefault();
     const data = new FormData();
-    console.log("firstname", this.state.firstname);
-    console.log("lastname", this.state.lastname);
-    console.log("identity_type", this.state.identity_type);
-    console.log("identity_no", this.state.identity_no);
-    console.log("phone_no", this.state.phone_no);
-    console.log("address", this.state.address);
-    console.log("email", this.state.email);
-    console.log("password", this.state.password);
-    console.log("confirmpassword", this.state.confirmpassword);
-
     data.append("firstname", this.state.firstname);
     data.append("lastname", this.state.lastname);
     data.append("identity_type", this.state.identity_type);
-    data.append("identity_no", this.state.identity_no);
+    //data.append("identity_no", this.state.identity_no);
     data.append("phone_no", this.state.phone_no);
     data.append("address", this.state.address);
     data.append("email", this.state.email);
     data.append("password", this.state.password);
-    data.append("confirmpassword", this.state.confirmpassword);
-    // data.append("identity_img", this.state.identity_img);
-    // data.append("registrationCard", this.state.registrationCard);
-    // data.append("insurance", this.state.insurance);
-    // data.append("license", this.state.license);
-    // data.append("driver_img", this.state.driver_img);
+    data.append(
+      "adhar_card_img",
+      this.state.selectedFile1,
+      this.state.selectedName1
+    );
+    data.append(
+      "driver_img",
+      this.state.selectedFile2,
+      this.state.selectedName2
+    );
+    data.append(
+      "identity_img",
+      this.state.selectedFile3,
+      this.state.selectedName3
+    );
+    data.append(
+      "regis_cardImg",
+      this.state.selectedFile4,
+      this.state.selectedName4
+    );
+    data.append(
+      "insuranceImg",
+      this.state.selectedFile5,
+      this.state.selectedName5
+    );
+    data.append(
+      "licenseImg",
+      this.state.selectedFile6,
+      this.state.selectedName6
+    );
+
+    for (var value of data.values()) {
+      console.log(value);
+    }
 
     axiosConfig
       .post("/admin/add_drive", data)
       .then(response => {
         console.log(response.data.data);
         if (response.data.msg == "success") {
-          swal("Submitted Successfully");
+          swal("Success!", "Submitted Successfully", "success");
+          this.props.history.push("/app/freshlist/driver/driverList");
         }
-        this.props.history.push("/app/freshlist/driver/driverList");
       })
       .catch(error => {
         console.log(error.response.data);
@@ -125,12 +143,9 @@ export class AddDriver extends Component {
           <Col>
             <div>
               <Card>
-                <Row className="m-1">
+                <Row className="m-2">
                   <Col>
                     <h1>Add Driver</h1>
-                    {/* <h3 col-sm-6 className="float-left"> */}
-                    {/* <BsFillPersonFill /> */}
-                    {/* </h3> */}
                   </Col>
                   <Col>
                     <Route
@@ -188,35 +203,13 @@ export class AddDriver extends Component {
                           <option value="PassPort">Passport</option>
                         </Input>
                       </Col>
-                      <Col lg="6" md="6" className="mb-1">
-                        <Label>
-                          Identity No.-
-                          {this.state.identity_type == "" ? null : (
-                            <span style={{ color: "red" }}>
-                              of-{this.state.identity_type}
-                            </span>
-                          )}
-                        </Label>
-                        <Input
-                          required
-                          type="text"
-                          name="identity_no"
-                          placeholder="Identity No"
-                          value={this.state.identity_no}
-                          onChange={this.changeHandler}
-                        ></Input>
-                      </Col>
+
                       <Col lg="6" md="6" className="mb-1">
                         <Label>Identity Type Image</Label>
                         <CustomInput
                           required
-                          // type="file"
-                          // name="driver_img"
-                          // value={this.state.identity}
-                          // onChange={this.changeHandler}
-                          // onChange={this.onImageChange}
                           type="file"
-                          onChange={this.onChangeHandler1}
+                          onChange={this.onChangeHandler3}
                         ></CustomInput>
                       </Col>
                       <Col lg="6" md="6" className="mb-1">
@@ -229,7 +222,7 @@ export class AddDriver extends Component {
                           placeholder="Phone No"
                           value={this.state.phone_no}
                           onChange={this.changeHandler}
-                        ></Input>
+                        />
                       </Col>
                       <Col lg="6" md="6" className="mb-1">
                         <Label>Address</Label>
@@ -243,19 +236,11 @@ export class AddDriver extends Component {
                         ></Input>
                       </Col>
                       <Col lg="6" md="6" className="mb-1">
-                        <Label>
-                          Aadhar Card-Image
-                          <span style={{ color: "red" }}>* Pdf/jpeg</span>
-                        </Label>
+                        <Label>Aadhar Card Image</Label>
                         <CustomInput
                           required
                           type="file"
-                          onChange={this.onChangeHandler2}
-                          // name="identity_img"
-                          // accept="application/pdf,image/gif, image/jpeg,image/png"
-                          // multiple
-                          // type="file"
-                          // onChange={this.fileSelectedHandler}
+                          onChange={this.onChangeHandler1}
                         />
                       </Col>
                       <Col lg="6" md="6" className="mb-1">
@@ -263,113 +248,63 @@ export class AddDriver extends Component {
                         <CustomInput
                           required
                           type="file"
-                          onChange={this.onChangeHandler3}
-                          // type="file"
-                          // name="driver_img"
-                          // value={this.state.identity_img}
-                          // onChange={this.changeHandler}
-                          // onChange={this.onImageChange}
-                          // onChange={this.driver_img}
-                        ></CustomInput>
+                          onChange={this.onChangeHandler2}
+                        />
                       </Col>
                     </Row>
-                    <Row className="m-1">
-                      <Col>
-                        {/* <h3 col-sm-6 className="float-left"> */}
-                        {/* <BsFillPersonFill /> */}
-                        Account Information
-                        {/* </h3> */}
-                      </Col>
+                    <Row className="mt-2 mb-1">
+                      <Col>Account Information</Col>
                     </Row>
                     <Row className="mb-2">
                       <Col lg="6" md="6" className="mb-2">
                         <Label>Email</Label>
                         <Input
+                          required
                           type="email"
-                          name="email"
-                          placeholder=" Email"
-                          value={this.state.email}
-                          onChange={this.changeHandler}
-                        ></Input>
+                          placeholder="Email"
+                          aria-autocomplete="none"
+                        />
                       </Col>
                       <Col lg="6" md="6" className="mb-1">
                         <Label>Password</Label>
                         <Input
                           required
+                          autoComplete="none"
                           type="password"
                           name="password"
                           placeholder=" Password"
                           value={this.state.password}
                           onChange={this.changeHandler}
-                        ></Input>
-                      </Col>
-
-                      <Col lg="6" md="6" className="mb-1">
-                        <Label> Confirm Password</Label>
-                        <Input
-                          // required
-                          type="Password"
-                          name="confirmpassword"
-                          placeholder="Confirm Password"
-                          value={this.state.confirmpassword}
-                          onChange={this.changeHandler}
-                        ></Input>
+                        />
                       </Col>
                     </Row>
-                    <Row className="m-1">
-                      <Col>
-                        {/* <BsFillPersonFill /> */}
-                        VehicleInfo
-                      </Col>
+                    <Row className="mt-2 mb-1">
+                      <Col>Vehicle Information</Col>
                     </Row>
                     <Row className="mb-2">
                       <Col lg="6" md="6" className="mb-1">
-                        <Label>Registration Card</Label>
+                        <Label>Registration Card Image</Label>
                         <CustomInput
                           required
                           type="file"
                           onChange={this.onChangeHandler4}
-                          // type="file"
-                          // name="identity"
-                          // value={this.state.identity}
-                          // onChange={this.changeHandler}
                         ></CustomInput>
                       </Col>
                       <Col lg="6" md="6" className="mb-1">
-                        <Label>Insurance</Label>
+                        <Label>Insurance Policy Image</Label>
                         <CustomInput
                           required
                           type="file"
                           onChange={this.onChangeHandler5}
-                          // type="file"
-                          // name="identity"
-                          // value={this.state.identity}
-                          // onChange={this.changeHandler}
                         ></CustomInput>
                       </Col>
 
                       <Col lg="6" md="6" className="mb-1">
-                        <Label>License</Label>
+                        <Label>License Image</Label>
                         <CustomInput
                           required
-                          // type="file"
-                          // name="identity"
-                          // value={this.state.identity}
-                          // onChange={this.changeHandler}
                           type="file"
                           onChange={this.onChangeHandler6}
-                        ></CustomInput>
-                      </Col>
-                      <Col lg="6" md="6" className="mb-1">
-                        <Label>Driver Photo</Label>
-                        <CustomInput
-                          required
-                          type="file"
-                          onChange={this.onChangeHandler7}
-                          // type="file"
-                          // name="identity"
-                          // value={this.state.identity}
-                          // onChange={this.changeHandler}
                         ></CustomInput>
                       </Col>
                     </Row>
