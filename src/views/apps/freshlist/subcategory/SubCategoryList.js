@@ -45,7 +45,7 @@ class SubCategoryList extends React.Component {
         headerName: "Image",
         field: "image",
         filter: true,
-        width: 150,
+        width: 100,
         cellRendererFramework: params => {
           return (
             <img
