@@ -21,10 +21,7 @@ export class AddCategory extends Component {
     super(props);
     this.state = {
       category_name: "",
-      title: "",
-      desc: "",
       type: "",
-      url: "",
       feature: "",
       status: "",
       selectedFile1: null,
@@ -69,10 +66,7 @@ export class AddCategory extends Component {
     e.preventDefault();
     const data = new FormData();
     data.append("category_name", this.state.category_name);
-    data.append("title", this.state.title);
-    data.append("desc", this.state.desc);
     data.append("type", this.state.type);
-    data.append("url", this.state.url);
     data.append("feature", this.state.feature);
     data.append("status", this.state.status);
     data.append("image", this.state.selectedFile1, this.state.selectedName1);
@@ -148,43 +142,6 @@ export class AddCategory extends Component {
                     />
                   </FormGroup>
                 </Col>
-                <Col lg="6" md="6">
-                  <FormGroup>
-                    <Label>Title</Label>
-                    <Input
-                      type="text"
-                      placeholder="Title"
-                      name="title"
-                      value={this.state.title}
-                      onChange={this.changeHandler}
-                    />
-                  </FormGroup>
-                </Col>
-
-                <Col lg="6" md="6">
-                  <FormGroup>
-                    <Label>Description</Label>
-                    <Input
-                      type="text"
-                      placeholder="Enter Here"
-                      name="desc"
-                      value={this.state.desc}
-                      onChange={this.changeHandler}
-                    />
-                  </FormGroup>
-                </Col>
-                <Col lg="6" md="6">
-                  <FormGroup>
-                    <Label>URL</Label>
-                    <Input
-                      type="url"
-                      placeholder="Enter URL"
-                      name="url"
-                      value={this.state.url}
-                      onChange={this.changeHandler}
-                    />
-                  </FormGroup>
-                </Col>
                 <Col lg="6" md="6" className="mb-2">
                   <Label>Type</Label>
                   <CustomInput
@@ -253,17 +210,17 @@ export class AddCategory extends Component {
                       style={{ marginRight: "3px" }}
                       type="radio"
                       name="status"
-                      value="true"
+                      value="Active"
                     />
-                    <span style={{ marginRight: "20px" }}>True</span>
+                    <span style={{ marginRight: "20px" }}>Active</span>
 
                     <input
                       style={{ marginRight: "3px" }}
                       type="radio"
                       name="status"
-                      value="false"
+                      value="Deactive"
                     />
-                    <span style={{ marginRight: "3px" }}>False</span>
+                    <span style={{ marginRight: "3px" }}>Deactive</span>
                   </div>
                 </Col>
               </Row>
