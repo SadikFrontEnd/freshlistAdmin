@@ -12,7 +12,7 @@ import {
   CustomInput,
 } from "reactstrap";
 
-export class Vouchers extends Component {
+export class Variant extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -44,26 +44,17 @@ export class Vouchers extends Component {
     data.append("productName", this.state.productName);
     data.append("quantity", this.state.quantity);
     data.append("sortorder", this.state.sortorder);
-    axiosConfig
-      .post("/addbrand", data)
-      .then((response) => {
-        console.log(response);
-        this.props.history.push("/app/freshlist/house/HouseProductList");
-      })
-      .catch((error) => {
-        console.log(error);
-      });
   };
   render() {
     return (
       <div>
         <Card>
-          <div style={{ color: "#000000" }}>Add Vouchers(s)</div>
+          <div style={{ color: "#000000" }}>Add Variant(s)</div>
           <CardBody>
             <Form className="m-1" onSubmit={this.submitHandler}>
               <Row className="mb-2">
                 <Col lg="12" md="12" className="mb-2">
-                  <Label>Choose Vouchers</Label>
+                  <Label>Choose Variant</Label>
                   <CustomInput
                     type="select"
                     placeholder="Select Type"
@@ -89,22 +80,15 @@ export class Vouchers extends Component {
                 <hr />
               </Row>
               <Row>
-                <Button.Ripple
-                  color="primary"
-                  type="submit"
-                  className="mr-1 mb-1 right"
-                >
-                  Add Voucher
-                </Button.Ripple>
-              </Row>
-              <Row>
-                <Button.Ripple
-                  color="primary"
-                  type="submit"
-                  className="mr-1 mb-1 right"
-                >
-                  Add Voucher
-                </Button.Ripple>
+                <div style={{ textAlign: "right", width: "100%" }}>
+                  <Button
+                    color="primary"
+                    className="mr-1 mb-1"
+                    // onClick={this.handleClick}
+                  >
+                    Add Variant
+                  </Button>
+                </div>
               </Row>
             </Form>
           </CardBody>
@@ -113,4 +97,4 @@ export class Vouchers extends Component {
     );
   }
 }
-export default Vouchers;
+export default Variant;

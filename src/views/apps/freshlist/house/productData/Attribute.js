@@ -94,7 +94,7 @@ export class Attribute extends Component {
           <CardBody>
             <Form className="m-1" onSubmit={this.submitHandler}>
               <Row className="mb-2">
-                <Col lg="2" md="2" className="mb-2">
+                {/* <Col lg="2" md="2" className="mb-2">
                   <Label>Size</Label>
                   <CustomInput
                     type="select"
@@ -106,8 +106,8 @@ export class Attribute extends Component {
                     <option value="Yes">Yes</option>
                     <option value="No">No</option>
                   </CustomInput>
-                </Col>
-                <Col lg="10" md="10" className="mb-2">
+                </Col> */}
+                <Col lg="12" md="12" className="mb-2">
                   <Label>Required</Label>
                   <CustomInput
                     type="select"
@@ -123,8 +123,7 @@ export class Attribute extends Component {
                 <hr />
               </Row>
               <Row>
-                <Col lg="2" md="2"></Col>
-                <Col lg="10" md="10">
+                <Col lg="12" md="12">
                   <Table responsive bordered>
                     <thead>
                       <tr>

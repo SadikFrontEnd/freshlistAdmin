@@ -112,72 +112,7 @@ export class Data extends Component {
                   />
                 </Col>
                 <hr />
-                <Col lg="12" md="12" className="mb-2">
-                  <Label>UPC</Label>
-                  <Input
-                    type="text"
-                    placeholder="UPC"
-                    name="name"
-                    value={this.state.name}
-                    onChange={this.changeHandler}
-                  />
-                </Col>
-                <hr />
-                <Col lg="12" md="12" className="mb-2">
-                  <Label>EAN</Label>
-                  <Input
-                    type="text"
-                    placeholder="EAN"
-                    name="name"
-                    value={this.state.name}
-                    onChange={this.changeHandler}
-                  />
-                </Col>
-                <hr />
-                <Col lg="12" md="12" className="mb-2">
-                  <Label>JAN</Label>
-                  <Input
-                    type="text"
-                    placeholder="JAN"
-                    name="name"
-                    value={this.state.name}
-                    onChange={this.changeHandler}
-                  />
-                </Col>
-                <hr />
-                <Col lg="12" md="12" className="mb-2">
-                  <Label>ISBN</Label>
-                  <Input
-                    type="text"
-                    placeholder="ISBN"
-                    name="name"
-                    value={this.state.name}
-                    onChange={this.changeHandler}
-                  />
-                </Col>
-                <hr />
-                <Col lg="12" md="12" className="mb-2">
-                  <Label>MPN</Label>
-                  <Input
-                    type="text"
-                    placeholder="MPN"
-                    name="name"
-                    value={this.state.name}
-                    onChange={this.changeHandler}
-                  />
-                </Col>
-                <hr />
-                <Col lg="12" md="12" className="mb-2">
-                  <Label>Location</Label>
-                  <Input
-                    type="text"
-                    placeholder="Location"
-                    name="name"
-                    value={this.state.name}
-                    onChange={this.changeHandler}
-                  />
-                </Col>
-                <hr />
+
                 <Col lg="12" md="12" className="mb-2">
                   <Label>Price</Label>
                   <Input
@@ -227,6 +162,17 @@ export class Data extends Component {
                 </Col>
                 <hr />
                 <Col lg="12" md="12" className="mb-2">
+                  <Label>Maximum Quantity</Label>
+                  <Input
+                    type="number"
+                    placeholder="Maximum Quantity"
+                    name="name"
+                    value={this.state.name}
+                    onChange={this.changeHandler}
+                  />
+                </Col>
+                <hr />
+                <Col lg="12" md="12" className="mb-2">
                   <Label>Preorder Limit</Label>
                   <Input
                     type="number"
@@ -262,119 +208,6 @@ export class Data extends Component {
                   >
                     <option value="Yes">Notify Me</option>
                     <option value="No">No</option>
-                  </CustomInput>
-                </Col>
-                <hr />
-                <Col lg="6" md="6" className="mb-1">
-                  <FormGroup tag="fieldset" className="d-flex ">
-                    <Label>Requires Shipping:</Label>
-                    <div className="d-flex ml-1">
-                      <FormGroup check>
-                        <Input
-                          value="bundleyes"
-                          name="radio1"
-                          type="radio"
-                          checked
-                        />
-
-                        <Label check className="mr-2">
-                          Yes
-                        </Label>
-                      </FormGroup>
-                      <FormGroup check>
-                        <Input value="bundleNO" name="radio1" type="radio" />
-                        <Label check>No</Label>
-                      </FormGroup>
-                    </div>
-                  </FormGroup>
-                </Col>
-                <hr />
-                <Col lg="12" md="12">
-                  <FormGroup>
-                    <Label>Date Available</Label>
-                    <Input
-                      type="date"
-                      placeholder="Delivery Date"
-                      name="d_date"
-                      value={this.state.d_date}
-                      onChange={this.changeHandler}
-                    />
-                  </FormGroup>
-                </Col>
-
-                <Col lg="4" md="4">
-                  <FormGroup>
-                    <Label>Dimentions(L x W x H)</Label>
-                    <Input
-                      type="text"
-                      placeholder="Length"
-                      name="d_date"
-                      value={this.state.d_date}
-                      onChange={this.changeHandler}
-                    />
-                  </FormGroup>
-                </Col>
-                <Col lg="4" md="4">
-                  <FormGroup>
-                    <Label></Label>
-                    <Input
-                      type="text"
-                      placeholder="Width"
-                      name="d_date"
-                      value={this.state.d_date}
-                      onChange={this.changeHandler}
-                    />
-                  </FormGroup>
-                </Col>
-                <Col lg="4" md="4">
-                  <FormGroup>
-                    <Label></Label>
-                    <Input
-                      type="text"
-                      placeholder="Height"
-                      name="d_date"
-                      value={this.state.d_date}
-                      onChange={this.changeHandler}
-                    />
-                  </FormGroup>
-                </Col>
-                <hr />
-                <Col lg="12" md="12" className="mb-2">
-                  <Label>Lenght Class</Label>
-                  <CustomInput
-                    type="select"
-                    placeholder="Select Type"
-                    name="type"
-                    value={this.state.name}
-                    onChange={this.changeHandler}
-                  >
-                    <option value="Centimeter">Centimeter</option>
-                    <option value="Meter">Meter</option>
-                  </CustomInput>
-                </Col>
-                <hr />
-                <Col lg="12" md="12" className="mb-2">
-                  <Label>Weight</Label>
-                  <Input
-                    type="number"
-                    placeholder="Weight"
-                    name="name"
-                    value={this.state.name}
-                    onChange={this.changeHandler}
-                  />
-                </Col>
-                <hr />
-                <Col lg="12" md="12" className="mb-2">
-                  <Label>Weight Class</Label>
-                  <CustomInput
-                    type="select"
-                    placeholder="Select Type"
-                    name="type"
-                    value={this.state.name}
-                    onChange={this.changeHandler}
-                  >
-                    <option value="Kilogram">Kilogram</option>
-                    <option value="Gram">Gram</option>
                   </CustomInput>
                 </Col>
                 <hr />
