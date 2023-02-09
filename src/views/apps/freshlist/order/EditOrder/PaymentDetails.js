@@ -29,11 +29,8 @@ export class PaymentDetails extends Component {
       company: "",
       adreess: "",
       address1: "",
-      address2: "",
       city: "",
       postCode: "",
-      country: "",
-      region: "",
       selectedFile: null,
       selectedName: "",
       sortorder: "",
@@ -60,9 +57,7 @@ export class PaymentDetails extends Component {
     data.append("name", this.state.name);
     data.append("firstname", this.state.firstname);
     data.append("lastname", this.state.lastname);
-    data.append("company", this.state.company);
     data.append("sortorder", this.state.sortorder);
-    // data.append("desc", this.state.desc);
     data.append("status", this.state.status);
     if (this.state.selectedFile !== null) {
       data.append(
@@ -128,33 +123,12 @@ export class PaymentDetails extends Component {
                 </Col>
                 <hr />
                 <Col lg="12" md="12" className="mb-2">
-                  <Label>Company</Label>
-                  <Input
-                    type="text"
-                    placeholder="Company"
-                    name="company"
-                    value={this.state.company}
-                    onChange={this.changeHandler}
-                  />
-                </Col>
-                <hr />
-                <Col lg="12" md="12" className="mb-2">
-                  <Label>Address1</Label>
+                  <Label>Address</Label>
                   <Input
                     type="text"
                     placeholder="Address"
                     name="address1"
                     value={this.state.address1}
-                    onChange={this.changeHandler}
-                  />
-                </Col>
-                <Col lg="12" md="12" className="mb-2">
-                  <Label>Address2</Label>
-                  <Input
-                    type="text"
-                    placeholder="Address"
-                    name="address2"
-                    value={this.state.address2}
                     onChange={this.changeHandler}
                   />
                 </Col>
@@ -177,35 +151,6 @@ export class PaymentDetails extends Component {
                     value={this.state.postCode}
                     onChange={this.changeHandler}
                   />
-                </Col>
-                <Col lg="12" md="12" className="mb-2">
-                  <Label>Country</Label>
-                  <CustomInput
-                    type="select"
-                    placeholder="Select Type"
-                    name="country"
-                    value={this.state.country}
-                    onChange={this.changeHandler}
-                  >
-                    <option value="India">India</option>
-                    <option value="Japan">Japan</option>
-                    <option value="BanglaDesh">BanglaDesh</option>
-                  </CustomInput>
-                </Col>
-
-                <Col lg="12" md="12" className="mb-2">
-                  <Label>Region/State</Label>
-                  <CustomInput
-                    type="select"
-                    name="region"
-                    value={this.state.region}
-                    onChange={this.changeHandler}
-                  >
-                    <option value="Kerala">Kerala</option>
-                    <option value="MadhyaPradesh">MadhyaPradesh</option>
-                    <option value="Bihar">Bihar</option>
-                    <option value="Gujrat">Gujrat</option>
-                  </CustomInput>
                 </Col>
               </Row>
               <Row>

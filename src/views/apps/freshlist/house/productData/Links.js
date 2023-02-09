@@ -108,7 +108,7 @@ export class Links extends Component {
                   </CustomInput>
                 </Col>
                 <hr />
-                <Col lg="12" md="12" className="mb-2">
+                {/* <Col lg="12" md="12" className="mb-2">
                   <Label>Filter</Label>
                   <CustomInput
                     type="select"
@@ -123,7 +123,7 @@ export class Links extends Component {
                     <option value="3">3</option>
                   </CustomInput>
                 </Col>
-                <hr />
+                <hr /> */}
                 <Col lg="12" md="12" className="mb-2">
                   <Label>Related Products</Label>
                   <CustomInput

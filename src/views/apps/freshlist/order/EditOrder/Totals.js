@@ -12,20 +12,16 @@ import {
   CustomInput,
   Table,
 } from "reactstrap";
-import { EditorState, convertToRaw } from "draft-js";
-import { Editor } from "react-draft-wysiwyg";
-import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
-import "../../../../../assets/scss/plugins/extensions/editor.scss";
-import draftToHtml from "draftjs-to-html";
+// import "../../../../../assets/scss/plugins/extensions/editor.scss";
 import { Route } from "react-router-dom";
 import { history } from "../../../../../history";
 import axiosConfig from "../../../../../axiosConfig";
-
+import "../../../../../../src/layouts/assets/scss/pages/users.scss";
 import { Tabs, Tab } from "react-bootstrap-tabs";
 import { Container } from "reactstrap";
 import CustomerDetails from "./CustomerDetails";
 import Product from "./Products/Product";
-import Vouchers from "./Products/Vouchers";
+import Variant from "./Products/Variant";
 export class Totals extends Component {
   constructor(props) {
     super(props);
@@ -124,9 +120,9 @@ export class Totals extends Component {
             <Form className="m-1" onSubmit={this.submitHandler}>
               <Row>
                 <Col lg="12" md="12">
-                  <Table bordered>
+                  <Table bordered className="table">
                     <thead>
-                      <tr>
+                      <tr scope="row">
                         <th>Product</th>
                         <th>Model</th>
                         <th>Quantity</th>
@@ -137,7 +133,7 @@ export class Totals extends Component {
                     </thead>
                     <tbody>
                       <>
-                        <tr>
+                        <tr scope="row">
                           <td className="p-0">
                             Vim Liquid Yellow Bottle -ML:750ml
                           </td>
@@ -154,7 +150,7 @@ export class Totals extends Component {
                           <td>Rs 115.00</td>
                           <td>Rs 115.00</td>
                         </tr>
-                        <tr>
+                        <tr scope="row">
                           <td className="p-0">
                             Vim Bar Tum Scruber-weght 250g
                           </td>
@@ -178,138 +174,117 @@ export class Totals extends Component {
               </Row>
             </Form>
             <div>
-              <Container>
-                <Tabs
-                  onSelect={(index, label) => console.log(label + " selected")}
-                >
-                  <Tab label="Product">
-                    <div>
-                      <Card>
-                        <div style={{ color: "#000000" }}>Add Products(s)</div>
-                        <CardBody>
-                          <Form className="m-1" onSubmit={this.submitHandler}>
-                            <Row className="mb-2">
-                              <Col lg="12" md="12" className="mb-2">
-                                <Label>Choose Product</Label>
-                                <CustomInput
-                                  type="select"
-                                  placeholder="Select Type"
-                                  name="type"
-                                  value={this.state.productlist}
-                                  onChange={this.changeHandler}
-                                >
-                                  <option value="tomato">tomato</option>
-                                  <option value="onion">onion</option>
-                                  <option value="apple">apple</option>
-                                </CustomInput>
-                              </Col>
-                              <Col lg="12" md="12" className="mb-2">
-                                <Label>Quantity</Label>
-                                <Input
-                                  type="text"
-                                  placeholder="Quantity"
-                                  name="quant"
-                                  value={this.state.quant}
-                                  onChange={this.changeHandler}
-                                />
-                              </Col>
-                              <hr />
-                            </Row>
-                            <Row>
-                              <div
-                                style={{ textAlign: "right", width: "100%" }}
-                              >
-                                <Button
-                                  color="primary"
-                                  // type="submit"
-                                  className="mr-1 mb-1"
-                                  onClick={this.handleClick}
-                                >
-                                  Add Product
-                                </Button>
-                                {/* {this.state.inputlist.map((e, i) => {
-                                  return (
-                                    <>
-                                      <tr key={i}>
-                                        <td className="p-0">
-                                          Vim Bar Tum Scruber-weght 250g
-                                        </td>
-                                        <td>Detergent</td>
-                                        <td>
-                                          <Input
-                                            type="text"
-                                            placeholder="Quantity"
-                                            name="name"
-                                            value="1"
-                                            onChange={this.changeHandler}
-                                          />
-                                        </td>
-                                        <td>Rs 26.00</td>
-                                        <td>Rs 26.00</td>
-                                        <td>
-                                          {this.state.inputlist.length !==
-                                            0 && (
-                                            <Button
-                                              color="primary"
-                                              className="mr-1 mt-2"
-                                              style={{ height: "40px" }}
-                                              onClick={() =>
-                                                this.handleremove(i)
-                                              }
-                                            >
-                                              -
-                                            </Button>
-                                          )}
-                                        </td>
-                                        <td>
-                                          {this.state.inputlist.length - 1 ===
-                                            i && (
-                                            <Button
-                                              color="primary"
-                                              style={{ padding: "5px 8px" }}
-                                              onClick={this.handleClick}
-                                            >
-                                              Add Product
-                                            </Button>
-                                          )}
-                                        </td>
-                                      </tr>
-                                    </>
-                                  );
-                                })} */}
-                              </div>
-                            </Row>
-
-                            <Row>
-                              <Col className="rrr">
-                                <Button
-                                  color="secondary"
-                                  type="submit"
-                                  className="mr-1 mb-1"
-                                >
-                                  Back
-                                </Button>
-                                <Button
-                                  color="primary"
-                                  type="submit"
-                                  className="mr-1 mb-1 "
-                                >
-                                  Continue
-                                </Button>
-                              </Col>
-                            </Row>
-                          </Form>
-                        </CardBody>
-                      </Card>
-                    </div>
-                    {/* <Product /> */}
-                  </Tab>
-                  <Tab label="Vouchers">
-                    <Vouchers />
-                  </Tab>
-                </Tabs>
-                <hr />
-              </Container>
+              <Form className="m-1" onSubmit={this.submitHandler}>
+                <Row className="mb-2">
+                  <Col lg="12" md="12" className="mb-2">
+                    <Label>
+                      <span style={{ color: "red" }}>*</span>Shipping Method
+                    </Label>
+                    <CustomInput
+                      type="select"
+                      placeholder="Select Type"
+                      name="customergroup"
+                      // value={this.state.customergroup}
+                      // onChange={this.changeHandler}
+                    >
+                      <option value="default">Free Shipping - 0.00</option>
+                      <option value="2">2</option>
+                      <option value="3">3</option>
+                    </CustomInput>
+                  </Col>
+                  <Col lg="12" md="12" className="mb-2">
+                    <Label>
+                      <span style={{ color: "red" }}>*</span>Payment Method
+                    </Label>
+                    <CustomInput
+                      type="select"
+                      placeholder="Select Type"
+                      name="customergroup"
+                      // value={this.state.customergroup}
+                      // onChange={this.changeHandler}
+                    >
+                      <option value="default">Cash On Delivery</option>
+                      <option value="2">Phone Pay</option>
+                      <option value="3">Google Pay</option>
+                    </CustomInput>
+                  </Col>
+                  <Col lg="12" md="12" className="mb-2">
+                    <Label>Coupon</Label>
+                    <Input
+                      type="text"
+                      placeholder="Coupon"
+                      name="Coupon"
+                      // value={this.state.customer}
+                      // onChange={this.changeHandler}
+                    />
+                  </Col>
+                  <hr />
+                  <Col lg="12" md="12" className="mb-2">
+                    <Label>Variant</Label>
+                    <Input
+                      type="text"
+                      placeholder="Variant"
+                      name="Variant"
+                      // value={this.state.customer}
+                      // onChange={this.changeHandler}
+                    />
+                  </Col>
+                  <hr />
+                  <Col lg="12" md="12" className="mb-2">
+                    <Label>Reward</Label>
+                    <Input
+                      type="text"
+                      placeholder="Reward"
+                      name="Reward"
+                      // value={this.state.customer}
+                      // onChange={this.changeHandler}
+                    />
+                  </Col>
+                  <hr />
+                  <Col lg="12" md="12" className="mb-2">
+                    <Label>Order Status</Label>
+                    <CustomInput
+                      type="select"
+                      placeholder="Select Type"
+                      name="customergroup"
+                      // value={this.state.customergroup}
+                      // onChange={this.changeHandler}
+                    >
+                      <option value="default">Delivery</option>
+                      <option value="2">Pending</option>
+                      <option value="3">Appoved</option>
+                    </CustomInput>
+                  </Col>
+                  <Col lg="12" md="12" className="mb-2">
+                    <FormGroup>
+                      <Label for="exampleText">Comment</Label>
+                      <Input
+                        id="exampleText"
+                        name="text"
+                        type="textarea"
+                        placeholder="comment here"
+                      />
+                    </FormGroup>
+                  </Col>
+                  <Col lg="12" md="12" className="mb-2">
+                    <Label>Affiliate</Label>
+                    <Input
+                      type="text"
+                      placeholder="Affiliate"
+                      name="Reward"
+                      // value={this.state.customer}
+                      // onChange={this.changeHandler}
+                    />
+                  </Col>
+                </Row>
+                <Row>
+                  <div className="text-right w-100">
+                    <Button color="primary" type="submit" className="mr-1 mb-1">
+                      Save
+                    </Button>
+                  </div>
+                </Row>
+              </Form>
             </div>
           </CardBody>
         </Card>

@@ -84,7 +84,7 @@ export class Product extends Component {
                 <hr />
               </Row>
               <Row>
-                <div style={{ textAlign: "right", width: "100%" }}>
+                <div className="text-right w-100">
                   <Button color="primary" type="submit" className="mr-1 mb-1">
                     Add Product
                   </Button>

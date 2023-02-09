@@ -20,9 +20,7 @@ import axiosConfig from "../../../../../axiosConfig";
 
 import { Tabs, Tab } from "react-bootstrap-tabs";
 import { Container } from "reactstrap";
-// import CustomerDetails from "./CustomerDetails";
-// import Product from "./Products/Product";
-import Vouchers from "./Products/Vouchers";
+import { Variant } from "./Products/Variant";
 export class Products extends Component {
   constructor(props) {
     super(props);
@@ -101,16 +99,6 @@ export class Products extends Component {
         this.state.selectedName
       );
     }
-
-    // axiosConfig
-    //   .post("/addbrand", data)
-    //   .then((response) => {
-    //     console.log(response);
-    //     this.props.history.push("/app/freshlist/house/HouseProductList");
-    //   })
-    //   .catch((error) => {
-    //     console.log(error);
-    //   });
   };
   render() {
     return (
@@ -132,32 +120,6 @@ export class Products extends Component {
                       </tr>
                     </thead>
                     <tbody>
-                      {/* <tr>
-                        <td className="p-0">
-                          Vim Liquid Yellow Bottle -ML:750ml
-                        </td>
-                        <td>Detergent</td>
-                        <td>
-                          <Input
-                            type="text"
-                            placeholder="Quantity"
-                            name="name"
-                            value="1"
-                            onChange={this.changeHandler}
-                          />
-                        </td>
-                        <td>Rs 115.00</td>
-                        <td>Rs 115.00</td>
-                        <td>
-                          <Button
-                            className=" btn btn-danger"
-                            style={{ height: "40px" }}
-                            onClick={() => this.handleremove(i)}
-                          >
-                            -
-                          </Button>
-                        </td>
-                      </tr> */}
                       {this.state.inputlist.map((e, i) => {
                         return (
                           <>
@@ -247,59 +209,8 @@ export class Products extends Component {
                                 >
                                   Add Product
                                 </Button>
-                                {/* {this.state.inputlist.map((e, i) => {
-                                  return (
-                                    <>
-                                      <tr key={i}>
-                                        <td className="p-0">
-                                          Vim Bar Tum Scruber-weght 250g
-                                        </td>
-                                        <td>Detergent</td>
-                                        <td>
-                                          <Input
-                                            type="text"
-                                            placeholder="Quantity"
-                                            name="name"
-                                            value="1"
-                                            onChange={this.changeHandler}
-                                          />
-                                        </td>
-                                        <td>Rs 26.00</td>
-                                        <td>Rs 26.00</td>
-                                        <td>
-                                          {this.state.inputlist.length !==
-                                            0 && (
-                                            <Button
-                                              color="primary"
-                                              className="mr-1 mt-2"
-                                              style={{ height: "40px" }}
-                                              onClick={() =>
-                                                this.handleremove(i)
-                                              }
-                                            >
-                                              -
-                                            </Button>
-                                          )}
-                                        </td>
-                                        <td>
-                                          {this.state.inputlist.length - 1 ===
-                                            i && (
-                                            <Button
-                                              color="primary"
-                                              style={{ padding: "5px 8px" }}
-                                              onClick={this.handleClick}
-                                            >
-                                              Add Product
-                                            </Button>
-                                          )}
-                                        </td>
-                                      </tr>
-                                    </>
-                                  );
-                                })} */}
                               </div>
                             </Row>
-
                             <Row>
                               <Col className="rrr">
                                 <Button
@@ -322,10 +233,9 @@ export class Products extends Component {
                         </CardBody>
                       </Card>
                     </div>
-                    {/* <Product /> */}
                   </Tab>
-                  <Tab label="Vouchers">
-                    <Vouchers />
+                  <Tab label="Variant">
+                    <Variant />
                   </Tab>
                 </Tabs>
                 <hr />

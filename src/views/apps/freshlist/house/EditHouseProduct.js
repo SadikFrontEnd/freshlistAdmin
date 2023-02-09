@@ -8,9 +8,7 @@ import Attribute from "./productData/Attribute";
 import Discount from "./productData/Discount";
 import Special from "./productData/Special";
 import ImageGallery from "./productData/ImageGallery";
-import Option from "./productData/Option";
 import Banner from "./productData/Banner";
-import Recurring from "./productData/Recurring";
 import Videos from "./productData/Videos";
 import Seo from "./productData/Seo";
 import RewardPoints from "./productData/RewardPoints";
@@ -30,12 +28,6 @@ function EditHouseProduct() {
           </Tab>
           <Tab label="Attribute">
             <Attribute />
-          </Tab>
-          <Tab label="Option">
-            <Option />
-          </Tab>
-          <Tab label="Recurring">
-            <Recurring />
           </Tab>
           <Tab label="Discount">
             <Discount />

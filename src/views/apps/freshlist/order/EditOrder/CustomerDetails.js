@@ -22,11 +22,13 @@ export class CustomerDetails extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      telephone: "",
+      customer: "",
+      customergroup: "",
       name: "",
       firstname: "",
       lastname: "",
       email: "",
-      telephone: "",
       selectedFile: null,
       selectedName: "",
       sortorder: "",
@@ -65,15 +67,15 @@ export class CustomerDetails extends Component {
     //   for (var value of data.values()) {
     //     console.log(value);
     //  }
-    axiosConfig
-      .post("/addbrand", data)
-      .then((response) => {
-        console.log(response);
-        this.props.history.push("/app/freshlist/house/HouseProductList");
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    // axiosConfig
+    //   .post("/addbrand", data)
+    //   .then((response) => {
+    //     console.log(response);
+    //     this.props.history.push("/app/freshlist/house/HouseProductList");
+    //   })
+    //   .catch((error) => {
+    //     console.log(error);
+    //   });
   };
   render() {
     return (
@@ -83,40 +85,23 @@ export class CustomerDetails extends Component {
             <Form className="m-1" onSubmit={this.submitHandler}>
               <Row className="mb-2">
                 <Col lg="12" md="12" className="mb-2">
-                  <Label>Store</Label>
-                  <CustomInput
-                    type="select"
-                    placeholder="Select Type"
-                    name="type"
-                    value={this.state.name}
+                  <Label>Telephone</Label>
+                  <Input
+                    type="number"
+                    placeholder="Telephone"
+                    name="telephone"
+                    value={this.state.telephone}
                     onChange={this.changeHandler}
-                  >
-                    <option value="default">Default</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                  </CustomInput>
+                  />
                 </Col>
-                <Col lg="12" md="12" className="mb-2">
-                  <Label>Currency</Label>
-                  <CustomInput
-                    type="select"
-                    placeholder="Select Type"
-                    name="type"
-                    value={this.state.name}
-                    onChange={this.changeHandler}
-                  >
-                    <option value="default">Rupee</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                  </CustomInput>
-                </Col>
+                <hr />
                 <Col lg="12" md="12" className="mb-2">
                   <Label>Customer</Label>
                   <Input
                     type="text"
                     placeholder="Customer"
-                    name="name"
-                    value={this.state.name}
+                    name="customer"
+                    value={this.state.customer}
                     onChange={this.changeHandler}
                   />
                 </Col>
@@ -126,7 +111,7 @@ export class CustomerDetails extends Component {
                   <CustomInput
                     type="select"
                     placeholder="Select Type"
-                    name="type"
+                    name="customergroup"
                     value={this.state.customergroup}
                     onChange={this.changeHandler}
                   >
@@ -164,17 +149,6 @@ export class CustomerDetails extends Component {
                     placeholder="Email"
                     name="email"
                     value={this.state.email}
-                    onChange={this.changeHandler}
-                  />
-                </Col>
-                <hr />
-                <Col lg="12" md="12" className="mb-2">
-                  <Label>Telephone</Label>
-                  <Input
-                    type="number"
-                    placeholder="Telephone"
-                    name="telephone"
-                    value={this.state.telephone}
                     onChange={this.changeHandler}
                   />
                 </Col>
