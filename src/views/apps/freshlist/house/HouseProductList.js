@@ -40,7 +40,7 @@ class HouseProductList extends React.Component {
         headerName: "S.No",
         valueGetter: "node.rowIndex + 1",
         field: "node.rowIndex + 1",
-        width: 150,
+        width: 120,
         filter: true,
       },
       {
@@ -87,7 +87,7 @@ class HouseProductList extends React.Component {
         headerName: "Status",
         field: "status",
         filter: true,
-        width: 150,
+        width: 120,
         cellRendererFramework: (params) => {
           return params.data.status === "Active" ? (
             <div className="badge badge-pill badge-success">

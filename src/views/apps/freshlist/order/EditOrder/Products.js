@@ -143,8 +143,7 @@ export class Products extends Component {
                                 {this.state.inputlist.length !== 0 && (
                                   <Button
                                     color="danger"
-                                    className="mr-1 mt-2"
-                                    style={{ height: "40px" }}
+                                    style={{ padding: "5px 8px" }}
                                     onClick={() => this.handleremove(i)}
                                   >
                                     -
