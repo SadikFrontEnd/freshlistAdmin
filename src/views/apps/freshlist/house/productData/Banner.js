@@ -155,9 +155,8 @@ export class Banner extends Component {
                               <td>
                                 {this.state.inputlist.length !== 1 && (
                                   <Button
-                                    color="primary"
-                                    className="mr-1"
-                                    style={{ height: "40px" }}
+                                    color="danger"
+                                    style={{ padding: "5px 8px" }}
                                     onClick={() => this.handleremove(i)}
                                   >
                                     -

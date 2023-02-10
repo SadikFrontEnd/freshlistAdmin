@@ -34,8 +34,6 @@ export class ImageGallery extends Component {
       selectedFile: null,
       selectedName: "",
       sortorder: "",
-      //   desc: "",
-      //   brand_img: "",
       status: "",
     };
   }
@@ -116,13 +114,65 @@ export class ImageGallery extends Component {
                 width="200px"
               />
             </Row>
-            <Row style={{ border: "1px solid gray" }}>Additional Images</Row>
             <Row style={{ border: "1px solid gray" }}>
-              <img
-                alt="Card cap"
-                src="https://picsum.photos/318/180"
-                width="200px"
-              />
+              <Col lg="12" md="12">
+                <Table responsive bordered>
+                  <thead>
+                    <tr>
+                      <th> Additional Images</th>
+                      <th>Sort Order</th>
+                      <th></th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>
+                        <img
+                          alt="Card cap"
+                          src="https://picsum.photos/318/180"
+                          width="200px"
+                        />
+                      </td>
+
+                      <td>
+                        <Input
+                          type="text"
+                          placeholder="Sort Order"
+                          name="name"
+                          value="0"
+                          onChange={this.changeHandler}
+                        />
+                      </td>
+                      <td>
+                        <Button
+                          className=" btn btn-danger"
+                          style={{ padding: "5px 8px" }}
+                          // onClick={() =>
+                          //   history.push("/app/freshlist/house/houseProductList")
+                          // }
+                        >
+                          -
+                        </Button>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td></td>
+                      <td></td>
+                      <td>
+                        <Button
+                          color="primary"
+                          style={{ padding: "5px 8px" }}
+                          // onClick={() =>
+                          //   history.push("/app/freshlist/house/houseProductList")
+                          // }
+                        >
+                          +
+                        </Button>
+                      </td>
+                    </tr>
+                  </tbody>
+                </Table>
+              </Col>
             </Row>
           </CardBody>
         </Card>

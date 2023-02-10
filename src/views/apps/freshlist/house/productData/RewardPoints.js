@@ -20,10 +20,8 @@ export class RewardPoints extends Component {
     super(props);
     this.state = {
       name: "",
-      title: "",
-      product: "",
-      main: "",
-      link: "",
+      default: "",
+      ex_customer: "",
       selectedFile: null,
       selectedName: "",
       sortorder: "",
@@ -59,10 +57,8 @@ export class RewardPoints extends Component {
     e.preventDefault();
     const data = new FormData();
     data.append("name", this.state.name);
-    data.append("title", this.state.title);
-    data.append("product", this.state.product);
-    data.append("main", this.state.main);
-    data.append("link", this.state.link);
+    data.append("default", this.state.default);
+    data.append("ex_customer", this.state.ex_customer);
     data.append("sortorder", this.state.sortorder);
     if (this.state.selectedFile !== null) {
       data.append(
@@ -81,6 +77,18 @@ export class RewardPoints extends Component {
               <hr />
               <Row>
                 <Col lg="12" md="12">
+                  <Label>Points</Label>
+                  <Input
+                    type="text"
+                    //   placeholder="Date End"
+                    name="name"
+                    value={this.state.name}
+                    onChange={this.changeHandler}
+                  />{" "}
+                </Col>
+              </Row>
+              <Row>
+                <Col lg="12" md="12">
                   <Table responsive bordered>
                     <thead>
                       <tr>
@@ -89,51 +97,30 @@ export class RewardPoints extends Component {
                       </tr>
                     </thead>
                     <tbody>
-                      {this.state.inputlist.map((e, i) => {
-                        return (
-                          <>
-                            <tr key={i}>
-                              <td className="p-0">Default</td>
+                      <tr>
+                        <td className="px-5">Default</td>
 
-                              <td>
-                                <Input
-                                  type="text"
-                                  //   placeholder="Date End"
-                                  name="name"
-                                  value={this.state.name}
-                                  onChange={this.changeHandler}
-                                />
-                              </td>
-                            </tr>
-                          </>
-                        );
-                      })}
-                      {this.state.inputlist.map((e, i) => {
-                        return (
-                          <>
-                            <tr>
-                              <td></td>
-                              <td></td>
-                              <td></td>
-                              <td></td>
-                              <td></td>
-                              <td></td>
-                              <td>
-                                {this.state.inputlist.length - 1 === i && (
-                                  <Button
-                                    color="primary"
-                                    style={{ padding: "5px 8px" }}
-                                    onClick={this.handleClick}
-                                  >
-                                    +
-                                  </Button>
-                                )}
-                              </td>
-                              <td></td>
-                            </tr>
-                          </>
-                        );
-                      })}
+                        <td>
+                          <Input
+                            type="text"
+                            name="name"
+                            value={this.state.name}
+                            onChange={this.changeHandler}
+                          />
+                        </td>
+                      </tr>
+                      <tr>
+                        <td className="px-5">Existing Customer</td>
+
+                        <td>
+                          <Input
+                            type="text"
+                            name="ex_customer"
+                            value={this.state.ex_customer}
+                            onChange={this.changeHandler}
+                          />
+                        </td>
+                      </tr>
                     </tbody>
                   </Table>
                 </Col>
